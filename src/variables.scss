@@ -1,0 +1,52 @@
+$c_blue : #252B42;
+$c_gray : #737373;
+$c_silver: #E1E1E1;
+$c_orange : #ff7b47;
+
+@mixin btn__universal($btn__color){
+  color: #fff;
+  background: $btn__color;
+  border: 1px solid $btn__color;
+  border-radius: 37px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 0.2px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 150%;
+  padding: 5px 36px;
+  font-size: 18px;
+  font-family: Montserrat, serif;
+  margin: 10px 0;
+
+  transition: .6s;
+  &:hover{
+    background: #fff;
+    border-color: #fff;
+    color: $btn__color;
+    transition: .6s;
+
+  }
+}
+
+@mixin card($back_color){
+  box-shadow: 15px 15px 15px 15px rgba(0, 0, 0, 0.07);
+  border-radius: 30px;
+
+  h3{
+    font-weight: 700;
+    letter-spacing: 0.1px;
+    font-size: 24px;
+    line-height: 133%;
+  }
+  @if $back_color == white{
+    color: $c_blue;
+    background-color: #fff;
+  }
+  @if $back_color == $c_blue{
+    color: #fff;
+    background-color: $c_blue;
+  }
+}
