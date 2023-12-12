@@ -36,7 +36,7 @@ setup(props, context){
   const {docs} = useFetchDocs();
   const dialogVisible = ref(false)
   function f(path){
-    return `${import.meta.env.VITE_APP_API_URL}/${path}`
+    return `${import.meta.env.VITE_APP_API_URL}/documents/${path}`
   }
   function deleteDoc(){
     const {count} = useDeleteDoc({id})

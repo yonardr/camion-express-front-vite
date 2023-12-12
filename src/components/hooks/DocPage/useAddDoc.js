@@ -6,6 +6,7 @@ export async function useAddDoc(init ={}){
         formData.append('name', init.name)
         formData.append('type_id', init.type)
         formData.append('file', init.file)
+        formData.append('file_name', init.file.name)
         console.log(init.file)
         if(init.name && init.name.trim() !== '') formData.append('keep_name', true)
         else formData.append('keep_name', false)
