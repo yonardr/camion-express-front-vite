@@ -47,9 +47,9 @@
   </div>
   <my-dialog v-model:show="dialogVisible" >
     <div class="modal">
-    <img :src="require('@/assets/done.svg')" />
-    <h1>Спасибо</h1>
-    <p>В ближайшее время с Вами свяжется наш специалист</p>
+      <img src="../../assets/dialog/done.svg" />
+      <h1>Спасибо</h1>
+      <p>В ближайшее время с Вами свяжется наш специалист</p>
     </div>
   </my-dialog>
 </template>

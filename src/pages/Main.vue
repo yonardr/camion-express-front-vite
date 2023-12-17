@@ -1,18 +1,20 @@
 <template>
   <div>
-    <Navbar v-model:scrollTo="scrollTo" />
+    <Navbar />
     <StartView id="start"/>
 
     <div class="__container">
       <Calculator id="calc"/>
+    </div>
       <News id="news" />
+    <div class="__container">
       <Advantages/>
       <SubmitApplication />
       <Partners />
       <Contacts id="contacts" />
     </div>
-    <Map id="map"/>
-<!--    <Footer/>-->
+<!--    <Map id="map"/>-->
+    <Footer/>
   </div>
 </template>
 

@@ -6,6 +6,7 @@ import AuthPage from "../pages/AuthPage.vue";
 import PersonalAccount from "../pages/PersonalAccount.vue";
 import DocumentsAdmin from "../pages/DocumentsAdmin.vue";
 import Calculator from "../components/MainPage/Calculator.vue";
+import NewsPage from "../pages/NewsPage.vue";
 
 
 const routes = [
@@ -23,6 +24,10 @@ const routes = [
         name: 'auth',
         path: '/auth',
         component: AuthPage
+    },
+    {
+      path: '/news/:id',
+      component: NewsPage
     },
     {
         name: 'personal',

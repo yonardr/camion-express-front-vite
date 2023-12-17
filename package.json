@@ -11,6 +11,7 @@
   "dependencies": {
     "aos-vue": "^0.0.5",
     "axios": "^1.6.2",
+    "swiper": "^11.0.5",
     "vue": "^3.3.8",
     "vue-flip": "^3.0.2",
     "vue-router": "^4.0.13",

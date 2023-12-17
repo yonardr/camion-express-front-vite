@@ -85,12 +85,12 @@ export default {
   .des{
     color: $c_silver;
   }
-}
-.back {
-  .rotate{
-      margin-top: 30px;
-      transform: rotate(180deg);
+  .rotate p{
+    margin-top: 30px;
+    transform: rotate(180deg);
   }
 }
+
+
 
 </style>
