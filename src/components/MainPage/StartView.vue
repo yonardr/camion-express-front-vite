@@ -24,9 +24,10 @@
 
 <script>
 import MyButton from "../UI/MyButton.vue";
+import CalcDirection from "../Calc/CalcDirection.vue";
 export default {
   name: "StartView",
-  components: {MyButton},
+  components: {CalcDirection, MyButton},
 }
 </script>
 
@@ -70,4 +71,5 @@ img{
     font-size: 38px;
   }
 }
+
 </style>

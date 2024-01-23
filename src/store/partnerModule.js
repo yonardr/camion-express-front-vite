@@ -1,7 +1,7 @@
 export const partnerModule = {
-    state: () => ({
+    state: {
         //Три элемента
-        groups:[
+        groups: [
             {
                 id: 1,
                 name: 'ДальЭкспресс',
@@ -51,9 +51,10 @@ export const partnerModule = {
             },
         ],
 
-
-
-
-
-})
+    },
+    getters:{
+        getPartners(state){
+            return state.groups;
+        }
+    }
 }

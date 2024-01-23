@@ -30,14 +30,14 @@
 
 <script>
 
-import ViewDocs from "../components/Docs/ViewDocs.vue";
+import ViewDocs from "../Docs/ViewDocs.vue";
 import {ref, watch} from "vue";
-import MyDialog from "../components/UI/MyDialog.vue";
-import {useFetchTypesDocs} from "../components/hooks/DocPage/useFetchTypesDocs";
-import MyInputFile from "../components/UI/MyInputFile.vue";
-import MyInput from "../components/UI/MyInput.vue";
-import MyButton from "../components/UI/MyButton.vue";
-import {useAddDoc} from "../components/hooks/DocPage/useAddDoc";
+import MyDialog from "../UI/MyDialog.vue";
+import {useFetchTypesDocs} from "../hooks/DocPage/useFetchTypesDocs.js";
+import MyInputFile from "../UI/MyInputFile.vue";
+import MyInput from "../UI/MyInput.vue";
+import MyButton from "../UI/MyButton.vue";
+import {useAddDoc} from "../hooks/DocPage/useAddDoc.js";
 
 export default {
   components: {MyButton, MyInput, MyInputFile, MyDialog, ViewDocs},
@@ -67,7 +67,7 @@ setup(props){
 </script>
 
 <style lang="scss" scoped>
-@import "../variables";
+@import "../../variables";
 .page{
   display: flex;
 }

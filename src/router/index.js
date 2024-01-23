@@ -4,9 +4,10 @@ import Main from "../pages/Main.vue";
 import Documents from "../pages/Documents.vue";
 import AuthPage from "../pages/AuthPage.vue";
 import PersonalAccount from "../pages/PersonalAccount.vue";
-import DocumentsAdmin from "../pages/DocumentsAdmin.vue";
-import Calculator from "../components/MainPage/Calculator.vue";
+import DocumentsAdmin from "../components/Personal/DocumentsAdmin.vue";
+import Calculator from "../components/Calc/CalculatorPage.vue";
 import NewsPage from "../pages/NewsPage.vue";
+import NewsAdmin from "../components/Personal/NewsAdmin.vue";
 
 
 const routes = [
@@ -43,6 +44,11 @@ const routes = [
                 name: 'calcEdit' ,
                 path: 'calcEdit',
                 component: Calculator
+            },
+            {
+                name: 'newsEdit' ,
+                path: 'newsEdit',
+                component: NewsAdmin
             },
         ]
     },

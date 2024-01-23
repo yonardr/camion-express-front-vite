@@ -24,7 +24,7 @@ export default {
 <style scoped lang="scss">
 @import "../../variables";
 .btn__orange{
-  @include btn__universal($c_orange)
+  @include btn__universal($c_orange);
 }
 .btn__blue{
   @include btn__universal($c_blue)

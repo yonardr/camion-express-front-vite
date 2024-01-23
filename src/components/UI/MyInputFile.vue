@@ -2,16 +2,23 @@
     <label for="images" class="drop-container">
       <span class="drop-title">Drop files here</span>
       or
-      <input @change="updateInput" type="file" accept="*" required>
+      <input v-if="!multiple" @change="updateInput" type="file" accept="*" required >
+      <input v-if="multiple" @change="updateInputMultiple" type="file" accept="*" required multiple="multiple">
     </label>
 </template>
 
 <script>
 export default {
   name: 'my-input-file',
+  props:{
+    multiple: false
+  },
   methods:{
     updateInput(event){
       this.$emit('update:modelValue', event.target.files[0])
+    },
+    updateInputMultiple(event){
+      this.$emit('update:modelValue', event.target.files)
     }
   }
 }

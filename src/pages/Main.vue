@@ -2,14 +2,17 @@
   <div>
     <Navbar />
     <StartView id="start"/>
-
     <div class="__container">
-      <Calculator id="calc"/>
+      <CalcOnMain id="calc"/>
     </div>
       <News id="news" />
     <div class="__container">
-      <Advantages/>
+<!--      <Advantages/>-->
+    </div>
+    <div class="fura">
       <SubmitApplication />
+    </div>
+    <div class="__container">
       <Partners />
       <Contacts id="contacts" />
     </div>
@@ -26,13 +29,16 @@ import SubmitApplication from "../components/MainPage/SubmitApplication.vue";
 import Partners from "../components/MainPage/Partners.vue";
 import Contacts from "../components/MainPage/Contacts.vue";
 import Map from "../components/MainPage/Map.vue";
-import Calculator from "../components/MainPage/Calculator.vue"
+import Calculator from "../components/Calc/CalculatorPage.vue"
 import News from "../components/MainPage/News.vue";
 import Footer from "../components/MainPage/Footer.vue";
+import CalcOnMain from "../components/Calc/CalcOnMain.vue";
 
 
 export default {
-  components: {Footer, News, Calculator, Map, Contacts, Partners, SubmitApplication, Advantages, StartView, Navbar},
+  components: {
+    CalcOnMain,
+    Footer, News, Calculator, Map, Contacts, Partners, SubmitApplication, Advantages, StartView, Navbar},
 }
 </script>
 
@@ -45,6 +51,11 @@ export default {
   .__container{
     padding: 0 15px;
   }
+}
+.fura{
+  background-image: url("src/assets/cloudy-3.webp") ;
+  background-repeat:no-repeat;
+  background-position: center center;
 }
 
 </style>

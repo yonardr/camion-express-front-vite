@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import DocumentsAdmin from "./DocumentsAdmin.vue";
-import SideNavbar from "../components/Personal/SideNavbar.vue";
+import DocumentsAdmin from "../components/Personal/DocumentsAdmin.vue";
+import SideNavbar from "./PersonalPage.vue";
 export default {
   components:{SideNavbar, DocumentsAdmin}
 }

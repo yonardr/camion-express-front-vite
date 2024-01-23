@@ -78,7 +78,7 @@ export default {
 }
 
 .mySwiper {
-  height: 600px;
+  height: 500px;
   padding: 35px;
   width: 1100px;
   .__slide {

@@ -84,7 +84,6 @@ export default {
     });
     function onChange(event) {
       file.value = event.target.files[0]
-      //console.log('поместил', form.value)
 
       let files = event.target.files || event.dataTransfer.files;
       if (files.length) changeInput.value = true;
@@ -115,6 +114,9 @@ h2{
 .card{
   @include card(white);
   padding: 30px 50px;
+  width: 1000px;
+  margin: 0 auto;
+
 }
 .upload{
   display: flex;

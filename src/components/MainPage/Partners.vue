@@ -5,7 +5,7 @@
       <aos-vue animation="fade-right" :delay="75" placement="top-bottom">
       <div class="group first__group">
         <img
-            v-for="img in $store.state.partners.groups.filter(i=> i.id <= 3 )"
+            v-for="img in getPartners.filter(i=> i.id <= 3 )"
             :key="img.id"
             :src=imgUrl(img.img_name)
             @click="OpenDialog(img)"
@@ -15,7 +15,7 @@
       <aos-vue animation="fade-left" :delay="75" placement="top-bottom">
       <div class="group second__group">
         <img
-            v-for="img in $store.state.partners.groups.filter(i=> i.id >= 4 )"
+            v-for="img in getPartners.filter(i=> i.id >= 4 )"
             :key="img.id"
             :style="{'width': img.size}"
             :src=imgUrl(img.img_name)
@@ -44,6 +44,7 @@
 <script>
 import MyDialog from "../UI/MyDialog.vue";
 import AosVue from "aos-vue";
+import {mapGetters} from "vuex";
 
 export default {
   components: {MyDialog, AosVue},
@@ -51,13 +52,11 @@ export default {
   data(){
     return {
       dialogVisible: false,
-      partner: {
-        type: Object
-      }
     }
   },
+  computed:mapGetters(['getPartners']),
   methods:{
-    OpenDialog(partner){
+     OpenDialog(partner){
       this.dialogVisible = true;
       this.partner = partner;
     },

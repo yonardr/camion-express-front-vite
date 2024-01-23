@@ -6,19 +6,19 @@
     <div class="group">
       <router-link to="/" style="color : white">Главная</router-link>
       <router-link :to="{name: 'calcEdit'}" class="field">
-        <img src="../../assets/personal/menu_icons/calculator.svg">
+        <img src="../assets/personal/menu_icons/calculator.svg">
         <Transition>
         <div v-if="show" class="text">Калькулятор</div>
         </Transition>
       </router-link>
       <router-link :to="{name: 'docsEdit'}" class="field">
-        <img src="../../assets/personal/menu_icons/documents.svg">
+        <img src="../assets/personal/menu_icons/documents.svg">
         <Transition>
           <div v-if="show" class="text">Документы</div>
         </Transition>
       </router-link>
-    <router-link :to="{name: 'calcEdit'}" class="field">
-        <img src="../../assets/personal/menu_icons/news.svg">
+    <router-link :to="{name: 'newsEdit'}" class="field">
+        <img src="../assets/personal/menu_icons/news.svg">
         <Transition>
           <div v-if="show" class="text">Новости</div>
         </Transition>
@@ -45,7 +45,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../variables";
+@import "../variables";
 .navbar{
   position: relative;
   height: 100vh;

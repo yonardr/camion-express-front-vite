@@ -6,7 +6,7 @@ export const newsModule = {
     },
     getters:{
         getNews(state){
-            return state.news
+            return state.news.reverse()
         }
     },
     actions: {

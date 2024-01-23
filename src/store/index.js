@@ -4,6 +4,7 @@ import {partnerModule} from "./partnerModule";
 import {mapModule} from "./mapModule";
 import {documentsModule} from "./documentsModule.js";
 import {newsModule} from "./newsModule.js";
+import {calculatorModule} from "./calculatorModule.js";
 
 export default createStore({
   modules: {
@@ -11,6 +12,7 @@ export default createStore({
     partners: partnerModule,
     map: mapModule,
     docs: documentsModule,
-    news: newsModule
+    news: newsModule,
+    calc: calculatorModule
   }
 })
