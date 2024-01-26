@@ -4,7 +4,12 @@ export const calculatorModule = {
     state: {
         point_a : [],
         directions: [],
-        direction_info: {}
+        direction_info: {},
+        packaging:{
+            rigid_packaging: false,
+            palletizing: false,
+            bubble_wrap: false,
+        }
     },
     actions: {
         async fetchPoints_a (ctx){
@@ -30,6 +35,12 @@ export const calculatorModule = {
         updateDirectionById(state, data){
             state.direction_info = data
         },
+        updatePacking(state, change_key){
+            for(const key of Object.keys(state.packaging)){
+                state.packaging[key] = false
+            }
+            state.packaging[change_key] = true
+        }
     },
     getters:{
         getPoints_a(state){
@@ -40,6 +51,9 @@ export const calculatorModule = {
         },
         getDirectionById(state){
             return state.direction_info
+        },
+        getPacking(state){
+            return state.packaging
         }
     }
 }
