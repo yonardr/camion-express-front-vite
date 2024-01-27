@@ -36,10 +36,13 @@ export const calculatorModule = {
             state.direction_info = data
         },
         updatePacking(state, change_key){
-            for(const key of Object.keys(state.packaging)){
-                state.packaging[key] = false
+            if(state.packaging[change_key]) state.packaging[change_key] = false
+            else{
+                for(const key of Object.keys(state.packaging)){
+                    state.packaging[key] = false
+                }
+                state.packaging[change_key] = true
             }
-            state.packaging[change_key] = true
         }
     },
     getters:{
