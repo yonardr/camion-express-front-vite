@@ -15,7 +15,7 @@
       <div class="input__fields">
         <div style="display: flex">
           <my-button color="blue">+</my-button>
-          <input />
+          <input/>
           <my-button color="blue">-</my-button>
         </div>
         <div>
@@ -54,7 +54,7 @@
           </div>
           <div><input v-model="form.weight.value" class="select" type="number" @input="inputParse($event, 'weight')">
           </div>
-          <div><input type="range" v-model="form.weight.value" max="5000"  class="input__range"
+          <div><input type="range" v-model="form.weight.value" max="5000" class="input__range"
                       :style="inputProgress('weight')"
                       @input="inputParse($event, 'weight')"
           ></div>
@@ -77,17 +77,17 @@
     </div>
     <div class="total__price">
       <h6>
-        Стоймость грузоперевозки
+        Стоимость грузоперевозки
       </h6>
       <h3>{{ result }} ₽</h3>
       <h6>
-        Стоймость упаковки
+        Стоимость упаковки
       </h6>
       <h3>1297 ₽</h3>
       <h6>
-        Стоймость упаковки
+        Стоимость упаковки
       </h6>
-      <h3>{{ result}} ₽</h3>
+      <h3>{{ result }} ₽</h3>
       <h6>
         Сроки доставки
       </h6>
@@ -99,44 +99,19 @@
 </template>
 
 <script>
-import {useStore} from "vuex";
-import {computed, onMounted, reactive, ref, watch, watchEffect} from "vue";
+import {ref, watch} from "vue";
 import MyButton from "../UI/MyButton.vue";
 import {useSubmit} from "../hooks/MainPage/useSubmit.js";
+import {useLoadingDataCalc} from "./useLoadingDataCalc.js";
+import {useInputsCalc} from "./useInputsCalc.js";
+import {useNumbersAnimation} from "../hooks/useNumbersAnimation.js";
 
 const minValue = value => Number(value) >= 0
 export default {
   components: {MyButton},
   setup() {
-    const store = useStore()
 
-    const points_a = computed(() => store.getters.getPoints_a);
-    const directions = computed(() => store.getters.getDirections)
-    const direction_info = computed(() => store.getters.getDirectionById)
-
-    onMounted(() => store.dispatch('fetchPoints_a'))
-
-    watchEffect(async () => {
-      await store.dispatch('fetchDirections', {id: points_a.value[1]?.id})
-    })
-    watchEffect(async () => {
-      await store.dispatch('fetchDirectionById', {id_direction: directions.value[0]?.id_direction})
-    })
-
-    const packing = computed(() => store.getters.getPacking)
-
-
-    async function onChangePoint_A(event) {
-      await store.dispatch('fetchDirections', {id: event.target.value})
-    }
-
-    async function onChangePoint_B(event) {
-      await store.dispatch('fetchDirectionById', {id_direction: event.target.value})
-    }
-
-    function changePacking(change_key) {
-      store.commit('updatePacking', change_key)
-    }
+    const {points_a, directions, direction_info, packing} = useLoadingDataCalc()
 
     const form = useSubmit({
       weight: {
@@ -149,16 +124,11 @@ export default {
       },
     })
 
-    function inputParse(event, key) {
-      if (event.target.value >= 5000 && key === 'weight') {
-        event.target.value = 5000
-      } else if (event.target.value >= 30 && key === 'volume') {
-        event.target.value = 30
-      } else {
-        event.target.value = Number(event.target.value)
-        if (form[key].value < 0) form[key].value = 0
-      }
-    }
+    const  {onChangePoint_A, onChangePoint_B, changePacking, inputProgress, inputParse} = useInputsCalc(form)
+
+
+
+
 
     const fn = () => {
       if (form.valid) {
@@ -192,42 +162,14 @@ export default {
       }
     }
     const total_price = ref(0)
-    const result = ref(0)
+    const result = useNumbersAnimation(total_price)
     watch(form, fn)
 
-    watch(total_price, (newValue, oldValue) => {
-      if (oldValue < newValue) {
-        for (let i = oldValue; i <= newValue; i += 10) {
-          setTimeout(() => {
-            result.value = i.toFixed()
-          }, 300)
-        }
-      } else {
-        for (let i = oldValue; i >= newValue; i -= 10) {
-          setTimeout(() => {
-            result.value = i.toFixed()
-          }, 300)
-        }
-      }
-      setTimeout(() => {
-        result.value = total_price.value
-      }, 300)
-    })
 
     watch(direction_info, (newValue) => {
       total_price.value = newValue.min_price
       fn()
     })
-
-    const inputProgress = (type) =>{
-      let value = 0;
-      if(type === 'weight') value = (form.weight.value)/(5000)*100
-      if(type === 'volume') value = (form.volume.value)/(30)*100
-      return{
-        background: `linear-gradient(to right, #737373 0%, #ff7b47 10%, #ff7b47 ${value}%, #ff7b47 ${value+2}%, #737373 ${value+20}%, #737373 100%)`
-      }
-    }
-
 
 
     return {
@@ -250,10 +192,12 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../variables';
-h6{
+
+h6 {
   margin-top: 20px;
   color: $c_gray
 }
+
 .container {
   margin-bottom: 200px;
   display: flex;
@@ -302,6 +246,7 @@ h6{
   left: 19px;
   width: 210px;
 }
+
 input[type=range] {
   -webkit-appearance: none;
   -moz-appearance: none;
