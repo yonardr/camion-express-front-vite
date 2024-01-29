@@ -2,24 +2,24 @@
   <div class="container">
     <div>
       <div class="input__fields btns">
-        <my-button color="blue" class="btn left" :class="{active: packing.rigid_packaging}"
-                   @click="changePacking('rigid_packaging')">Паллетный борт
+        <my-button color="blue" class="btn left" :class="{active: packing.pallet_board}"
+                   @click="changePacking('pallet_board')">Паллетный борт
         </my-button>
-        <my-button color="blue" class="btn between" :class="{active: packing.palletizing}"
-                   @click="changePacking('palletizing')">Паллета
+        <my-button color="blue" class="btn between" :class="{active: packing.pallet}"
+                   @click="changePacking('pallet')">Паллета
         </my-button>
-        <my-button color="blue" class="btn right" :class="{active: packing.bubble_wrap}"
-                   @click="changePacking('bubble_wrap')">Деревянная упаковка
+        <my-button color="blue" class="btn right" :class="{active: packing.wooden}"
+                   @click="changePacking('wooden')">Деревянная упаковка
         </my-button>
       </div>
       <div class="input__fields">
-        <div style="display: flex">
-          <my-button color="blue">+</my-button>
-          <input/>
-          <my-button color="blue">-</my-button>
+        <div class="count_bord" v-show="packing.pallet_board || packing.pallet">
+          <my-button color="blue" @click="form.count_packing.value++">+</my-button>
+          <input class="select" v-model="form.count_packing.value"/>
+          <my-button color="blue" :disabled='form.count_packing.value<=0' @click="form.count_packing.value--">-</my-button>
         </div>
         <div>
-          <input type="checkbox" id="stretch_film"/>
+          <input type="checkbox" id="stretch_film" v-model="packing.stretch_film" class="stretch_film"/>
           <label for="stretch_film">Стрейч пленка</label>
         </div>
       </div>
@@ -79,15 +79,15 @@
       <h6>
         Стоимость грузоперевозки
       </h6>
-      <h3>{{ result }} ₽</h3>
+      <h3>{{ price_direction }} ₽</h3>
       <h6>
         Стоимость упаковки
       </h6>
-      <h3>1297 ₽</h3>
+      <h3>{{ price_packing }} ₽</h3>
       <h6>
         Стоимость упаковки
       </h6>
-      <h3>{{ result }} ₽</h3>
+      <h3>{{price_total}} ₽</h3>
       <h6>
         Сроки доставки
       </h6>
@@ -105,6 +105,8 @@ import {useSubmit} from "../hooks/MainPage/useSubmit.js";
 import {useLoadingDataCalc} from "./useLoadingDataCalc.js";
 import {useInputsCalc} from "./useInputsCalc.js";
 import {useNumbersAnimation} from "../hooks/useNumbersAnimation.js";
+import {useCalc} from "./useCalc.js";
+import {useCalcPacking} from "./useCalcPacking.js";
 
 const minValue = value => Number(value) >= 0
 export default {
@@ -122,57 +124,45 @@ export default {
         value: 0.01,
         validators: {minValue}
       },
+      count_packing : {
+        value: 0
+      }
     })
 
     const  {onChangePoint_A, onChangePoint_B, changePacking, inputProgress, inputParse} = useInputsCalc(form)
 
-
-
-
-
-    const fn = () => {
-      if (form.valid) {
-        let price_by_weight = 0
-        let min_value = direction_info.value.weights[4].value
-        let value_price = 0
-        direction_info.value.weights.map((item) => {
-          //alert(`${Math.fround(min_value)} >= ${Math.fround(item.value)} ${Math.fround(min_value) >= Math.fround(item.value)} ${Math.fround(min_value)} >= ${Math.fround(form.weight.value)} ${Math.fround(min_value) >= Math.fround(form.weight.value)}`)
-          if (Math.fround(min_value) >= Math.fround(item.value) && Math.fround(min_value) >= Math.fround(form.weight.value)) {
-            min_value = item.value
-            value_price = item.price
-            //alert(value_price)
-          }
-        })
-
-        price_by_weight = form.weight.value * value_price
-        //alert(`${form.weight.value} * ${value_price} =  ${price_by_weight}`)
-        if (price_by_weight < direction_info.value.min_price) price_by_weight = direction_info.value.min_price
-
-
-        let price_by_volume = 0
-        direction_info.value.volumes.map((item) => {
-          if (form.volume.value <= item.value) {
-            price_by_volume = form.volume.value * item.price
-            if (price_by_volume < direction_info.value.min_price) price_by_volume = direction_info.value.min_price
-          }
-
-        })
-
-        total_price.value = Math.max(price_by_weight, price_by_volume)
-      }
-    }
     const total_price = ref(0)
-    const result = useNumbersAnimation(total_price)
-    watch(form, fn)
+    const packing_price = ref(0)
+    const price_sum = ref(0)
+    const price_direction = useNumbersAnimation(total_price)
+    const price_packing = useNumbersAnimation(packing_price)
+    const price_total = useNumbersAnimation(price_sum)
 
-
-    watch(direction_info, (newValue) => {
-      total_price.value = newValue.min_price
-      fn()
+    watch(form, ()=> {
+      total_price.value = useCalc(direction_info, form)
+      packing_price.value = useCalcPacking(packing, form)
+      price_sum.value = total_price.value+packing_price.value
     })
 
 
+    watch(direction_info, () => {
+      total_price.value = useCalc(direction_info, form)
+      price_sum.value = total_price.value+packing_price.value
+    })
+
+
+    watch(packing.value, ()=>{
+      packing_price.value = useCalcPacking(packing, form)
+      price_sum.value = total_price.value+packing_price.value
+    })
+
+
+
+
+
     return {
+      price_total,
+      price_packing,
       inputProgress,
       points_a,
       onChangePoint_A,
@@ -184,7 +174,7 @@ export default {
       changePacking,
       total_price,
       inputParse,
-      result
+      price_direction
     }
   }
 }
@@ -302,5 +292,41 @@ input[type=range]::-webkit-slider-thumb {
     background-color: $c_blue;
     border-color: $c_blue;
   }
+}
+.count_bord{
+  display: flex;
+  height: 48px;
+  align-items: center;
+  input{
+    margin: 5px;
+    height: 100%;
+    width: 80px;
+  }
+}
+.stretch_film{
+  display: none;
+}
+.stretch_film + label {
+  position: relative;
+  padding-left: 30px;
+  height: 1.5em;
+  display: flex;
+  align-items: center;
+  color: #000;
+  cursor: pointer;
+  user-select: none;
+}
+.stretch_film + label:before {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 1px;
+  width: 15px;
+  height: 15px;
+  border: 4px solid $c_blue;
+  border-radius: 20px;
+}
+.stretch_film:checked + label::before {
+  border-color: $c_orange;
 }
 </style>

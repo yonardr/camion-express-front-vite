@@ -6,9 +6,10 @@ export const calculatorModule = {
         directions: [],
         direction_info: {},
         packaging:{
-            rigid_packaging: false,
-            palletizing: false,
-            bubble_wrap: false,
+            pallet_board: false,
+            pallet: false,
+            wooden: false,
+            stretch_film: false
         }
     },
     actions: {
@@ -39,7 +40,7 @@ export const calculatorModule = {
             if(state.packaging[change_key]) state.packaging[change_key] = false
             else{
                 for(const key of Object.keys(state.packaging)){
-                    state.packaging[key] = false
+                    if(key !== 'stretch_film') state.packaging[key] = false
                 }
                 state.packaging[change_key] = true
             }
