@@ -21,3 +21,4 @@ export function useLoadingDataCalc() {
     return {points_a, directions, direction_info, packing}
 
 }
+

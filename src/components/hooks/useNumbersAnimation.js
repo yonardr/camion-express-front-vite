@@ -23,11 +23,11 @@ export function useNumbersAnimation(number) {
 
     })
 
-    watch(number, async (newValue, oldValue) => {
-        await iteration(oldValue, newValue).finally(() => {
+    watch(number,  (newValue, oldValue) => {
+          iteration(oldValue, newValue).then(() => {
             setTimeout(() => {
-                result.value = number.value
-            }, 300)
+                result.value = number.value.toFixed()
+            }, 400)
         })
 
     })
