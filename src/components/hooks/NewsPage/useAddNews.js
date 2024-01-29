@@ -15,15 +15,17 @@ export async function useAddNews(init = {}) {
             formData.append(`contacts[${index}]`, item)
         })
 
-        // init.files.value.map((item, index) => {
-        //     formData.append(`images`, item)
-        // })
-
-        for (let i = 0; i < init.files.value.length; i++) {
-            let file = init.files.value[i];
+        for (let i = 0; i < init.images.value.length; i++) {
+            let file = init.images.value[i];
             formData.append('images', file);
 
         }
+
+        // for (let i = 0; i < init.files.value.length; i++) {
+        //     let file = init.files.value[i];
+        //     formData.append('files', file);
+        //
+        // }
 
         const res = await axios.post(`${import.meta.env.VITE_APP_API_URL}/news`,
             formData,

@@ -43,7 +43,7 @@
         <h4>
           Добавление изображений
         </h4>
-        <my-input-file :multiple="true" v-model="form.files.value"/>
+        <my-input-file :multiple="true" v-model="form.images.value"/>
         <h4>
           Добавление документов
         </h4>
@@ -82,6 +82,9 @@ export default {
       },
       contactsArray: {
         value: ['']
+      },
+      images: {
+        value: []
       },
       files: {
         value: []

@@ -1,5 +1,5 @@
 import {useStore} from "vuex";
-import {computed, onMounted, watchEffect} from "vue";
+import {computed, onMounted, ref, watch, watchEffect} from "vue";
 
 export function useLoadingDataCalc() {
 
@@ -11,11 +11,13 @@ export function useLoadingDataCalc() {
 
     onMounted(() => store.dispatch('fetchPoints_a'))
 
-    watchEffect(async () => {
-        await store.dispatch('fetchDirections', {id: points_a.value[1]?.id})
+    watch(points_a, async ()=>{
+        await store.dispatch('fetchDirections', {id: points_a.value[0]?.id})
+
     })
-    watchEffect(async () => {
+    watch(directions, async ()=>{
         await store.dispatch('fetchDirectionById', {id_direction: directions.value[0]?.id_direction})
+
     })
 
     return {points_a, directions, direction_info, packing}
