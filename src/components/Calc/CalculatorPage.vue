@@ -1,120 +1,122 @@
 <template>
-
+<div class="__container">
   <div class="section">
     <h2 style="margin: 40px 0">КАЛЬКУЛЯТОР</h2>
-      <div class="card card__header">
+    <div class="card card__header">
 
-        <div class="title">Направление</div>
+      <div class="title">Направление</div>
 
-        <CalcDirection />
+      <CalcDirection />
+
+    </div>
+
+
+    <div class="card card__footer">
+      <div class="title">Параметры груза</div>
+      <div class="input__fields beginning">
+        <my-button color='orange' class="switcher active">Одно или несколько мест отдельно</my-button>
+        <my-button color='orange' class="switcher">Общий вес и объем</my-button>
+      </div>
+      <div class="input__fields">
+        <div class="input__fields place__group">
+          <div v-for="item in ['1 место','2 место','3 место','4 место','5 место']" class="place__item">
+            {{item}}
+          </div>
+        </div>
+
+        <div><my-button color="orange" class="switcher active">Добавить место</my-button></div>
+      </div>
+      <div class="input__fields border-none">
+
+        <div class="input__fields ">
+
+          <div class="input">
+            <div class="input__title">Длина</div>
+            <div class="input__unit">
+              <input class="mini__input"/>
+            </div>
+          </div>
+          <div class="input">
+            <div class="input__title">Ширина</div>
+            <div class="input__unit">
+              <input class="mini__input"/>
+            </div>
+          </div>
+          <div class="input">
+            <div class="input__title">Высота</div>
+            <div class="input__unit">
+              <input class="mini__input"/>
+            </div>
+          </div>
+          <div class="input">
+            <div class="input__title">Объем</div>
+            <div class="input__unit">
+              <input class="mini__input"/>
+            </div>
+          </div>
+
+        </div>
+
+
+
+        <div class="input__fields">
+          <div class="input">
+            <div class="input__title">Вес</div>
+            <div class="input__unit">
+              <input class="mini__input"/>
+            </div>
+          </div>
+          <div class="input">
+            <div class="input__title">Одинаковые места</div>
+            <div class="input__unit">
+              <input class="mini__input"/>
+            </div>
+          </div>
+        </div>
 
       </div>
 
-
-      <div class="card card__footer">
-        <div class="title">Параметры груза</div>
-        <div class="input__fields beginning">
-          <my-button color='orange' class="switcher active">Одно или несколько мест отдельно</my-button>
-          <my-button color='orange' class="switcher">Общий вес и объем</my-button>
+      <div class="input__fields border-none">
+        <div class="input__fields">
+          <div class="input">
+            <div class="input__title">Характер груза</div>
+            <input class="mini__input long" />
+          </div>
         </div>
         <div class="input__fields">
-          <div class="input__fields place__group">
-            <div v-for="item in ['1 место','2 место','3 место','4 место','5 место']" class="place__item">
-              {{item}}
-            </div>
-          </div>
-
-          <div><my-button color="orange" class="switcher active">Добавить место</my-button></div>
-        </div>
-        <div class="input__fields border-none">
-
-          <div class="input__fields ">
-
-            <div class="input">
-              <div class="input__title">Длина</div>
-              <div class="input__unit">
-                <input class="mini__input"/>
-              </div>
-            </div>
-            <div class="input">
-              <div class="input__title">Ширина</div>
-              <div class="input__unit">
-                <input class="mini__input"/>
-              </div>
-            </div>
-            <div class="input">
-              <div class="input__title">Высота</div>
-              <div class="input__unit">
-                <input class="mini__input"/>
-              </div>
-            </div>
-            <div class="input">
-              <div class="input__title">Объем</div>
-              <div class="input__unit">
-                <input class="mini__input"/>
-              </div>
-            </div>
-
-          </div>
-
-
-
-          <div class="input__fields">
-            <div class="input">
-              <div class="input__title">Вес</div>
-              <div class="input__unit">
-                <input class="mini__input"/>
-              </div>
-            </div>
-            <div class="input">
-              <div class="input__title">Одинаковые места</div>
-              <div class="input__unit">
-                <input class="mini__input"/>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="input__fields border-none">
-          <div class="input__fields">
-            <div class="input">
-              <div class="input__title">Характер груза</div>
-              <input class="mini__input long" />
-            </div>
-          </div>
-          <div class="input__fields">
           <div class="input">
             <div class="input__title">Оценочная стоимость груза</div>
             <input class="mini__input long" />
           </div>
-          </div>
-        </div>
-
-        <div class="title">Упаковка</div>
-        <div class="input__fields border-none">
-          <div class="input__fields">
-            <input type="checkbox" id="check_rigid_packaging">
-            <label for="check_rigid_packaging">Жесткая упаковка</label>
-          </div>
-          <div class="input__fields">
-            <input type="checkbox" id="check_pallet_board">
-            <label for="check_pallet_board">Паллетный борт (индивидуальный)</label>
-          </div>
-        </div>
-        <div class="input__fields border-none">
-          <div class="input__fields">
-            <input type="checkbox" id="check_palletizing">
-            <label for="check_palletizing">Паллетирование</label>
-          </div>
-          <div class="input__fields">
-            <input type="checkbox" id="">
-            <label>Пузырчатая пленка</label>
-          </div>
         </div>
       </div>
 
+      <div class="title">Упаковка</div>
+      <div class="input__fields border-none">
+        <div class="input__fields">
+          <input type="checkbox" id="check_rigid_packaging">
+          <label for="check_rigid_packaging">Жесткая упаковка</label>
+        </div>
+        <div class="input__fields">
+          <input type="checkbox" id="check_pallet_board">
+          <label for="check_pallet_board">Паллетный борт (индивидуальный)</label>
+        </div>
+      </div>
+      <div class="input__fields border-none">
+        <div class="input__fields">
+          <input type="checkbox" id="check_palletizing">
+          <label for="check_palletizing">Паллетирование</label>
+        </div>
+        <div class="input__fields">
+          <input type="checkbox" id="">
+          <label>Пузырчатая пленка</label>
+        </div>
+      </div>
+    </div>
+
   </div>
+</div>
+
 
 </template>
 

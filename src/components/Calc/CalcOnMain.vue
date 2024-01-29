@@ -72,6 +72,13 @@
           ></div>
           <small v-if="form.volume.errors.minValue" style="color:#ff7b47">Введите корректные значения</small>
         </div>
+
+      </div>
+      <div class="input__fields">
+        <router-link :to="{name:'calc'}" style="text-decoration: none">
+          <my-button color="orange">Рассчитать</my-button>
+        </router-link>
+
       </div>
 
     </div>
@@ -218,11 +225,10 @@ h6 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 15px;
 
   .input {
-    padding: 10px;
-
+    padding: 10px 0 0;
     .input__title {
       margin: 0 0 5px 5px;
       font-weight: bold;
