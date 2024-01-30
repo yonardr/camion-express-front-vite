@@ -7,9 +7,8 @@
     </div>
       <News id="news" />
     <div class="__container">
-<!--      <Advantages/>-->
-    </div>
-    <div class="fura">
+      <Advantages/>
+
       <SubmitApplication />
     </div>
     <div class="__container">
@@ -51,11 +50,6 @@ export default {
   .__container{
     padding: 0 15px;
   }
-}
-.fura{
-  background-image: url("src/assets/cloudy-3.webp") ;
-  background-repeat:no-repeat;
-  background-position: center center;
 }
 
 </style>

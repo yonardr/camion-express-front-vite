@@ -8,6 +8,7 @@ import DocumentsAdmin from "../components/Personal/DocumentsAdmin.vue";
 import Calculator from "../components/Calc/CalculatorPage.vue";
 import NewsPage from "../pages/NewsPage.vue";
 import NewsAdmin from "../components/Personal/NewsAdmin.vue";
+import CalculatorPage from "../components/Calc/CalculatorPage.vue";
 
 
 const routes = [
@@ -29,6 +30,11 @@ const routes = [
     {
       path: '/news/:id',
       component: NewsPage
+    },
+    {
+        name: 'calc',
+        path: '/calculator',
+        component: CalculatorPage
     },
     {
         name: 'personal',
