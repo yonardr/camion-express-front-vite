@@ -1,7 +1,7 @@
 <template >
   <aos-vue animation="zoom-in" :delay="75" placement="top-bottom">
 <div class="item" :class="changeColor">
-  <vue-flip :active-hover="true" :horizontal="flipChange" style="padding: 20px; height: 100%">
+  <vue-flip :active-hover="true" :horizontal="flipChange" style="padding: 20px" height="200px" width="300px">
     <template v-slot:front class="front">
         <img :src=imgUrl(item.img) />
         <h3>{{item.title}}</h3>
