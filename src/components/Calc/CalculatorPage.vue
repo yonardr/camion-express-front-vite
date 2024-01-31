@@ -2,118 +2,27 @@
 <div class="__container">
   <div class="section">
     <h2 style="margin: 40px 0">КАЛЬКУЛЯТОР</h2>
+    <div class="cargo">
+      <div class="cargo__items">
+        <div v-for="item in cargoArray">
+          <my-button color="orange" class="btn">Груз №{{ item.id }}
+            <div class="delete" @click="deleteCargo(item.id)">x</div>
+          </my-button>
+        </div>
+      </div>
+      <my-button color='orange' class="switcher active" @click="addCargo">Добавить груз</my-button>
+    </div>
     <div class="card card__header">
-
       <div class="title">Направление</div>
-
       <CalcDirection />
-
     </div>
-
-
-    <div class="card card__footer">
-      <div class="title">Параметры груза</div>
-      <div class="input__fields beginning">
-        <my-button color='orange' class="switcher active">Одно или несколько мест отдельно</my-button>
-        <my-button color='orange' class="switcher">Общий вес и объем</my-button>
-      </div>
-      <div class="input__fields">
-        <div class="input__fields place__group">
-          <div v-for="item in ['1 место','2 место','3 место','4 место','5 место']" class="place__item">
-            {{item}}
-          </div>
-        </div>
-
-        <div><my-button color="orange" class="switcher active">Добавить место</my-button></div>
-      </div>
-      <div class="input__fields border-none">
-
-        <div class="input__fields ">
-
-          <div class="input">
-            <div class="input__title">Длина</div>
-            <div class="input__unit">
-              <input class="mini__input"/>
-            </div>
-          </div>
-          <div class="input">
-            <div class="input__title">Ширина</div>
-            <div class="input__unit">
-              <input class="mini__input"/>
-            </div>
-          </div>
-          <div class="input">
-            <div class="input__title">Высота</div>
-            <div class="input__unit">
-              <input class="mini__input"/>
-            </div>
-          </div>
-          <div class="input">
-            <div class="input__title">Объем</div>
-            <div class="input__unit">
-              <input class="mini__input"/>
-            </div>
-          </div>
-
-        </div>
-
-
-
-        <div class="input__fields">
-          <div class="input">
-            <div class="input__title">Вес</div>
-            <div class="input__unit">
-              <input class="mini__input"/>
-            </div>
-          </div>
-          <div class="input">
-            <div class="input__title">Одинаковые места</div>
-            <div class="input__unit">
-              <input class="mini__input"/>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="input__fields border-none">
-        <div class="input__fields">
-          <div class="input">
-            <div class="input__title">Характер груза</div>
-            <input class="mini__input long" />
-          </div>
-        </div>
-        <div class="input__fields">
-          <div class="input">
-            <div class="input__title">Оценочная стоимость груза</div>
-            <input class="mini__input long" />
-          </div>
-        </div>
-      </div>
-
-      <div class="title">Упаковка</div>
-      <div class="input__fields border-none">
-        <div class="input__fields">
-          <input type="checkbox" id="check_rigid_packaging">
-          <label for="check_rigid_packaging">Жесткая упаковка</label>
-        </div>
-        <div class="input__fields">
-          <input type="checkbox" id="check_pallet_board">
-          <label for="check_pallet_board">Паллетный борт (индивидуальный)</label>
-        </div>
-      </div>
-      <div class="input__fields border-none">
-        <div class="input__fields">
-          <input type="checkbox" id="check_palletizing">
-          <label for="check_palletizing">Паллетирование</label>
-        </div>
-        <div class="input__fields">
-          <input type="checkbox" id="">
-          <label>Пузырчатая пленка</label>
-        </div>
-      </div>
-    </div>
-
+<div class="card">
+  <CalcParam />
+</div>
+  </div>
+  <div class="prices" >
+    <img src="./../../assets/calc/check.png" class="invoice__img">
+    {{direction_info.min_price}}
   </div>
 </div>
 
@@ -123,17 +32,42 @@
 <script>
 import MyCombobox from "../UI/MyCombobox.vue";
 import MyButton from "../UI/MyButton.vue";
-import {useStore} from "vuex";
-import {computed, onMounted} from "vue";
 import CalcDirection from "./CalcDirection.vue";
-
+import CalcOnMain from "./CalcOnMain.vue";
+import CalcParam from "./CalcParam.vue";
+import {ref} from "vue";
+import {useLoadingDataCalc} from "./useLoadingDataCalc.js";
+import {useSubmit} from "../hooks/MainPage/useSubmit.js";
+const minValue = value => Number(value) >= 0
 export default {
-  components: {CalcDirection, MyButton, MyCombobox},
+  components: {CalcParam, CalcOnMain, CalcDirection, MyButton, MyCombobox},
   setup(){
-    const store = useStore()
-    onMounted(() => store.dispatch('fetchPoints_a'))
-    const points_a = computed(() => store.getters.getPoints_a);
-    return {points_a}
+    const form = useSubmit({
+      weight: {
+        value: 1,
+        validators: {minValue}
+      },
+      volume: {
+        value: 0.01,
+        validators: {minValue}
+      },
+      count_packing : {
+        value: 0
+      }
+    })
+    const {direction_info, packing} = useLoadingDataCalc()
+    const cargoArray = ref([{id: 1}])
+    function addCargo() {
+      const value = cargoArray.value.length + 1
+      cargoArray.value.push({id: value})
+    }
+    const deleteCargo = (id) =>{
+      if(id !== 1){
+        cargoArray.value = cargoArray.value.filter((item)=> item.id !== id)
+      }
+    }
+
+    return {cargoArray, deleteCargo, addCargo, direction_info}
   }
 }
 
@@ -141,7 +75,9 @@ export default {
 
 <style scoped lang="scss">
 @import '../../variables';
-
+.__container{
+  display: flex;
+}
 .card{
   padding: 24px;
 }
@@ -149,9 +85,6 @@ export default {
 
   @include card(white);
   margin-bottom: 20px;
-}
-.card__footer{
-  @include card(white);
 }
 .title{
   margin: 10px 0;
@@ -234,5 +167,60 @@ export default {
 }
 label{
   margin-left: 5px;
+}
+.prices{
+  position: relative;
+  top:150px;
+  left: 100px;
+}
+.invoice__img{
+  width: 300px;
+}
+.wave{
+  position: relative;
+  bottom: 300px;
+  left: 10px;
+  h6{
+    margin: 10px;
+    font-size: 16px;
+  }
+}
+.cargo {
+  width: 1000px;
+  display: flex;
+  justify-content: space-between;
+
+  .switcher {
+    width: 250px;
+  }
+}
+
+.cargo__items {
+  display: flex;
+  overflow-x: scroll;
+  width: 80%;
+}
+
+.btn {
+  width: 130px;
+  padding: 0;
+  font-size: 16px;
+  margin: 5px;
+  border-radius: 20px;
+  &:hover {
+    background-color: $c_orange;
+    color: #fff;
+  }
+
+  .delete {
+    margin-left: 15px;
+    transition: 0.6s;
+
+    &:hover {
+      transform: scale(1.5);
+      transition: 0.6s;
+      margin-bottom: 3px;
+    }
+  }
 }
 </style>

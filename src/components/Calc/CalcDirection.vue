@@ -1,13 +1,14 @@
 <template>
+
   <div class="container">
     <div class="input__fields">
       <div class="input">
         <div class="input__title">
           Откуда
         </div>
-        <select class="select" @change="onChange($event)">
-          <option v-for="item in points_a" :value=item.id>
-            {{item.name}}
+        <select class="select" @change="onChangePoint_A($event)">
+          <option v-for="item in points_a" :value=item.id :key="item.id">
+            {{ item.name }}
           </option>
         </select>
       </div>
@@ -17,44 +18,39 @@
           Куда
         </div>
 
-        <select class="select">
-          <option v-for="item in directions" :key="item.id">
-            {{item.name}}
+        <select class="select" @change="onChangePoint_B($event)">
+          <option v-for="item in directions" :key="item.id" :value="item.id_direction">
+            {{ item.name }}
           </option>
         </select>
       </div>
     </div>
-    <input >
-    <input type="range">
   </div>
 
 </template>
 
 <script>
-import {useStore} from "vuex";
-import {computed, onMounted, ref} from "vue";
+import {useLoadingDataCalc} from "./useLoadingDataCalc.js";
+import {useInputsCalc} from "./useInputsCalc.js";
+import MyButton from "../UI/MyButton.vue";
+import {ref} from "vue";
 
 export default {
+  components: {MyButton},
   setup(){
-    const store = useStore()
+    const {points_a, directions, direction_info, packing} = useLoadingDataCalc()
+    const  {onChangePoint_A, onChangePoint_B} = useInputsCalc({})
 
-    onMounted(() => store.dispatch('fetchPoints_a'))
-    const points_a = computed(() => store.getters.getPoints_a);
 
-    const directions = computed (()=> store.getters.getDirections)
-     async function onChange(event) {
-       await store.dispatch('fetchDirections', {id: event.target.value})
-    }
 
-    return {points_a, onChange, directions}
+    return {points_a, onChangePoint_A, onChangePoint_B, directions}
   }
 }
 </script>
 
 <style lang="scss" scoped>
+@import '../../variables';
 .container{
-  margin-bottom: 200px;
-
 }
 .title{
   margin: 10px 0;
@@ -66,7 +62,7 @@ export default {
   width: 400px;
   height: 60px;
   border-radius: 20px;
-  border: 1px solid #86868b;
+  border: 1px solid $c_gray;
   font-size: 18px;
   padding: 10px;
 }
@@ -85,4 +81,7 @@ export default {
     }
   }
 }
+
+
+
 </style>
