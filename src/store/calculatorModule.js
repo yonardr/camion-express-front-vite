@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const calculatorModule = {
     state: {
+        cargo: [],
         point_a : [],
         directions: [],
         direction_info: {},

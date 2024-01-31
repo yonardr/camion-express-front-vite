@@ -26,4 +26,20 @@ h2{
   font-size: 40px;
   text-align: center;
 }
+
+
+
+*::-webkit-scrollbar {
+  width: 5px; /* Ширина всего элемента навигации */
+  height: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent; /* Цвет дорожки */
+}
+*::-webkit-scrollbar-thumb {
+  background-color: $c_orange;
+  border-radius: 25px;
+  border: 3px solid $c_orange;
+}
 </style>
