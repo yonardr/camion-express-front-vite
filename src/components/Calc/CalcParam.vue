@@ -2,13 +2,29 @@
   <div class="card">
     <div class="title">Параметры груза</div>
     <div class="input__fields beginning">
-      <my-button color='orange' class="switcher active">Одно или несколько мест отдельно</my-button>
-      <my-button color='orange' class="switcher">Общий вес и объем</my-button>
+      <my-button
+          color='orange'
+          class="switcher"
+          :class="{active: paramType}"
+          @click="paramType=false"
+      >Одно или несколько мест отдельно</my-button>
+      <my-button
+          color='orange'
+          class="switcher"
+          :class="{active: !paramType}"
+          @click="paramType=true"
+      >Общий вес и объем</my-button>
     </div>
+    <div v-if="!paramType">
     <div class="input__fields">
       <div class="input__fields place__group">
         <div v-for="item in placeArray">
-          <my-button color="orange" class="btn">{{ item.id }} место
+          <my-button
+              color="orange"
+              class="btn"
+              :class="activePlace(item.id)"
+              @click="changeCargo(item.id)"
+          >{{ item.id }} место
             <div class="delete" @click="deletePlace(item.id)">x</div>
           </my-button>
         </div>
@@ -103,6 +119,57 @@
         <label>Пузырчатая пленка</label>
       </div>
     </div>
+    </div>
+
+    <div v-if="paramType">
+
+        <div class="input__fields ">
+
+          <div class="input">
+            <div class="input__title">Объем</div>
+            <div class="input__unit">
+              <input class="mini__input"/>
+            </div>
+          </div>
+          <div class="input">
+            <div class="input__title">Вес</div>
+            <div class="input__unit">
+              <input class="mini__input"/>
+            </div>
+          </div>
+          <div class="input">
+            <div class="input__title">Макс. вес</div>
+            <div class="input__unit">
+              <input class="mini__input"/>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="input__fields">
+          <div class="input">
+            <div class="input__title">Макс. длина</div>
+            <div class="input__unit">
+              <input class="mini__input"/>
+            </div>
+          </div>
+          <div class="input">
+            <div class="input__title">Макс. ширина</div>
+            <div class="input__unit">
+              <input class="mini__input"/>
+            </div>
+          </div>
+          <div class="input">
+            <div class="input__title">Макс. высота</div>
+            <div class="input__unit">
+              <input class="mini__input"/>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
   </div>
 </template>
 
@@ -113,30 +180,34 @@ import {ref} from "vue";
 export default {
   components: {MyButton},
   setup() {
-    const cargoArray = ref([{id: 1}])
-    const placeArray = ref([{id: 1},{id: 2},{id: 3},{id: 4}])
-    function addCargo() {
-      const value = cargoArray.value.length + 1
-      cargoArray.value.push({id: value})
-    }
+
+    const placeArray = ref([{id: 1}])
+    const placeId = ref(1)
+    const paramType = ref(false)
+
     function addPlace(){
       const value = placeArray.value.length + 1
       placeArray.value.push({id: value})
     }
 
-    const deleteCargo = (id) =>{
-      if(id !== 1){
-        cargoArray.value = cargoArray.value.filter((item)=> item.id !== id)
-      }
-    }
     const deletePlace = (id) => {
       if(id !== 1){
         placeArray.value = placeArray.value.filter((item)=> item.id !== id)
       }
     }
+    const activePlace = (id) => {
+      if(placeId.value !== id) return 'active'
+    }
 
+    function changeCargo(id){
+      placeId.value = id
+      placeArray.value.map((value, index)=>{
+        if(value.id === id) placeArray.value[index].active = true
+        else placeArray.value[index].active = false
+      })
+    }
 
-    return {cargoArray, addCargo, deleteCargo, placeArray,deletePlace, addPlace}
+    return { placeArray,deletePlace, addPlace, activePlace, changeCargo, paramType}
   }
 }
 </script>
@@ -147,7 +218,7 @@ export default {
 .card {
   @include card(white);
   padding: 24px;
-  max-width: 1000px;
+  width: 1000px;
 }
 
 .title {
@@ -203,8 +274,8 @@ export default {
 .place__group {
   overflow-x: scroll;
   display: flex;
-
-  justify-content: flex-start
+  justify-content: flex-start;
+  width: 80%;
 }
 
 .place__item {
@@ -268,6 +339,9 @@ label {
     }
   }
 }
-
+.active{
+  color: $c_orange;
+  background-color: #fff;
+}
 
 </style>

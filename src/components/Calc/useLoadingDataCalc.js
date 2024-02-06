@@ -8,6 +8,7 @@ export function useLoadingDataCalc() {
     const directions = computed(() => store.getters.getDirections)
     const direction_info = computed(() => store.getters.getDirectionById)
     const packing = computed(() => store.getters.getPacking)
+    const cargo = computed(() => store.getters.getAllCargo)
 
     onMounted(() => store.dispatch('fetchPoints_a'))
 
@@ -20,7 +21,7 @@ export function useLoadingDataCalc() {
 
     })
 
-    return {points_a, directions, direction_info, packing}
+    return {points_a, directions, direction_info, packing, cargo}
 
 }
 

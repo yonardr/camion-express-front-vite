@@ -4,8 +4,12 @@
     <h2 style="margin: 40px 0">КАЛЬКУЛЯТОР</h2>
     <div class="cargo">
       <div class="cargo__items">
-        <div v-for="item in cargoArray">
-          <my-button color="orange" class="btn">Груз №{{ item.id }}
+        <div v-for="item in cargo">
+          <my-button color="orange"
+                     class="btn"
+                     :class="activeCargo(item.id)"
+                     @click="changeCargo(item.id)">
+            Груз №{{ item.id }}
             <div class="delete" @click="deleteCargo(item.id)">x</div>
           </my-button>
         </div>
@@ -35,39 +39,42 @@ import MyButton from "../UI/MyButton.vue";
 import CalcDirection from "./CalcDirection.vue";
 import CalcOnMain from "./CalcOnMain.vue";
 import CalcParam from "./CalcParam.vue";
-import {ref} from "vue";
 import {useLoadingDataCalc} from "./useLoadingDataCalc.js";
 import {useSubmit} from "../hooks/MainPage/useSubmit.js";
+import {useStore} from "vuex";
+import {computed, onMounted, ref} from "vue";
 const minValue = value => Number(value) >= 0
 export default {
   components: {CalcParam, CalcOnMain, CalcDirection, MyButton, MyCombobox},
   setup(){
-    const form = useSubmit({
-      weight: {
-        value: 1,
-        validators: {minValue}
-      },
-      volume: {
-        value: 0.01,
-        validators: {minValue}
-      },
-      count_packing : {
-        value: 0
-      }
+    const store = useStore()
+    const cargoId = ref(1)
+    const {cargo, direction_info, packing} = useLoadingDataCalc()
+    onMounted(()=>{
+      addCargo()
     })
-    const {direction_info, packing} = useLoadingDataCalc()
-    const cargoArray = ref([{id: 1}])
     function addCargo() {
-      const value = cargoArray.value.length + 1
-      cargoArray.value.push({id: value})
+      const value = cargo.value.length + 1
+      store.commit('AddCargo', {id: value})
     }
     const deleteCargo = (id) =>{
-      if(id !== 1){
-        cargoArray.value = cargoArray.value.filter((item)=> item.id !== id)
-      }
+      store.commit('RemoveCargoById', id)
     }
 
-    return {cargoArray, deleteCargo, addCargo, direction_info}
+    const activeCargo = (id) => {
+      if(cargoId.value !== id) return 'active'
+    }
+
+
+    function changeCargo(id){
+      cargoId.value = id
+      cargo.value.map((value, index)=>{
+        if(value.id === id) cargo.value[index].active = true
+        else cargo.value[index].active = false
+      })
+    }
+
+    return {cargo, deleteCargo, addCargo, direction_info, activeCargo, changeCargo}
   }
 }
 
@@ -127,10 +134,10 @@ export default {
 .switcher{
   width: 100%;
   margin: 10px;
-  &.active{
-    color: $c_orange;
-    background-color: #fff;
-  }
+}
+.active{
+  color: $c_orange;
+  background-color: #fff;
 }
 .place__group{
   display: flex;

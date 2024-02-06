@@ -45,9 +45,26 @@ export const calculatorModule = {
                 }
                 state.packaging[change_key] = true
             }
+        },
+        AddCargo(state, data){
+            state.cargo.push(data)
+        },
+        RemoveCargoById(state, id){
+            state.cargo = state.cargo.filter((item)=> item.id !== id)
+        },
+        UpdateCargoById(state, object){
+          state.cargo.map((value, index) =>{
+              if(value.id === id) state.cargo[index] = object
+          } )
+        },
+        ClearCargo(state){
+            state.cargo = []
         }
     },
     getters:{
+        getAllCargo(state){
+            return state.cargo;
+        },
         getPoints_a(state){
             return state.point_a;
         },
