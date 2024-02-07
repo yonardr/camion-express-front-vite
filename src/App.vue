@@ -27,7 +27,10 @@ h2{
   text-align: center;
 }
 
-
+@font-face {
+  font-family: Montserrat;
+  src: url('./assets/fonts/Montserrat-VariableFont_wght.ttf');
+}
 
 *::-webkit-scrollbar {
   width: 5px; /* Ширина всего элемента навигации */
