@@ -82,7 +82,56 @@
       </div>
 
     </div>
+    </div>
 
+    <div v-if="paramType">
+
+        <div class="input__fields total_weight">
+
+          <div class="input">
+            <div class="input__title">Объем</div>
+            <div class="input__unit">
+              <input class="mini__input total_weight"/>
+            </div>
+          </div>
+          <div class="input">
+            <div class="input__title">Вес</div>
+            <div class="input__unit">
+              <input class="mini__input total_weight"/>
+            </div>
+          </div>
+          <div class="input">
+            <div class="input__title">Макс. вес</div>
+            <div class="input__unit">
+              <input class="mini__input total_weight"/>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="input__fields total_weight">
+          <div class="input">
+            <div class="input__title">Макс. длина</div>
+            <div class="input__unit">
+              <input class="mini__input total_weight"/>
+            </div>
+          </div>
+          <div class="input">
+            <div class="input__title">Макс. ширина</div>
+            <div class="input__unit">
+              <input class="mini__input total_weight"/>
+            </div>
+          </div>
+          <div class="input">
+            <div class="input__title">Макс. высота</div>
+            <div class="input__unit">
+              <input class="mini__input total_weight"/>
+            </div>
+          </div>
+        </div>
+
+      </div>
     <div class="input__fields border-none">
       <div class="input__fields">
         <div class="input">
@@ -119,57 +168,6 @@
         <label>Пузырчатая пленка</label>
       </div>
     </div>
-    </div>
-
-    <div v-if="paramType">
-
-        <div class="input__fields ">
-
-          <div class="input">
-            <div class="input__title">Объем</div>
-            <div class="input__unit">
-              <input class="mini__input"/>
-            </div>
-          </div>
-          <div class="input">
-            <div class="input__title">Вес</div>
-            <div class="input__unit">
-              <input class="mini__input"/>
-            </div>
-          </div>
-          <div class="input">
-            <div class="input__title">Макс. вес</div>
-            <div class="input__unit">
-              <input class="mini__input"/>
-            </div>
-          </div>
-
-        </div>
-
-
-        <div class="input__fields">
-          <div class="input">
-            <div class="input__title">Макс. длина</div>
-            <div class="input__unit">
-              <input class="mini__input"/>
-            </div>
-          </div>
-          <div class="input">
-            <div class="input__title">Макс. ширина</div>
-            <div class="input__unit">
-              <input class="mini__input"/>
-            </div>
-          </div>
-          <div class="input">
-            <div class="input__title">Макс. высота</div>
-            <div class="input__unit">
-              <input class="mini__input"/>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
   </div>
 </template>
 
@@ -243,6 +241,9 @@ export default {
       font-weight: bold;
     }
   }
+  &.total_weight{
+    justify-content: flex-start
+  }
 }
 
 .input__fields {
@@ -311,6 +312,9 @@ export default {
   &.long {
     width: 400px;
   }
+  &.total_weight{
+    width: 100%;
+  }
 }
 
 label {
@@ -343,5 +347,6 @@ label {
   color: $c_orange;
   background-color: #fff;
 }
+
 
 </style>
