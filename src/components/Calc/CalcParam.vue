@@ -174,7 +174,8 @@
 <script>
 import MyButton from "../UI/MyButton.vue";
 import {ref} from "vue";
-
+import {useSubmit} from "../hooks/MainPage/useSubmit.js";
+const minValue = value => Number(value) >= 0
 export default {
   components: {MyButton},
   setup() {
@@ -204,6 +205,29 @@ export default {
         else placeArray.value[index].active = false
       })
     }
+
+    const fields = {
+      volume: {
+        length: 0,
+        width: 0,
+        height: 0
+      },
+      weight: 0
+    }
+
+    const form = useSubmit({
+      weight: {
+        value: 1,
+        validators: {minValue}
+      },
+      volume: {
+        value: 0.01,
+        validators: {minValue}
+      },
+      count_packing : {
+        value: 0
+      }
+    })
 
     return { placeArray,deletePlace, addPlace, activePlace, changeCargo, paramType}
   }
