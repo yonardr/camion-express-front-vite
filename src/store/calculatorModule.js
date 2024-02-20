@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const calculatorModule = {
     state: {
+        current_cargo: 1,
         cargo: [],
         point_a : [],
         directions: [],
@@ -52,9 +53,9 @@ export const calculatorModule = {
         RemoveCargoById(state, id){
             state.cargo = state.cargo.filter((item)=> item.id !== id)
         },
-        UpdateCargoById(state, object){
+        UpdateCargoById(state, object ){
           state.cargo.map((value, index) =>{
-              if(value.id === id) state.cargo[index] = object
+              if(value.id === state.current_cargo) state.cargo[index] = object
           } )
         },
         ClearCargo(state){
@@ -62,6 +63,9 @@ export const calculatorModule = {
         }
     },
     getters:{
+        getCurrentCargo(state){
+          return state.current_cargo
+        },
         getAllCargo(state){
             return state.cargo;
         },
