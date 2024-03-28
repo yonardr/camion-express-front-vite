@@ -18,11 +18,17 @@
           Куда
         </div>
 
-        <select class="select" @change="onChangePoint_B($event)">
-          <option v-for="item in directions" :key="item.id" :value="item.id_direction">
+<!--        <select class="select" @change="onChangePoint_B($event)">-->
+<!--          <option v-for="item in directions" :key="item.id" :value="item.id_direction">-->
+<!--            {{ item.name }}-->
+<!--          </option>-->
+<!--        </select>-->
+        <select class="select" @change="onChangePoint_B($event)" >
+          <option v-for="item in directions" :key="item.id" :value="item.id_direction" :selected="item.name === cargo[cargo_current-1].point_b">
             {{ item.name }}
           </option>
         </select>
+
       </div>
     </div>
   </div>
@@ -33,17 +39,29 @@
 import {useLoadingDataCalc} from "./useLoadingDataCalc.js";
 import {useInputsCalc} from "./useInputsCalc.js";
 import MyButton from "../UI/MyButton.vue";
-import {ref} from "vue";
+import {reactive, ref, watch} from "vue";
+import {useStore} from "vuex";
 
 export default {
   components: {MyButton},
   setup(){
-    const {points_a, directions, direction_info, packing} = useLoadingDataCalc()
+    const store = useStore()
+    const {points_a, directions, direction_info, cargo_current, cargo} = useLoadingDataCalc()
     const  {onChangePoint_A, onChangePoint_B} = useInputsCalc({})
 
+    watch(direction_info, ()=>{
+      store.commit('UpdateCargoById', {current_cargo: cargo_current.value, point_a: direction_info.value.point_a[0].name,point_b: direction_info.value.point_b[0].name, direction_id: direction_info.value.id, deadline: direction_info.value.deadline })
+    })
 
+    // const CargoCurrent = reactive({})
+    // watch(cargo_current, ()=>{
+    //   CargoCurrent.value = cargo.value.map((item)=>{
+    //     if(item.id === cargo_current.value) return {point_a: item.point_a, point_b: item.point_b}
+    //   })
+    //   CargoCurrent.value.active = true
+    // })
 
-    return {points_a, onChangePoint_A, onChangePoint_B, directions}
+    return {points_a, onChangePoint_A, onChangePoint_B, directions, cargo, cargo_current}
   }
 }
 </script>

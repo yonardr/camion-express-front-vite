@@ -7,142 +7,157 @@
           class="switcher"
           :class="{active: paramType}"
           @click="paramType=false"
-      >Одно или несколько мест отдельно</my-button>
+      >Одно или несколько мест отдельно
+      </my-button>
       <my-button
           color='orange'
           class="switcher"
           :class="{active: !paramType}"
           @click="paramType=true"
-      >Общий вес и объем</my-button>
+      >Общий вес и объем
+      </my-button>
     </div>
+    {{cargo}}
+    //////
+    {{cargo_current}}
+
+
     <div v-if="!paramType">
-    <div class="input__fields">
-      <div class="input__fields place__group">
-        <div v-for="item in placeArray">
-          <my-button
-              color="orange"
-              class="btn"
-              :class="activePlace(item.id)"
-              @click="changeCargo(item.id)"
-          >{{ item.id }} место
-            <div class="delete" @click="deletePlace(item.id)">x</div>
-          </my-button>
-        </div>
-      </div>
-
-      <div>
-        <my-button color="orange" class="switcher active" @click="addPlace">Добавить место</my-button>
-      </div>
-    </div>
-    <div class="input__fields border-none">
-
-      <div class="input__fields ">
-
-        <div class="input">
-          <div class="input__title">Длина</div>
-          <div class="input__unit">
-            <input class="mini__input"  v-model="form.volume.length"/>
-          </div>
-        </div>
-        <div class="input">
-          <div class="input__title">Ширина</div>
-          <div class="input__unit">
-            <input class="mini__input"  v-model="form.volume.width"/>
-          </div>
-        </div>
-        <div class="input">
-          <div class="input__title">Высота</div>
-          <div class="input__unit">
-            <input class="mini__input" v-model="form.volume.height"/>
-          </div>
-        </div>
-        <div class="input">
-          <div class="input__title">Объем</div>
-          <div class="input__unit">
-            <input class="mini__input" v-model="form.volume.value" readonly/>
-          </div>
-        </div>
-
-      </div>
-
-
       <div class="input__fields">
-        <div class="input">
-          <div class="input__title">Вес</div>
-          <div class="input__unit">
-            <input class="mini__input" v-model="form.weight.value"/>
+        <div class="input__fields place__group">
+          <div v-for="item in cargo[cargo_current-1].places">
+            <my-button
+                color="orange"
+                class="btn"
+                :class="activePlace(item.id)"
+                @click="changeCargo(item.id)"
+            >{{ item.idArray }} место
+              <div class="delete" @click="deletePlace(item)">x</div>
+            </my-button>
           </div>
         </div>
-        <div class="input">
-          <div class="input__title">Одинаковые места</div>
-          <div class="input__unit">
-            <input class="mini__input" v-model="form.same_places"/>
-          </div>
+
+
+        <div>
+          <my-button color="orange" class="switcher active" @click="addPlace">Добавить место</my-button>
         </div>
       </div>
+      <div class="input__fields border-none">
 
-    </div>
+        <div class="input__fields ">
+
+          <div class="input">
+            <div class="input__title">Длина</div>
+            <div class="input__unit">
+              <input class="mini__input" v-model="form.volume.length"/>
+            </div>
+          </div>
+          <div class="input">
+            <div class="input__title">Ширина</div>
+            <div class="input__unit">
+              <input class="mini__input" v-model="form.volume.width"/>
+            </div>
+          </div>
+          <div class="input">
+            <div class="input__title">Высота</div>
+            <div class="input__unit">
+              <input class="mini__input" v-model="form.volume.height"/>
+            </div>
+          </div>
+          <div class="input">
+            <div class="input__title">Объем</div>
+            <div class="input__unit m3">
+              <input class="mini__input" v-model="form.volume.value" readonly/>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="input__fields">
+          <div class="input">
+            <div class="input__title">Вес</div>
+            <div class="input__unit kg">
+              <input class="mini__input" v-model="form.weight.value"/>
+            </div>
+          </div>
+          <div class="input">
+            <div class="input__title">Одинаковые места</div>
+            <div>
+              <div class="count_bord">
+                <my-button color="blue" @click="form.same_places++" style="padding: 18px">+</my-button>
+                <input class="mini__input" v-model="form.same_places"/>
+                <my-button color="blue" :disabled='form.same_places<=0' @click="form.same_places--" style="padding: 18px">-</my-button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
 
     <div v-if="paramType">
 
-        <div class="input__fields total_weight">
+      <div class="input__fields total_weight">
 
-          <div class="input">
-            <div class="input__title">Объем</div>
-            <div class="input__unit">
-              <input class="mini__input total_weight"/>
-            </div>
+        <div class="input">
+          <div class="input__title">Объем</div>
+          <div class="input__unit m3">
+            <input class="mini__input total_weight"/>
           </div>
-          <div class="input">
-            <div class="input__title">Вес</div>
-            <div class="input__unit">
-              <input class="mini__input total_weight"/>
-            </div>
-          </div>
-          <div class="input">
-            <div class="input__title">Макс. вес</div>
-            <div class="input__unit">
-              <input class="mini__input total_weight"/>
-            </div>
-          </div>
-
         </div>
-
-
-        <div class="input__fields total_weight">
-          <div class="input">
-            <div class="input__title">Макс. длина</div>
-            <div class="input__unit">
-              <input class="mini__input total_weight"/>
-            </div>
+        <div class="input">
+          <div class="input__title">Вес</div>
+          <div class="input__unit kg">
+            <input class="mini__input total_weight"/>
           </div>
-          <div class="input">
-            <div class="input__title">Макс. ширина</div>
-            <div class="input__unit">
-              <input class="mini__input total_weight"/>
-            </div>
-          </div>
-          <div class="input">
-            <div class="input__title">Макс. высота</div>
-            <div class="input__unit">
-              <input class="mini__input total_weight"/>
-            </div>
+        </div>
+        <div class="input">
+          <div class="input__title">Макс. вес</div>
+          <div class="input__unit kg">
+            <input class="mini__input total_weight"/>
           </div>
         </div>
 
       </div>
+
+
+      <div class="input__fields total_weight">
+        <div class="input">
+          <div class="input__title">Макс. длина</div>
+          <div class="input__unit">
+            <input class="mini__input total_weight"/>
+          </div>
+        </div>
+        <div class="input">
+          <div class="input__title">Макс. ширина</div>
+          <div class="input__unit">
+            <input class="mini__input total_weight"/>
+          </div>
+        </div>
+        <div class="input">
+          <div class="input__title">Макс. высота</div>
+          <div class="input__unit">
+            <input class="mini__input total_weight"/>
+          </div>
+        </div>
+      </div>
+
+    </div>
     <div class="input__fields border-none">
       <div class="input__fields">
         <div class="input">
           <div class="input__title">Характер груза</div>
-          <input class="mini__input long" v-model="form.cargo_type"/>
+          <input class="mini__input long" v-model="form.cargo_type" placeholder="Мебель, шины, мед. оборудование"/>
         </div>
       </div>
       <div class="input__fields">
         <div class="input">
           <div class="input__title">Оценочная стоимость груза</div>
-          <input class="mini__input long" v-model="form.estimated_price_cargo"/>
+          <div class="input__unit rub">
+            <input class="mini__input long" v-model="form.estimated_price_cargo"/>
+          </div>
+
         </div>
       </div>
     </div>
@@ -150,7 +165,8 @@
     <div class="title">Упаковка</div>
     <div class="input__fields border-none">
       <div class="input__fields">
-        <input type="checkbox" id="check_rigid_packaging" v-model="packing.pallet_board" @click="changePacking('pallet_board')" />
+        <input type="checkbox" id="check_rigid_packaging" v-model="packing.pallet_board"
+               @click="changePacking('pallet_board')"/>
         <label for="check_rigid_packaging">Паллетный борт</label>
       </div>
       <div class="input__fields">
@@ -161,9 +177,9 @@
     <div class="input__fields border-none" v-show="packing.pallet_board">
       <div class="input__fields">
         <div class="count_bord">
-          <my-button color="blue" @click="form.count_packing++">+</my-button>
-          <input class="mini__input" v-model="form.count_packing" />
-          <my-button color="blue" :disabled='form.count_packing<=0' @click="form.count_packing--">-</my-button>
+          <my-button color="blue" @click="form.count_packing.value++">+</my-button>
+          <input class="mini__input" v-model="form.count_packing.value"/>
+          <my-button color="blue" :disabled='form.count_packing.value<=0' @click="form.count_packing.value--">-</my-button>
         </div>
       </div>
     </div>
@@ -179,10 +195,10 @@
     </div>
     <div class="input__fields border-none" v-show="packing.pallet">
       <div class="input__fields">
-        <div class="count_bord" >
-          <my-button color="blue" @click="form.count_packing++">+</my-button>
-          <input class="mini__input" v-model="form.count_packing"/>
-          <my-button color="blue" :disabled='form.count_packing<=0' @click="form.count_packing--">-</my-button>
+        <div class="count_bord">
+          <my-button color="blue" @click="form.count_packing.value++">+</my-button>
+          <input class="mini__input" v-model="form.count_packing.value"/>
+          <my-button color="blue" :disabled='form.count_packing.value<=0' @click="form.count_packing.value--">-</my-button>
         </div>
       </div>
     </div>
@@ -191,20 +207,21 @@
 
 <script>
 import MyButton from "../UI/MyButton.vue";
-import {computed, onMounted, reactive, ref, watch, watchEffect} from "vue";
+import {onMounted, reactive, ref, watch} from "vue";
 import {useLoadingDataCalc} from "./useLoadingDataCalc.js";
 import {useStore} from "vuex";
 import {useInputsCalc} from "./useInputsCalc.js";
 import {useCalc} from "./useCalc.js";
 import {useCalcPacking} from "./useCalcPacking.js";
-import {useSubmit} from "../hooks/MainPage/useSubmit.js";
-const minValue = value => Number(value) >= 0
+
 export default {
   components: {MyButton},
   setup() {
     const store = useStore()
-    const defaultForm = {
-      id: 1,
+    const {direction_info, packing, cargo_current, cargo} = useLoadingDataCalc()
+    const {changePacking} = useInputsCalc()
+
+    const form = reactive({
       volume: {
         length: 0,
         width: 0,
@@ -216,58 +233,197 @@ export default {
       },
       same_places: 0,
       cargo_type: '',
-      estimated_price_cargo : 0,
-      count_packing: 0,
-    }
-    const form = reactive(defaultForm)
-    const placeArray = ref([])
-    const placeId = ref(1)
+      estimated_price_cargo: 0,
+      count_packing: {
+        value: 0
+      },
+      packaging: {
+        pallet_board: false,
+        pallet: false,
+        wooden: false,
+        stretch_film: false
+      },
+    })
+    const placeArray = ref([{
+      id: (new Date()).getTime(),
+      idArray: 1,
+      volume: {
+        length: 0,
+        width: 0,
+        height: 0,
+        value: 0
+      },
+      active: true,
+      weight: {
+        value: 0
+      },
+    }])
+    const placeId = ref(placeArray.value[0].id)
     const paramType = ref(false)
 
-    function addPlace(){
-      placeArray.value.push({id: form.id, volume: form.volume.value})
+    onMounted(()=>{
+      store.commit('UpdateCargoById', {places: placeArray.value, current_cargo: cargo_current.value})
+    })
+
+    function addPlace() {
+
+      const id = (new Date()).getTime();
+      placeArray.value.push({
+        id: id,
+        idArray: placeArray.value[placeArray.value.length-1].idArray + 1,
+        volume: {
+          length: 0,
+          width: 0,
+          height: 0,
+          value: 0
+        },
+        weight: {
+          value: 0
+        },
+        same_places: 0,
+        cargo_type: '',
+        estimated_price_cargo: 0,
+        count_packing: 0,
+      })
       updateData()
-
-      form.id = placeArray.value.length + 1
-
+      changePlace(id)
+      updateData()
     }
 
-    const deletePlace = (id) => {
-      if(id !== 1){
-        placeArray.value = placeArray.value.filter((item)=> item.id !== id)
+    const deletePlace = (item) => {
+      if (item.idArray !== 1) {
+        placeArray.value = placeArray.value.filter((elem) => elem.id !== item.id)
+        changePlace(placeArray.value[0].id)
+        updateData()
+
       }
     }
+
+
     const activePlace = (id) => {
-      if(placeId.value !== id) return 'active'
+      if (placeId.value === id) return ''
+      else return 'active'
     }
 
-    function changeCargo(id){
+    function changePlace(id) {
       placeId.value = id
-      placeArray.value.map((value, index)=>{
-        if(value.id === id) placeArray.value[index].active = true
-        else placeArray.value[index].active = false
+      cargo.value.map((item) => {
+        item.places.map((item2) =>{
+          if (item2.id === id) {
+            const current_place = item2
+            current_place.active = true
+            form.volume.length = current_place.volume.length
+            form.volume.width = current_place.volume.width
+            form.volume.height = current_place.volume.height
+            form.volume.value = current_place.volume.value
+            form.weight.value = current_place.weight.value
+            form.same_places = current_place.same_places
+            form.cargo_type = current_place.cargo_type
+            form.estimated_price_cargo = current_place.estimated_price_cargo
+            form.count_packing.value = current_place.count_packing
+
+            // form.packaging.pallet_board = current_place.packing.pallet_board
+            // form.packaging.pallet = current_place.packing.pallet
+            // form.packaging.wooden = current_place.packing.wooden
+            // form.packaging.stretch_film = current_place.packing.stretch_film
+          }
+          else item2.active = false
+        })
+
       })
     }
-    const {direction_info, packing} = useLoadingDataCalc()
-    const {changePacking} = useInputsCalc()
 
 
-    watch(form.volume, ()=>{
-        form.volume.value = form.volume.height *form.volume.width*form.volume.length
+    watch(form.volume, () => {
+      form.volume.value = form.volume.height * form.volume.width * form.volume.length
+    })
+
+    watch(direction_info, ()=> {
+      cargo.value.map((item) =>{
+        if(item.id === cargo_current.value){
+          item.places.map((elem)=>{
+            elem.price = useCalc(direction_info, elem)
+          })
+        }
+      })
+    })
+
+    watch(form, () => updateData())
+    watch(direction_info, ()=> updateData())
+    watch(packing.value, () => {
+      placeArray.value.map((item, index) => {
+        if (item.id === placeId.value) {
+          const current_place = placeArray.value[index]
+          current_place.packimg_price = useCalcPacking(packing, form)
+          current_place.packing = {...packing.value}
+        }
+      })
+      store.commit('UpdateCargoById', {current_cargo: cargo_current.value, places: placeArray.value})
+
+    })
+    watch(cargo_current, (value, oldValue) => {
+      if(cargo_current.value !== oldValue){
+        cargo.value.map((item) => {
+          if(item.id === cargo_current.value){
+            placeArray.value.length = 0
+            item.places.map((item2)=>{
+              placeArray.value.push(item2)
+            })
+
+            changePlace(placeArray.value[0].id)
+            updateData()
+          }
+
+        })
+      }
     })
 
 
-    watch(form, ()=>updateData())
-    watch(packing.value, ()=>updateData())
+    function updateData(id = 0) {
+      placeArray.value.map((item, index) => {
+        if (item.id === placeId.value) {
+          const current_place = placeArray.value[index]
+          current_place.volume.length = form.volume.length
+          current_place.volume.width = form.volume.width
+          current_place.volume.height = form.volume.height
+          current_place.volume.value = form.volume.value
+          current_place.weight.value = form.weight.value
+          current_place.same_places = form.same_places
+          current_place.cargo_type = form.cargo_type
+          current_place.estimated_price_cargo = form.estimated_price_cargo
+          current_place.count_packing = form.count_packing.value
+          if(form.same_places > 0){
+            current_place.price = useCalc(direction_info, form) * (form.same_places + 1)
+            current_place.packimg_price = useCalcPacking(packing, form) * (form.same_places + 1)
+          }
+          else{
+            current_place.price = useCalc(direction_info, form)
+            current_place.packimg_price = useCalcPacking(packing, form)
+          }
 
-    function updateData(){
-      form.price = useCalc(direction_info, form)
-      form.packimg_price = useCalcPacking(packing, form)
-
-      store.commit('UpdateCargoById', placeArray)
+        }
+      })
+      if(id === 0) store.commit('UpdateCargoById', {current_cargo: cargo_current.value, places: placeArray.value})
+      else {
+        store.commit('UpdateCargoById', {current_cargo: id, places: placeArray.value})
+      }
     }
 
-    return {changePacking, placeArray,deletePlace, addPlace, activePlace, changeCargo, paramType, form, packing}
+
+
+    return {
+      cargo_current,
+      cargo,
+      changePacking,
+      placeArray,
+      deletePlace,
+      addPlace,
+      activePlace,
+      changeCargo: changePlace,
+      paramType,
+      form,
+      packing
+    }
   }
 }
 </script>
@@ -303,7 +459,8 @@ export default {
       font-weight: bold;
     }
   }
-  &.total_weight{
+
+  &.total_weight {
     justify-content: flex-start
   }
 }
@@ -359,9 +516,18 @@ export default {
     display: block;
     position: absolute;
     right: 8px;
-    top: 5px;
-    font-size: 20px;
+    top: 10px;
+    font-size: 16px;
     color: #86868b;
+  }
+  &.m3::before {
+    content: "м³";
+  }
+  &.kg::before {
+    content: "кг";
+  }
+  &.rub::before {
+    content: "₽";
   }
 }
 
@@ -374,7 +540,8 @@ export default {
   &.long {
     width: 400px;
   }
-  &.total_weight{
+
+  &.total_weight {
     width: 100%;
   }
 }
@@ -389,6 +556,7 @@ label {
   font-size: 16px;
   margin: 5px;
   border-radius: 20px;
+
   &:hover {
     background-color: $c_orange;
     color: #fff;
@@ -405,19 +573,28 @@ label {
     }
   }
 }
-.active{
+
+.active {
   color: $c_orange;
   background-color: #fff;
 }
-.count_bord{
+
+.count_bord {
   display: flex;
   height: 48px;
   align-items: center;
-  input{
+
+  input {
     margin: 5px;
     height: 100%;
     width: 80px;
   }
+}
+input{
+  padding: 10px;
+  font-size: 16px;
+  font-family: Montserrat,serif;
+  font-weight: 500;
 }
 
 </style>
