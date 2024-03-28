@@ -65,11 +65,59 @@ img{
 }
 @media (max-width: 1024px) {
   .down{
-    margin-top: 150px;
+    margin-top: 200px;
   }
   h1{
+    font-size: 48px;
+  }
+  .btns{
+    margin-top: 100px;
+  }
+  img{
+    object-position: 65% 0;
+  }
+}
+@media (max-width: 768px) {
+  .down{
+    z-index: 2;
+    margin-top: 180px;
+  }
+  img{
+    opacity: 85%;
+  }
+
+}
+@media (max-width: 615px) {
+  h1{
     font-size: 38px;
+    width: 80%;
+  }
+  .down{
+    margin-top: 120px;
+  }
+  .btns{
+    margin-top: 50%;
   }
 }
 
+@media (max-width: 425px) {
+  h1{
+    font-size: 33px;
+  }
+}
+@media (max-width: 370px) {
+  h1{
+    font-size: 30px;
+  }
+}
+
+
+@media (max-height: 780px) {
+  .down{
+    margin-top: 100px;
+  }
+  .btns{
+    margin-top: 20px;
+  }
+}
 </style>
