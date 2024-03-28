@@ -1,30 +1,31 @@
 <template>
-<div class="__container">
-  <div class="section">
-    <h2 style="margin: 40px 0">КАЛЬКУЛЯТОР</h2>
-    <div class="cargo">
-      <div class="cargo__items">
-        <div v-for="item in cargoArray">
-          <my-button color="orange" class="btn">Груз №{{ item.id }}
-            <div class="delete" @click="deleteCargo(item.id)">x</div>
-          </my-button>
+  <div class="__container">
+    <div class="section">
+      <h2 style="margin: 40px 0">КАЛЬКУЛЯТОР</h2>
+      <div class="cargo">
+        <div class="cargo__items">
+          <div v-for="item in cargo">
+            <my-button color="orange"
+                       class="btn"
+                       :class="activeCargo(item.id)"
+                       @click="changeCargo(item.id)">
+              Груз №{{ item.id }}
+              <div class="delete" @click="deleteCargo(item.id)">x</div>
+            </my-button>
+          </div>
         </div>
+        <my-button color='orange' class="switcher active" @click="addCargo">Добавить груз</my-button>
       </div>
-      <my-button color='orange' class="switcher active" @click="addCargo">Добавить груз</my-button>
+      <div class="card card__header">
+        <div class="title">Направление</div>
+        <CalcDirection/>
+      </div>
+      <div class="card">
+        <CalcParam/>
+      </div>
     </div>
-    <div class="card card__header">
-      <div class="title">Направление</div>
-      <CalcDirection />
-    </div>
-<div class="card">
-  <CalcParam />
-</div>
+    <CalcTotalPrice />
   </div>
-  <div class="prices" >
-    <img src="./../../assets/calc/check.png" class="invoice__img">
-    {{direction_info.min_price}}
-  </div>
-</div>
 
 
 </template>
@@ -35,39 +36,45 @@ import MyButton from "../UI/MyButton.vue";
 import CalcDirection from "./CalcDirection.vue";
 import CalcOnMain from "./CalcOnMain.vue";
 import CalcParam from "./CalcParam.vue";
-import {ref} from "vue";
 import {useLoadingDataCalc} from "./useLoadingDataCalc.js";
-import {useSubmit} from "../hooks/MainPage/useSubmit.js";
+import {useStore} from "vuex";
+import {vShow} from "vue";
+import CalcTotalPrice from "./CalcTotalPrice.vue";
+
+
 const minValue = value => Number(value) >= 0
 export default {
-  components: {CalcParam, CalcOnMain, CalcDirection, MyButton, MyCombobox},
-  setup(){
-    const form = useSubmit({
-      weight: {
-        value: 1,
-        validators: {minValue}
-      },
-      volume: {
-        value: 0.01,
-        validators: {minValue}
-      },
-      count_packing : {
-        value: 0
-      }
-    })
-    const {direction_info, packing} = useLoadingDataCalc()
-    const cargoArray = ref([{id: 1}])
+  components: {CalcTotalPrice, CalcParam, CalcOnMain, CalcDirection, MyButton, MyCombobox},
+  setup() {
+    const store = useStore()
+    const {cargo, direction_info, cargo_current} = useLoadingDataCalc()
+
+
+
     function addCargo() {
-      const value = cargoArray.value.length + 1
-      cargoArray.value.push({id: value})
-    }
-    const deleteCargo = (id) =>{
-      if(id !== 1){
-        cargoArray.value = cargoArray.value.filter((item)=> item.id !== id)
-      }
+      store.commit('AddCargo')
+      const value = cargo.value[cargo.value.length - 1]
+      store.commit('ChangeCargoId', value.id)
     }
 
-    return {cargoArray, deleteCargo, addCargo, direction_info}
+    const deleteCargo = (id) => {
+      store.commit('RemoveCargoById', id)
+    }
+
+    const activeCargo = (id) => {
+      if (cargo_current.value !== id) return 'active'
+    }
+
+
+    function changeCargo(id) {
+      store.commit('ChangeCargoId', id)
+      // cargo.value.map((value, index) => {
+      //   if (value.id === id) cargo.value[index].active = true
+      //   else cargo.value[index].active = false
+      // })
+    }
+
+    return {cargo, deleteCargo, addCargo, direction_info, activeCargo, changeCargo}
   }
 }
 
@@ -75,47 +82,56 @@ export default {
 
 <style scoped lang="scss">
 @import '../../variables';
-.__container{
+
+.__container {
   display: flex;
 }
-.card{
+
+.card {
   padding: 24px;
 }
-.card__header{
+
+.card__header {
 
   @include card(white);
   margin-bottom: 20px;
 }
-.title{
+
+.title {
   margin: 10px 0;
   font-size: 28px;
   font-weight: bold;
 }
 
-.input__fields{
+.input__fields {
   display: flex;
   justify-content: space-between;
   align-items: center;
   border: 1px solid #e8e8ed;
   padding: 20px;
   border-radius: 20px;
-  .input{
+
+  .input {
     padding: 10px;
-    .input__title{
+
+    .input__title {
       margin: 0 0 5px 5px;
       font-weight: bold;
     }
   }
 }
+
 //____card_footer____
-.card__footer{
-  .input__fields{
+.card__footer {
+  .input__fields {
     margin: 5px 0;
-    &.border-none{
+
+    &.border-none {
       border: none;
       padding: 0;
     }
-    &.beginning{
+
+    &.beginning {
       border: none;
       padding: 0;
       margin-bottom: 20px;
@@ -124,28 +140,33 @@ export default {
 }
 
 
-.switcher{
+.switcher {
   width: 100%;
   margin: 10px;
-  &.active{
-    color: $c_orange;
-    background-color: #fff;
-  }
 }
-.place__group{
+
+.active {
+  color: $c_orange;
+  background-color: #fff;
+}
+
+.place__group {
   display: flex;
 
 }
-.place__item{
+
+.place__item {
   background: $c_orange;
   padding: 15px;
   border-radius: 20px;
   color: #fff;
   margin: 5px;
 }
-.input__unit{
+
+.input__unit {
   display: inline-block;
   position: relative;
+
   &::before {
     content: "м";
     display: block;
@@ -155,36 +176,40 @@ export default {
     font-size: 20px;
     color: #86868b;
   }
-  }
-.mini__input{
+}
+
+.mini__input {
   width: 100px;
   height: 40px;
   border-radius: 20px;
   border: 1px solid $c_blue;
-  &.long{
+
+  &.long {
     width: 400px;
   }
 }
-label{
+
+label {
   margin-left: 5px;
 }
-.prices{
-  position: relative;
-  top:150px;
-  left: 100px;
-}
-.invoice__img{
+
+
+
+.invoice__img {
   width: 300px;
 }
-.wave{
+
+.wave {
   position: relative;
   bottom: 300px;
   left: 10px;
-  h6{
+
+  h6 {
     margin: 10px;
     font-size: 16px;
   }
 }
+
 .cargo {
   width: 1000px;
   display: flex;
@@ -207,6 +232,7 @@ label{
   font-size: 16px;
   margin: 5px;
   border-radius: 20px;
+
   &:hover {
     background-color: $c_orange;
     color: #fff;

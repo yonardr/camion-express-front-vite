@@ -15,7 +15,7 @@
       <Partners />
       <Contacts id="contacts" />
     </div>
-<!--    <Map id="map"/>-->
+    <Map id="map"/>
     <Footer/>
   </div>
 </template>

@@ -8,6 +8,8 @@ export function useLoadingDataCalc() {
     const directions = computed(() => store.getters.getDirections)
     const direction_info = computed(() => store.getters.getDirectionById)
     const packing = computed(() => store.getters.getPacking)
+    const cargo = computed(() => store.getters.getAllCargo)
+    const cargo_current = computed(()=> store.getters.getCurrentCargo)
 
     onMounted(() => store.dispatch('fetchPoints_a'))
 
@@ -17,10 +19,9 @@ export function useLoadingDataCalc() {
     })
     watch(directions, async ()=>{
         await store.dispatch('fetchDirectionById', {id_direction: directions.value[0]?.id_direction})
-
     })
 
-    return {points_a, directions, direction_info, packing}
+    return {points_a, directions, direction_info, packing, cargo, cargo_current}
 
 }
 
