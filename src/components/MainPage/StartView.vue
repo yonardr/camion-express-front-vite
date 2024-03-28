@@ -110,8 +110,6 @@ img{
     font-size: 30px;
   }
 }
-
-
 @media (max-height: 780px) {
   .down{
     margin-top: 100px;
