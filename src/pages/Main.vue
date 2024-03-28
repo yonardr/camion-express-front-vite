@@ -5,18 +5,18 @@
     <div class="__container">
       <CalcOnMain id="calc"/>
     </div>
-      <News id="news" />
-    <div class="__container">
-      <Advantages/>
+<!--      <News id="news" />-->
+<!--    <div class="__container">-->
+<!--      <Advantages/>-->
 
-      <SubmitApplication />
-    </div>
-    <div class="__container">
-      <Partners />
-      <Contacts id="contacts" />
-    </div>
-    <Map id="map"/>
-    <Footer/>
+<!--      <SubmitApplication />-->
+<!--    </div>-->
+<!--    <div class="__container">-->
+<!--      <Partners />-->
+<!--      <Contacts id="contacts" />-->
+<!--    </div>-->
+<!--    <Map id="map"/>-->
+<!--    <Footer/>-->
   </div>
 </template>
 
