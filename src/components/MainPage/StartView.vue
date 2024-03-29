@@ -110,12 +110,46 @@ img{
     font-size: 30px;
   }
 }
-@media (max-height: 780px) {
+@media (max-width: 335px) {
+  h1{
+    font-size: 28px;
+  }
+}
+@media (max-height: 740px) {
+  .down{
+    margin-top: 120px;
+  }
+  .btns{
+    margin-top: 20px;
+  }
+}
+
+@media (max-height: 640px) {
+  h1{
+    font-size: 40px;
+  }
+  .text{
+    font-size: 15px;
+  }
   .down{
     margin-top: 100px;
   }
   .btns{
     margin-top: 20px;
+  }
+}
+
+@media (max-height: 475px) {
+  h1{
+    font-size: 35px;
+  }
+}
+@media (max-height: 395px) {
+  h1{
+    font-size: 30px;
+  }
+  .text{
+    margin-top: 5px;
   }
 }
 </style>
