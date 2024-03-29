@@ -16,7 +16,7 @@
       <Contacts id="contacts" />
     </div>
     <Map id="map"/>
-<!--    <Footer/>-->
+    <Footer/>
   </div>
 </template>
 
