@@ -9,7 +9,7 @@
     <div class="__container">
       <Advantages/>
 
-<!--      <SubmitApplication />-->
+      <SubmitApplication />
     </div>
     <div class="__container">
 <!--      <Partners />-->
