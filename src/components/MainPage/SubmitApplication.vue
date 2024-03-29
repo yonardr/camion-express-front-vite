@@ -194,6 +194,9 @@ h2{
   }
 }
 @media (max-width: 425px) {
+  .card{
+    padding: 15px 25px;
+  }
   .upload{
     flex-direction: column;
     .file-dummy{
