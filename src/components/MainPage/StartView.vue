@@ -1,8 +1,9 @@
 <template>
 <div>
   <div class="__container">
-    <aos-vue animation="fade-right" :duration="1000" placement="top-bottom">
     <div class="down">
+    <aos-vue animation="fade-right" :duration="1000" placement="top-bottom">
+
       <h1>Транспортно-логистическая компания «КамионЭкспресс»</h1>
       <div class="text">
         Перевозка сборных грузов
@@ -15,8 +16,9 @@
         <my-button :color="'blue'" @click="$router.push('/#map')">Отследить транспорт</my-button>
       </div>
 
-    </div>
+
     </aos-vue>
+    </div>
   </div>
 
   <img src="../../assets/main.jpg" >
@@ -81,10 +83,11 @@ img{
 }
 @media (max-width: 768px) {
   .down{
-    z-index: 2;
+    z-index: 99;
     margin-top: 180px;
   }
   img{
+    z-index: 0;
     opacity: 85%;
   }
 
