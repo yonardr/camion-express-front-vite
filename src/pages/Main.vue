@@ -6,16 +6,16 @@
       <CalcOnMain id="calc"/>
     </div>
 <!--      <News id="news" />-->
-<!--    <div class="__container">-->
-<!--      <Advantages/>-->
+    <div class="__container">
+      <Advantages/>
 
 <!--      <SubmitApplication />-->
-<!--    </div>-->
-<!--    <div class="__container">-->
+    </div>
+    <div class="__container">
 <!--      <Partners />-->
-<!--      <Contacts id="contacts" />-->
-<!--    </div>-->
-<!--    <Map id="map"/>-->
+      <Contacts id="contacts" />
+    </div>
+    <Map id="map"/>
 <!--    <Footer/>-->
   </div>
 </template>

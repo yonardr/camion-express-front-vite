@@ -1,6 +1,7 @@
 <template>
 <div>
   <div class="__container">
+    <aos-vue animation="fade-right" :duration="1000" placement="top-bottom">
     <div class="down">
       <h1>Транспортно-логистическая компания «КамионЭкспресс»</h1>
       <div class="text">
@@ -15,7 +16,7 @@
       </div>
 
     </div>
-
+    </aos-vue>
   </div>
 
   <img src="../../assets/main.jpg" >
@@ -25,9 +26,10 @@
 <script>
 import MyButton from "../UI/MyButton.vue";
 import CalcDirection from "../Calc/CalcDirection.vue";
+import AosVue from "aos-vue";
 export default {
   name: "StartView",
-  components: {CalcDirection, MyButton},
+  components: {CalcDirection, MyButton, AosVue},
 }
 </script>
 
