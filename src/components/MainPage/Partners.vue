@@ -175,11 +175,19 @@ export default {
 
   .first__group,
   .second__group {
-    grid-template-columns: repeat(3, calc(300/3)-0.1px) !important;
+    grid-template-columns: repeat(3, calc(350/3)-0.1px) !important;
   }
   .second__group{
-    grid-template-columns: repeat(2, 100px) !important;
+    grid-template-columns: repeat(2, 120px) !important;
   }
 }
-
+@media (max-width: 350px) {
+  .first__group,
+  .second__group {
+    grid-template-columns: repeat(3, calc(320/3)-0.1px) !important;
+  }
+  .second__group{
+    grid-template-columns: repeat(2, 110px) !important;
+  }
+}
 </style>
