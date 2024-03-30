@@ -2,21 +2,21 @@
   <div>
     <Navbar />
     <StartView id="start"/>
-    <div class="__container">
-      <CalcOnMain id="calc"/>
-    </div>
-<!--      <News id="news" />-->
-    <div class="__container">
-      <Advantages/>
+<!--    <div class="__container">-->
+<!--      <CalcOnMain id="calc"/>-->
+<!--    </div>-->
+<!--&lt;!&ndash;      <News id="news" />&ndash;&gt;-->
+<!--    <div class="__container">-->
+<!--      <Advantages/>-->
 
-      <SubmitApplication />
-    </div>
-    <div class="__container">
-<!--      <Partners />-->
-      <Contacts id="contacts" />
-    </div>
-    <Map id="map"/>
-    <Footer/>
+<!--      <SubmitApplication />-->
+<!--    </div>-->
+    <Partners />
+<!--    <div class="__container">-->
+<!--      <Contacts id="contacts" />-->
+<!--    </div>-->
+<!--    <Map id="map"/>-->
+<!--    <Footer/>-->
   </div>
 </template>
 
