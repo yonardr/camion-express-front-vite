@@ -1,22 +1,22 @@
 <template>
   <div>
-    <Navbar />
+    <Navbar/>
     <StartView id="start"/>
-<!--    <div class="__container">-->
-<!--      <CalcOnMain id="calc"/>-->
-<!--    </div>-->
-<!--&lt;!&ndash;      <News id="news" />&ndash;&gt;-->
-<!--    <div class="__container">-->
-<!--      <Advantages/>-->
 
-<!--      <SubmitApplication />-->
-<!--    </div>-->
-    <Partners />
-<!--    <div class="__container">-->
-<!--      <Contacts id="contacts" />-->
-<!--    </div>-->
-<!--    <Map id="map"/>-->
-<!--    <Footer/>-->
+    <CalcOnMain id="calc" class="__container"/>
+
+    <News id="news"/>
+
+    <Advantages class="__container"/>
+
+    <SubmitApplication class="__container"/>
+
+    <Partners/>
+
+    <Contacts id="contacts" class="__container"/>
+
+    <Map id="map"/>
+    <Footer/>
   </div>
 </template>
 
@@ -37,17 +37,19 @@ import CalcOnMain from "../components/Calc/CalcOnMain.vue";
 export default {
   components: {
     CalcOnMain,
-    Footer, News, Calculator, Map, Contacts, Partners, SubmitApplication, Advantages, StartView, Navbar},
+    Footer, News, Calculator, Map, Contacts, Partners, SubmitApplication, Advantages, StartView, Navbar
+  },
 }
 </script>
 
-<style >
-.__container{
+<style>
+.__container {
   margin: 0 auto;
   max-width: 1000px;
 }
+
 @media (max-width: 1024px) {
-  .__container{
+  .__container {
     padding: 0 15px;
   }
 }
