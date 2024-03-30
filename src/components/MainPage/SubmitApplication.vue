@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div id="zayavka">
     <h2>Оставить заявку</h2>
     <div class="card" @submit.prevent="submit">
@@ -51,6 +52,7 @@
       <p>В ближайшее время с Вами свяжется наш специалист</p>
     </div>
   </my-dialog>
+  </div>
 </template>
 
 <script>

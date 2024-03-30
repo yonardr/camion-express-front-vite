@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div class="container">
     <div class="interaction">
       <div class="input__fields btns">
@@ -110,7 +111,7 @@
       <my-button color="blue">Рассчитать подробнее</my-button>
     </router-link>
   </div>
-
+  </div>
 </template>
 
 <script>

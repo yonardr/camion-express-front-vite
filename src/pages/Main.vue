@@ -3,17 +3,17 @@
     <Navbar/>
     <StartView id="start"/>
 
-    <CalcOnMain id="calc" class="__container"/>
+    <CalcOnMain id="calc" class="__container margin"/>
 
-    <News id="news"/>
+    <News id="news" class="margin"/>
 
-    <Advantages class="__container"/>
+    <Advantages class="__container margin"/>
 
-    <SubmitApplication class="__container"/>
+    <SubmitApplication class="__container margin"/>
 
-    <Partners/>
+    <Partners class="margin"/>
 
-    <Contacts id="contacts" class="__container"/>
+    <Contacts id="contacts" class="__container margin"/>
 
     <Map id="map"/>
     <Footer/>
@@ -47,7 +47,9 @@ export default {
   margin: 0 auto;
   max-width: 1000px;
 }
-
+.margin{
+  margin-bottom: 100px;
+}
 @media (max-width: 1024px) {
   .__container {
     padding: 0 15px;
