@@ -137,6 +137,7 @@ export default {
 @media (max-width: 1024px) {
   .navbar{
     justify-content: flex-start;
+    min-height: 80px ;
   }
   .navbar__links{
     display: none !important;
@@ -154,7 +155,7 @@ export default {
     left: 90%;
     width: 30px;
     height: 20px;
-    top: 32px;
+    top: 27px;
     z-index: 50;
 
     span{
