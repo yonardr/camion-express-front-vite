@@ -3,7 +3,7 @@
     <h2>НОВОСТИ И СПЕЦПРЕДЛОЖЕНИЯ</h2>
     <div class="news">
       <swiper
-          :slidesPerView="3"
+          :slidesPerView="count_news"
           :spaceBetween="30"
           :navigation="{
       prevEl: prev,
@@ -42,7 +42,7 @@
 
 <script>
 import {useStore} from "vuex";
-import {computed, onMounted, ref} from "vue";
+import {computed, onMounted, onUnmounted, ref} from "vue";
 
 import {Swiper, SwiperSlide} from 'swiper/vue'
 import 'swiper/css';
@@ -61,8 +61,23 @@ export default {
 
     const prev = ref(null);
     const next = ref(null);
+
+    const count_news = ref(3)
+    onMounted(()=>{
+      if(window.innerWidth > 768) count_news.value = 3
+      if(window.innerWidth < 768) count_news.value = 1
+      window.addEventListener("resize", myEventHandler);
+    })
+    onUnmounted(()=>{
+      window.removeEventListener("resize", myEventHandler);
+    })
+    function myEventHandler(e) {
+      if(window.innerWidth > 768) count_news.value = 3
+      if(window.innerWidth < 768) count_news.value = 1
+    }
+
     return {
-      news, imgUrl, prev, next,
+      news, imgUrl, prev, next, count_news,
       modules: [Navigation],
     }
   }
@@ -71,6 +86,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../variables';
+
 
 .news {
   width: 1100px;
@@ -159,5 +175,25 @@ export default {
   bottom: 0;
   background: linear-gradient(to top, red 8%, transparent 20%);
   z-index: 12;
+}
+
+@media (max-width: 1200px) {
+  h2{
+font-size: 30px;
+  }
+  .news{
+    width: 100%;
+  }
+  .mySwiper{
+    width: 100%;
+  }
+}
+@media (max-width: 375px) {
+  h2{
+    font-size: 26px;
+  }
+  .__slide{
+    height: 100px;
+  }
 }
 </style>

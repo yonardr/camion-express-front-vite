@@ -1,8 +1,9 @@
 <template>
   <div>
       <h2>ПАРТНЕРЫ</h2>
+    <div class="__container">
     <div class="group">
-      <aos-vue animation="fade-right" :delay="75" placement="top-bottom">
+
       <div class="group first__group">
         <img
             v-for="img in getPartners.filter(i=> i.id <= 3 )"
@@ -11,8 +12,8 @@
             @click="OpenDialog(img)"
         />
       </div>
-      </aos-vue>
-      <aos-vue animation="fade-left" :delay="75" placement="top-bottom">
+
+
       <div class="group second__group">
         <img
             v-for="img in getPartners.filter(i=> i.id >= 4 )"
@@ -22,8 +23,9 @@
             @click="OpenDialog(img)"
         />
       </div>
-      </aos-vue>
+
   </div>
+    </div>
     <my-dialog v-model:show="dialogVisible">
       <h3 class="title"><img :src=imgUrl(partner.img_name) /> {{partner.name}}</h3>
       <div class="group__modal">
@@ -43,11 +45,10 @@
 
 <script>
 import MyDialog from "../UI/MyDialog.vue";
-import AosVue from "aos-vue";
 import {mapGetters} from "vuex";
 
 export default {
-  components: {MyDialog, AosVue},
+  components: {MyDialog},
 
   data(){
     return {
@@ -68,11 +69,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.__container{
+  margin: 0 auto;
+  max-width: 1000px;
+}
 .group{
   display: grid;
   justify-items: center;
   align-items: center;
-
+  justify-content: center;
   .first__group,
   .second__group
   {
@@ -91,6 +96,7 @@ export default {
     grid-template-columns: repeat(2, 280px);
   }
 }
+
 
 //Модальное окно
 .title{
@@ -121,6 +127,20 @@ export default {
   margin: 10px 0;
   line-height: 130%;
 }
+@media (max-width: 375px) {
+  .title{
+    font-size: 20px;
+  }
+  .group__modal {
+    .name {
+      font-size: 15px;
+    }
+  }
+  .text{
+    font-size: 12px;
+  }
+}
+
 @media (max-width: 1024px) {
   .first__group,
   .second__group {
@@ -128,6 +148,46 @@ export default {
   }
   .second__group{
     grid-template-columns: repeat(2, 200px) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .group{
+    width: 100%;
+  }
+  .first__group,
+  .second__group {
+    grid-template-columns: repeat(3, calc(425/3)-0.1px) !important;
+  }
+  .second__group{
+    grid-template-columns: repeat(2, 150px) !important;
+  }
+}
+
+@media (max-width: 460px) {
+  .__container{
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  .first__group,
+  .second__group {
+    grid-template-columns: repeat(3, calc(350/3)-0.1px) !important;
+  }
+  .second__group{
+    grid-template-columns: repeat(2, 120px) !important;
+  }
+}
+@media (max-width: 350px) {
+  .first__group,
+  .second__group {
+    grid-template-columns: repeat(3, calc(320/3)-0.1px) !important;
+  }
+  .second__group{
+    grid-template-columns: repeat(2, 110px) !important;
   }
 }
 </style>

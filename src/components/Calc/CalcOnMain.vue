@@ -1,6 +1,7 @@
 <template>
+  <div>
   <div class="container">
-    <div>
+    <div class="interaction">
       <div class="input__fields btns">
         <my-button color="blue" class="btn left" :class="{active: packing.pallet_board}"
                    @click="changePacking('pallet_board')">Паллетный борт
@@ -16,93 +17,101 @@
         <div class="count_bord" v-show="packing.pallet_board || packing.pallet">
           <my-button color="blue" @click="form.count_packing.value++">+</my-button>
           <input class="select" v-model="form.count_packing.value"/>
-          <my-button color="blue" :disabled='form.count_packing.value<=0' @click="form.count_packing.value--">-</my-button>
+          <my-button color="blue" :disabled='form.count_packing.value<=0' @click="form.count_packing.value--">-
+          </my-button>
         </div>
         <div>
           <input type="checkbox" id="stretch_film" v-model="packing.stretch_film" class="stretch_film"/>
           <label for="stretch_film">Стрейч пленка</label>
         </div>
       </div>
-      <div class="input__fields">
-        <div class="input">
-          <div class="input__title">
-            Откуда
-          </div>
-          <select class="select" @change="onChangePoint_A($event)">
-            <option v-for="item in points_a" :value=item.id :key="item.id">
-              {{ item.name }}
-            </option>
-          </select>
-        </div>
 
-        <div class="input">
-          <div class="input__title">
-            Куда
+      <div>
+        <div class="input__fields">
+          <div class="input">
+            <div class="input__title">
+              Откуда
+            </div>
+            <select class="select" @change="onChangePoint_A($event)">
+              <option v-for="item in points_a" :value=item.id :key="item.id">
+                {{ item.name }}
+              </option>
+            </select>
           </div>
 
-          <select class="select" @change="onChangePoint_B($event)">
-            <option v-for="item in directions" :key="item.id" :value="item.id_direction">
-              {{ item.name }}
-            </option>
-          </select>
-        </div>
-      </div>
-      <div class="input__fields">
-        <div class="input">
-          <div class="input__title">
-            Вес
+          <div class="input">
+            <div class="input__title">
+              Куда
+            </div>
+
+            <select class="select" @change="onChangePoint_B($event)">
+              <option v-for="item in directions" :key="item.id" :value="item.id_direction">
+                {{ item.name }}
+              </option>
+            </select>
           </div>
-          <div><input v-model="form.weight.value" class="select" type="number" @input="inputParse($event, 'weight')">
-          </div>
-          <div><input type="range" v-model="form.weight.value" max="5000" class="input__range"
-                      :style="inputProgress('weight')"
-                      @input="inputParse($event, 'weight')"
-          ></div>
-          <small v-if="form.weight.errors.minValue" style="color:#ff7b47">Введите корректные значения</small>
-        </div>
-        <div class="input">
-          <div class="input__title">
-            Объем
-          </div>
-          <div><input v-model="form.volume.value" class="select" type="number" @input="inputParse($event, 'volume')">
-          </div>
-          <div><input type="range" v-model="form.volume.value" max="30" class="input__range" step="0.1"
-                      :style="inputProgress('volume')"
-                      @input="inputParse($event, 'volume')"
-          ></div>
-          <small v-if="form.volume.errors.minValue" style="color:#ff7b47">Введите корректные значения</small>
         </div>
 
-      </div>
-      <div class="input__fields">
-        <router-link :to="{name:'calc'}" style="text-decoration: none">
-          <my-button color="orange">Рассчитать</my-button>
-        </router-link>
+        <div class="input__fields">
+          <div class="input">
+            <div class="input__title">
+              Вес
+            </div>
+            <div><input v-model="form.weight.value" class="select" type="number" @input="inputParse($event, 'weight')">
+            </div>
+            <div><input type="range" v-model="form.weight.value" max="5000" class="input__range"
+                        :style="inputProgress('weight')"
+                        @input="inputParse($event, 'weight')"
+            ></div>
+            <small v-if="form.weight.errors.minValue" style="color:#ff7b47">Введите корректные значения</small>
+          </div>
+          <div class="input">
+            <div class="input__title">
+              Объем
+            </div>
+            <div><input v-model="form.volume.value" class="select" type="number" @input="inputParse($event, 'volume')">
+            </div>
+            <div><input type="range" v-model="form.volume.value" max="30" class="input__range" step="0.1"
+                        :style="inputProgress('volume')"
+                        @input="inputParse($event, 'volume')"
+            ></div>
+            <small v-if="form.volume.errors.minValue" style="color:#ff7b47">Введите корректные значения</small>
+          </div>
 
+        </div>
       </div>
 
     </div>
     <div class="total__price">
-      <h6>
-        Стоимость грузоперевозки
-      </h6>
-      <h3>{{ price_direction }} ₽</h3>
-      <h6>
-        Стоимость упаковки
-      </h6>
-      <h3>{{ price_packing }} ₽</h3>
-      <h6>
-        Стоимость упаковки
-      </h6>
-      <h3>{{price_total}} ₽</h3>
-      <h6>
-        Сроки доставки
-      </h6>
-      <h3>{{ direction_info.deadline }}</h3>
-
+      <div>
+        <h6>
+          Стоимость грузоперевозки
+        </h6>
+        <h3>{{ price_direction }} ₽</h3>
+        <h6>
+          Стоимость упаковки
+        </h6>
+        <h3>{{ price_packing }} ₽</h3>
+      </div>
+      <div>
+        <h6>
+          Стоимость упаковки
+        </h6>
+        <h3>{{ price_total }} ₽</h3>
+        <h6>
+          Сроки доставки
+        </h6>
+        <h3>{{ direction_info.deadline }}</h3>
+      </div>
     </div>
-  </div>
 
+  </div>
+  <div class="more_detailed">
+    <router-link :to="{name:'calc'}" style="text-decoration: none; display: flex">
+      <my-button color="blue">Рассчитать подробнее</my-button>
+    </router-link>
+  </div>
+  </div>
 </template>
 
 <script>
@@ -131,12 +140,12 @@ export default {
         value: 0.01,
         validators: {minValue}
       },
-      count_packing : {
+      count_packing: {
         value: 0
       }
     })
 
-    const  {onChangePoint_A, onChangePoint_B, changePacking, inputProgress, inputParse} = useInputsCalc(form)
+    const {onChangePoint_A, onChangePoint_B, changePacking, inputProgress, inputParse} = useInputsCalc(form)
 
     const total_price = ref(0)
     const packing_price = ref(0)
@@ -145,26 +154,23 @@ export default {
     const price_packing = useNumbersAnimation(packing_price)
     const price_total = useNumbersAnimation(price_sum)
 
-    watch(form, ()=> {
+    watch(form, () => {
       total_price.value = useCalc(direction_info, form)
       packing_price.value = useCalcPacking(packing, form)
-      price_sum.value = total_price.value+packing_price.value
+      price_sum.value = total_price.value + packing_price.value
     })
 
 
     watch(direction_info, () => {
       total_price.value = useCalc(direction_info, form)
-      price_sum.value = total_price.value+packing_price.value
+      price_sum.value = total_price.value + packing_price.value
     })
 
 
-    watch(packing.value, ()=>{
+    watch(packing.value, () => {
       packing_price.value = useCalcPacking(packing, form)
-      price_sum.value = total_price.value+packing_price.value
+      price_sum.value = total_price.value + packing_price.value
     })
-
-
-
 
 
     return {
@@ -196,8 +202,8 @@ h6 {
 }
 
 .container {
-  margin-bottom: 200px;
   display: flex;
+  justify-content: center;
 }
 
 .total__price {
@@ -229,6 +235,7 @@ h6 {
 
   .input {
     padding: 10px 0 0;
+
     .input__title {
       margin: 0 0 5px 5px;
       font-weight: bold;
@@ -299,19 +306,23 @@ input[type=range]::-webkit-slider-thumb {
     border-color: $c_blue;
   }
 }
-.count_bord{
+
+.count_bord {
   display: flex;
   height: 48px;
   align-items: center;
-  input{
+
+  input {
     margin: 5px;
     height: 100%;
     width: 80px;
   }
 }
-.stretch_film{
+
+.stretch_film {
   display: none;
 }
+
 .stretch_film + label {
   position: relative;
   padding-left: 30px;
@@ -322,6 +333,7 @@ input[type=range]::-webkit-slider-thumb {
   cursor: pointer;
   user-select: none;
 }
+
 .stretch_film + label:before {
   content: '';
   position: absolute;
@@ -332,7 +344,71 @@ input[type=range]::-webkit-slider-thumb {
   border: 4px solid $c_blue;
   border-radius: 20px;
 }
+
 .stretch_film:checked + label::before {
   border-color: $c_orange;
+}
+
+.more_detailed{
+margin-left: 85px;
+}
+@media (max-width: 1024px) {
+  .more_detailed{
+    margin: 0;
+    display: flex;
+    justify-content: center
+  }
+}
+@media (max-width: 768px) {
+  .interaction {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .input__fields {
+    flex-direction: column;
+    align-items: start;
+    padding-bottom: 0;
+
+    &.btns {
+      button {
+        border-radius: 30px;
+      }
+    }
+
+  }
+  .more_detailed{
+    margin-top: 10px;
+  }
+
+}
+
+@media (max-width: 415px) {
+  .container {
+    flex-direction: column;
+  }
+  .total__price {
+    width: 100%;
+    border-left: 0;
+    display: flex;
+    justify-content: space-between;
+
+    div {
+      padding: 5px;
+    }
+  }
+
+  .input__fields {
+    align-items: center;
+
+    .select {
+      width: 300px;
+    }
+  }
+  .count_bord {
+    margin-bottom: 10px;
+    .select {
+      width: 100px;
+    }
+  }
 }
 </style>
