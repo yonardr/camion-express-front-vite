@@ -48,7 +48,7 @@ export default {
   max-width: 1000px;
 }
 .margin{
-  margin-bottom: 100px;
+  margin-bottom: 70px;
 }
 @media (max-width: 1024px) {
   .__container {

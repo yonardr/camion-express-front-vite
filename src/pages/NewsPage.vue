@@ -88,8 +88,22 @@ export default {
   flex-direction: column;
   margin: 0 auto;
 }
+@media (max-width: 1024px){
+  .news{
+    width: 100%;
+    padding: 0px 15px;
+  }
+  .mySwiper{
+    width: 100%;
+  }
+}
 h2{
   font-size: 40px;
+}
+@media (max-width: 768px){
+  h2{
+    font-size: 30px;
+  }
 }
 h6{
   font-size: 25px;
