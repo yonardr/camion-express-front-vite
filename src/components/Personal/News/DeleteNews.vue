@@ -17,8 +17,8 @@
 <script>
 import {computed, ref} from "vue";
 import {useStore} from "vuex";
-import MyButton from "../UI/MyButton.vue";
-import {useDelNews} from "../hooks/NewsPage/useDelNews.js";
+import MyButton from "../../UI/MyButton.vue";
+import {useDelNews} from "../../hooks/NewsPage/useDelNews.js";
 
 export default {
   components: {MyButton},
@@ -38,7 +38,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../variables';
+@import '../../../variables';
 
 .selected {
   width: 100%;

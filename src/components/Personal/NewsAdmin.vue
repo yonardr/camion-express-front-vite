@@ -15,8 +15,8 @@ import MyInput from "../UI/MyInput.vue";
 import MyTextarea from "../UI/MyTextarea.vue";
 import MyButton from "../UI/MyButton.vue";
 import MyInputFile from "../UI/MyInputFile.vue";
-import AddNews from "../Docs/AddNews.vue";
-import DeleteNews from "../Docs/DeleteNews.vue";
+import AddNews from "./News/AddNews.vue";
+import DeleteNews from "./News/DeleteNews.vue";
 
 export default {
   components: {DeleteNews, AddNews, MyInputFile, MyButton, MyTextarea, MyInput, News},
