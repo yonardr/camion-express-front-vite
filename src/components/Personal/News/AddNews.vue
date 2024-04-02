@@ -59,13 +59,13 @@
   </div>
 </template>
 <script>
-import News from "../MainPage/News.vue";
-import MyInput from "../UI/MyInput.vue";
-import MyTextarea from "../UI/MyTextarea.vue";
-import MyButton from "../UI/MyButton.vue";
+import News from "../../MainPage/News.vue";
+import MyInput from "../../UI/MyInput.vue";
+import MyTextarea from "../../UI/MyTextarea.vue";
+import MyButton from "../../UI/MyButton.vue";
 import {reactive, ref} from "vue";
-import MyInputFile from "../UI/MyInputFile.vue";
-import {useAddNews} from "../hooks/NewsPage/useAddNews.js";
+import MyInputFile from "../../UI/MyInputFile.vue";
+import {useAddNews} from "../../hooks/NewsPage/useAddNews.js";
 
 export default {
   components: {MyInputFile, MyButton, MyTextarea, MyInput, News},
@@ -102,7 +102,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../variables";
+@import "../../../variables";
 
 .page {
   display: flex;
