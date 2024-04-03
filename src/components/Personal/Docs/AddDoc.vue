@@ -10,7 +10,7 @@
 
     <select class="select" v-model="selectType" >
       <option :value="null" disabled>Выберите тип документа</option>
-      <option v-for="item in types" :value="item.id">{{item.name}}</option>
+      <option v-for="item in docs" :value="item.id">{{item.type}}</option>
     </select>
 
 
@@ -21,22 +21,23 @@
 </template>
 
 <script>
-import MyInputFile from "../UI/MyInputFile.vue";
-import MyInput from "../UI/MyInput.vue";
-import MyButton from "../UI/MyButton.vue";
-import MyDialog from "../UI/MyDialog.vue";
-import ViewDocs from "../Docs/ViewDocs.vue";
-import {useFetchTypesDocs} from "../hooks/DocPage/useFetchTypesDocs.js";
-import {ref, watch} from "vue";
-import {useAddDoc} from "../hooks/DocPage/useAddDoc.js";
+import MyInputFile from "../../UI/MyInputFile.vue";
+import MyInput from "../../UI/MyInput.vue";
+import MyButton from "../../UI/MyButton.vue";
+import MyDialog from "../../UI/MyDialog.vue";
+import ViewDocs from "../../Docs/ViewDocs.vue";
+import {useFetchTypesDocs} from "../../hooks/DocPage/useFetchTypesDocs.js";
+import {computed, ref, watch} from "vue";
+import {useAddDoc} from "../../hooks/DocPage/useAddDoc.js";
+import {useStore} from "vuex";
 
 export default {
   components: {MyButton, MyInput, MyInputFile, MyDialog, ViewDocs},
 
   setup(props){
-    const {types} = useFetchTypesDocs()
+    const store = useStore()
+    const docs = computed(() => store.getters.getDocs);
     const selectType = ref(null)
-    watch(selectType, (i,k)=>console.log(i))
     const file = ref(null)
     watch(file, (i,k)=>console.log(i))
     const name = ref(null)
@@ -45,21 +46,23 @@ export default {
           file.value !== null &&
           name.value &&
           name.value.trim() !== '' ) {
-        useAddDoc({name: name.value, type: selectType.value, file: file.value})
+        useAddDoc({name: name.value, type: selectType.value, file: file.value}).then(()=>{
+          store.dispatch('fetchDocs')
+        })
       }
       else{
         alert('Не все поля заполнены')
       }
     }
 
-    return {types, selectType, file, submit, name}
+    return {selectType, file, submit, name, docs}
   }
 
 }
 </script>
 
 <style lang="scss" scoped>
-@import "../../variables";
+@import "../../../variables";
 .select{
   background: #eeeeee;
   border-radius: 20px;
