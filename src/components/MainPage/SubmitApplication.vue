@@ -1,6 +1,6 @@
 <template>
+  <div>
   <div id="zayavka">
-<!--    <pre>{{form}}</pre>-->
     <h2>Оставить заявку</h2>
     <div class="card" @submit.prevent="submit">
       <my-input
@@ -52,6 +52,7 @@
       <p>В ближайшее время с Вами свяжется наш специалист</p>
     </div>
   </my-dialog>
+  </div>
 </template>
 
 <script>
@@ -114,7 +115,7 @@ h2{
 .card{
   @include card(white);
   padding: 30px 50px;
-  width: 1000px;
+  width: 100%;
   margin: 0 auto;
 
 }
@@ -192,6 +193,17 @@ h2{
   img{
     margin: 0 auto;
     width:150px
+  }
+}
+@media (max-width: 425px) {
+  .card{
+    padding: 15px 25px;
+  }
+  .upload{
+    flex-direction: column;
+    .file-dummy{
+      margin: 5px;
+    }
   }
 }
 </style>

@@ -45,7 +45,6 @@ export default {}
   top:150px;
 }
 .footer {
-  margin-top: 100px;
   background: $c_blue;
   padding: 35px 0;
 }
@@ -89,6 +88,24 @@ export default {}
   img {
     width: 25px;
     margin-left: 25px;
+  }
+}
+@media (max-width: 768px){
+  .footer__content{
+    flex-direction: column;
+    .link{
+      margin: 10px;
+    }
+  }
+  .footer__bottom{
+    flex-direction: column;
+    p{
+      text-align: center;
+      margin: 5px;
+    }
+    .social{
+      margin: 10px;
+    }
   }
 }
 </style>

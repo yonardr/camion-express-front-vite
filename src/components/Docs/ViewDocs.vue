@@ -35,21 +35,25 @@
 </template>
 
 <script>
-import {useFetchDocs} from "../hooks/DocPage/useFetch.js";
 import {computed, onMounted, ref, watch} from "vue";
 import MyDialog from "../UI/MyDialog.vue";
 import MyButton from "../UI/MyButton.vue";
 import {useDeleteDoc} from "../hooks/DocPage/useDeleteFile";
-import {mapActions, mapGetters} from "vuex";
+import {useStore} from "vuex";
 export default {
   components: {MyButton, MyDialog},
   props: {
     deleteField: false,
   },
 setup(props, context){
+
+  const store = useStore()
+  onMounted(()=> store.dispatch('fetchDocs')
+  )
+  const docs = computed(() => store.getters.getDocs);
+
   const id = ref (null)
   const name_file = ref(null)
-  const {docs} = useFetchDocs();
   const dialogVisible = ref(false)
   const dialogErrorVisible = ref(false)
   function f(path){
@@ -58,13 +62,14 @@ setup(props, context){
   async function deleteDoc(){
     const {count} = await useDeleteDoc({id})
     if (count.value.message === "success") {
-      //docs.value.splice(index.value, 1)
-      alert("Удалил")
+      await store.dispatch('fetchDocs')
+      dialogVisible.value=false
     }
     else dialogErrorVisible.value = true
   }
-  //onMounted(()=> mapActions(['fetchDocs']))
-  //const docs = computed(()=>mapGetters(['ShowDocs']))
+
+
+
 
   return {id, name_file, docs, f, dialogVisible, dialogErrorVisible, deleteDoc}
 },
