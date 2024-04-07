@@ -93,7 +93,7 @@ export default {
 <style lang="scss" scoped>
 @import '../../variables';
 .prices {
-  margin: 70px 0 0 50px;
+  margin: 300px 0 0 50px;
 }
 .prices__content{
   width: 350px;
@@ -135,7 +135,15 @@ export default {
   display: flex;
   justify-content: space-between;
 }
-
+@media (max-width: 1460px){
+  .prices{
+    margin: 50px 0 0 0;
+    width: 100%;
+  }
+  .prices__content{
+    width: 100%;
+  }
+}
 
 
 </style>
