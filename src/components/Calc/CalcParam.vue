@@ -17,9 +17,9 @@
       >Общий вес и объем
       </my-button>
     </div>
-    {{cargo}}
-    //////
-    {{cargo_current}}
+<!--    {{cargo}}-->
+<!--    //////-->
+<!--    {{cargo_current}}-->
 
 
     <div v-if="!paramType">

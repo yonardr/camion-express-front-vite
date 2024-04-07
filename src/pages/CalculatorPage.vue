@@ -1,7 +1,8 @@
 <template>
+  <h2 style="margin: 40px 0">КАЛЬКУЛЯТОР</h2>
   <div class="__container">
     <div class="section">
-      <h2 style="margin: 40px 0">КАЛЬКУЛЯТОР</h2>
+
       <div class="cargo">
         <div class="cargo__items">
           <div v-for="item in cargo">
@@ -31,15 +32,15 @@
 </template>
 
 <script>
-import MyCombobox from "../UI/MyCombobox.vue";
-import MyButton from "../UI/MyButton.vue";
-import CalcDirection from "./CalcDirection.vue";
-import CalcOnMain from "./CalcOnMain.vue";
-import CalcParam from "./CalcParam.vue";
-import {useLoadingDataCalc} from "./useLoadingDataCalc.js";
+import MyCombobox from "../components/UI/MyCombobox.vue";
+import MyButton from "../components/UI/MyButton.vue";
+import CalcDirection from "../components/Calc/CalcDirection.vue";
+import CalcOnMain from "../components/Calc/CalcOnMain.vue";
+import CalcParam from "../components/Calc/CalcParam.vue";
+import {useLoadingDataCalc} from "../components/Calc/useLoadingDataCalc.js";
 import {useStore} from "vuex";
 import {vShow} from "vue";
-import CalcTotalPrice from "./CalcTotalPrice.vue";
+import CalcTotalPrice from "../components/Calc/CalcTotalPrice.vue";
 
 
 const minValue = value => Number(value) >= 0
@@ -81,10 +82,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../variables';
+@import '../variables';
 
 .__container {
   display: flex;
+  justify-content: center
 }
 
 .card {
