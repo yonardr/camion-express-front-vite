@@ -17,9 +17,9 @@
       >Общий вес и объем
       </my-button>
     </div>
-    {{cargo}}
-    //////
-    {{cargo_current}}
+<!--    {{cargo}}-->
+<!--    //////-->
+<!--    {{cargo_current}}-->
 
 
     <div v-if="!paramType">
@@ -103,13 +103,13 @@
         <div class="input">
           <div class="input__title">Объем</div>
           <div class="input__unit m3">
-            <input class="mini__input total_weight"/>
+            <input class="mini__input total_weight" v-model="form.volume.value"/>
           </div>
         </div>
         <div class="input">
           <div class="input__title">Вес</div>
           <div class="input__unit kg">
-            <input class="mini__input total_weight"/>
+            <input class="mini__input total_weight" v-model="form.weight.value"/>
           </div>
         </div>
         <div class="input">
@@ -333,9 +333,12 @@ export default {
       })
     }
 
+    watch(paramType, ()=>{
+      if(!paramType.value) form.volume.value = form.volume.height * form.volume.width * form.volume.length
+    })
 
     watch(form.volume, () => {
-      form.volume.value = form.volume.height * form.volume.width * form.volume.length
+      if(!paramType.value) form.volume.value = form.volume.height * form.volume.width * form.volume.length
     })
 
     watch(direction_info, ()=> {
@@ -596,5 +599,16 @@ input{
   font-family: Montserrat,serif;
   font-weight: 500;
 }
-
+@media (max-width: 1050px) {
+  .input__fields{
+    width: 100%;
+    flex-direction: column;
+  }
+  .mini__input, .input, .input__unit {
+    width: 100%;
+    &.long{
+      width: 100%;
+    }
+  }
+}
 </style>

@@ -5,10 +5,10 @@ import Documents from "../pages/Documents.vue";
 import AuthPage from "../pages/AuthPage.vue";
 import PersonalAccount from "../pages/PersonalAccount.vue";
 import DocumentsAdmin from "../components/Personal/DocumentsAdmin.vue";
-import Calculator from "../components/Calc/CalculatorPage.vue";
+import Calculator from "../pages/CalculatorPage.vue";
 import NewsPage from "../pages/NewsPage.vue";
 import NewsAdmin from "../components/Personal/NewsAdmin.vue";
-import CalculatorPage from "../components/Calc/CalculatorPage.vue";
+import CalculatorPage from "../pages/CalculatorPage.vue";
 
 
 const routes = [

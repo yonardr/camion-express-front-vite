@@ -28,7 +28,7 @@ import SubmitApplication from "../components/MainPage/SubmitApplication.vue";
 import Partners from "../components/MainPage/Partners.vue";
 import Contacts from "../components/MainPage/Contacts.vue";
 import Map from "../components/MainPage/Map.vue";
-import Calculator from "../components/Calc/CalculatorPage.vue"
+import Calculator from "./CalculatorPage.vue"
 import News from "../components/MainPage/News.vue";
 import Footer from "../components/MainPage/Footer.vue";
 import CalcOnMain from "../components/Calc/CalcOnMain.vue";

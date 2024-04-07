@@ -1,7 +1,10 @@
 <template>
+  <div>
+ <Navbar/>
   <div class="__container">
     <div class="section">
-      <h2 style="margin: 40px 0">КАЛЬКУЛЯТОР</h2>
+      <h2>Расчёт и оформление заявки</h2>
+      <div class="card" style="padding-bottom: 0px; padding-top: 0">
       <div class="cargo">
         <div class="cargo__items">
           <div v-for="item in cargo">
@@ -16,35 +19,39 @@
         </div>
         <my-button color='orange' class="switcher active" @click="addCargo">Добавить груз</my-button>
       </div>
-      <div class="card card__header">
-        <div class="title">Направление</div>
-        <CalcDirection/>
       </div>
+      <div class="card" style="padding-bottom: 0;padding-top: 0">
+        <div class="card card__header">
+          <div class="title">Направление</div>
+          <CalcDirection/>
+        </div>
+      </div>
+
       <div class="card">
         <CalcParam/>
       </div>
     </div>
     <CalcTotalPrice />
   </div>
-
+  </div>
 
 </template>
 
 <script>
-import MyCombobox from "../UI/MyCombobox.vue";
-import MyButton from "../UI/MyButton.vue";
-import CalcDirection from "./CalcDirection.vue";
-import CalcOnMain from "./CalcOnMain.vue";
-import CalcParam from "./CalcParam.vue";
-import {useLoadingDataCalc} from "./useLoadingDataCalc.js";
+import MyCombobox from "../components/UI/MyCombobox.vue";
+import MyButton from "../components/UI/MyButton.vue";
+import CalcDirection from "../components/Calc/CalcDirection.vue";
+import CalcOnMain from "../components/Calc/CalcOnMain.vue";
+import CalcParam from "../components/Calc/CalcParam.vue";
+import {useLoadingDataCalc} from "../components/Calc/useLoadingDataCalc.js";
 import {useStore} from "vuex";
-import {vShow} from "vue";
-import CalcTotalPrice from "./CalcTotalPrice.vue";
+import Navbar from "../components/MainPage/Navbar.vue";
+import CalcTotalPrice from "../components/Calc/CalcTotalPrice.vue";
 
 
 const minValue = value => Number(value) >= 0
 export default {
-  components: {CalcTotalPrice, CalcParam, CalcOnMain, CalcDirection, MyButton, MyCombobox},
+  components: {CalcTotalPrice, CalcParam, CalcOnMain, CalcDirection, MyButton, MyCombobox, Navbar},
   setup() {
     const store = useStore()
     const {cargo, direction_info, cargo_current} = useLoadingDataCalc()
@@ -58,7 +65,7 @@ export default {
     }
 
     const deleteCargo = (id) => {
-      store.commit('RemoveCargoById', id)
+      if(id !== 1) store.commit('RemoveCargoById', id)
     }
 
     const activeCargo = (id) => {
@@ -81,10 +88,16 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../variables';
-
+@import '../variables';
+h2{
+  padding: 0 24px;
+  text-align: start;
+  margin-top: 150px;
+  margin-bottom: 30px;
+}
 .__container {
   display: flex;
+  justify-content: center
 }
 
 .card {
@@ -92,7 +105,6 @@ export default {
 }
 
 .card__header {
-
   @include card(white);
   margin-bottom: 20px;
 }
@@ -247,6 +259,30 @@ label {
       transition: 0.6s;
       margin-bottom: 3px;
     }
+  }
+}
+@media (max-width: 1460px){
+  .__container{
+    flex-wrap: wrap;
+  }
+}
+@media(max-width: 1050px){
+  .card, .cargo, .card__header{
+    width: 100%;
+  }
+}
+@media(max-width: 768px){
+  .cargo{
+    flex-direction: column;
+    width: 320px;
+  }
+  .card{
+   padding: 10px;
+  }
+  h2{
+    font-size: 30px;
+    text-align: center;
+    padding: 0;
   }
 }
 </style>

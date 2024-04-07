@@ -53,13 +53,6 @@ export default {
       store.commit('UpdateCargoById', {current_cargo: cargo_current.value, point_a: direction_info.value.point_a[0].name,point_b: direction_info.value.point_b[0].name, direction_id: direction_info.value.id, deadline: direction_info.value.deadline })
     })
 
-    // const CargoCurrent = reactive({})
-    // watch(cargo_current, ()=>{
-    //   CargoCurrent.value = cargo.value.map((item)=>{
-    //     if(item.id === cargo_current.value) return {point_a: item.point_a, point_b: item.point_b}
-    //   })
-    //   CargoCurrent.value.active = true
-    // })
 
     return {points_a, onChangePoint_A, onChangePoint_B, directions, cargo, cargo_current}
   }
@@ -100,6 +93,13 @@ export default {
   }
 }
 
-
+@media (max-width: 1050px) {
+  .input, .select{
+    width: 100%;
+  }
+  .input__fields{
+    flex-direction: column;
+  }
+}
 
 </style>
