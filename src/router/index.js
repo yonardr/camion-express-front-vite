@@ -9,6 +9,7 @@ import Calculator from "../pages/CalculatorPage.vue";
 import NewsPage from "../pages/NewsPage.vue";
 import NewsAdmin from "../components/Personal/NewsAdmin.vue";
 import CalculatorPage from "../pages/CalculatorPage.vue";
+import CalculatorAdmin from "../components/Personal/CalculatorAdmin.vue";
 
 
 const routes = [
@@ -49,7 +50,7 @@ const routes = [
             {
                 name: 'calcEdit' ,
                 path: 'calcEdit',
-                component: Calculator
+                component: CalculatorAdmin
             },
             {
                 name: 'newsEdit' ,

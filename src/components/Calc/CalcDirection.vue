@@ -18,11 +18,6 @@
           Куда
         </div>
 
-<!--        <select class="select" @change="onChangePoint_B($event)">-->
-<!--          <option v-for="item in directions" :key="item.id" :value="item.id_direction">-->
-<!--            {{ item.name }}-->
-<!--          </option>-->
-<!--        </select>-->
         <select class="select" @change="onChangePoint_B($event)" >
           <option v-for="item in directions" :key="item.id" :value="item.id_direction" :selected="item.name === cargo[cargo_current-1].point_b">
             {{ item.name }}
