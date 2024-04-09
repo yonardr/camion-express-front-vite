@@ -1,7 +1,7 @@
 <template>
   <div>
  <Navbar/>
-  <div class="__container">
+  <div class="__container" id="calc">
     <div class="section">
       <h2>Расчёт и оформление заявки</h2>
       <div class="card" style="padding-bottom: 0px; padding-top: 0">

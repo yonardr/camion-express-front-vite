@@ -4,7 +4,7 @@
       <router-link class="link logo" :to="{name:'main', hash: '#start'}"><img src="../../assets/logo.png" /></router-link>
 
       <div class="navbar__links">
-        <router-link class="link" :to="{name:'main', hash: '#calc'}">Калькулятор</router-link>
+        <router-link class="link" :to="{name:'calc', hash: '#calc'}">Калькулятор</router-link>
         <router-link class="link" :to="{name:'main', hash: '#news'}">Новости</router-link>
         <router-link class="link" to="/documents">Документы</router-link>
         <router-link class="link" :to="{name:'main', hash: '#contacts'}" >Контакты</router-link>
@@ -17,7 +17,7 @@
       <div class="navbar_tel" :class="{active: burger_active}">
         <ul class="menu_table">
           <li>
-            <router-link class="menu_button" :to="{name:'main', hash: '#calc'}" @click="burger_active=!burger_active">Калькулятор</router-link>
+            <router-link class="menu_button" :to="{name:'calc', hash: '#calc'}" @click="burger_active=!burger_active">Калькулятор</router-link>
           </li>
           <li>
             <router-link class="menu_button" :to="{name:'main', hash: '#news'}" @click="burger_active=!burger_active">Новости</router-link>

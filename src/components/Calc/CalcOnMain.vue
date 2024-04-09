@@ -107,7 +107,7 @@
 
   </div>
   <div class="more_detailed">
-    <router-link :to="{name:'calc'}" style="text-decoration: none; display: flex">
+    <router-link :to="{name:'calc', hash: '#calc'}" style="text-decoration: none; display: flex">
       <my-button color="blue">Рассчитать подробнее</my-button>
     </router-link>
   </div>
