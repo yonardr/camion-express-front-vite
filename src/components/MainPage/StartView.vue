@@ -3,21 +3,23 @@
   <div class="__container">
     <div class="down">
     <aos-vue animation="fade-right" :duration="1000" placement="top-bottom">
-
       <h1>Транспортно-логистическая компания «КамионЭкспресс»</h1>
+    </aos-vue>
+      <aos-vue animation="fade-right" :duration="1400" placement="top-bottom">
       <div class="text">
         Перевозка сборных грузов
         <br>
         (Сибирь, Дальний Восток, Урал, Север, Юг)
       </div>
-
+      </aos-vue>
+      <aos-vue animation="fade-right" :duration="1800" placement="top-bottom">
       <div class="btns">
         <my-button :color="'orange'" @click="$router.push('/#zayavka')">Оставить заявку</my-button>
         <my-button :color="'blue'" @click="$router.push('/#map')">Отследить транспорт</my-button>
       </div>
+      </aos-vue>
 
 
-    </aos-vue>
     </div>
   </div>
 
