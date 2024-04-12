@@ -1,7 +1,7 @@
 <template>
   <div class="add__card">
     <h3>Добавление новостей</h3>
-    <form>
+    <div>
       <my-input
           v-model="form.title.value"
           :type="'personal'"
@@ -54,7 +54,7 @@
 
       </div>
 
-    </form>
+    </div>
 
   </div>
 </template>
@@ -66,6 +66,7 @@ import MyButton from "../../UI/MyButton.vue";
 import {reactive, ref} from "vue";
 import MyInputFile from "../../UI/MyInputFile.vue";
 import {useAddNews} from "../../hooks/NewsPage/useAddNews.js";
+import {useAddDocNews} from "../../hooks/NewsPage/useAddDocNews.js";
 
 export default {
   components: {MyInputFile, MyButton, MyTextarea, MyInput, News},
@@ -92,8 +93,12 @@ export default {
     })
 
     async function submit() {
-      const {result} = await useAddNews(form)
-      console.log(result)
+      const {resultNews} = await useAddNews(form)
+      if(resultNews.value.id){
+        const {resultDocs} = useAddDocNews({files: form.files, id: resultNews.value.id})
+        if(resultDocs) alert('Новость добавлена с документами')
+      }
+      else alert('Новость добавлена')
     }
 
     return {form, submit}
