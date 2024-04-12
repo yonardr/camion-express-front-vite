@@ -2,7 +2,7 @@ import axios from "axios";
 import {ref} from "vue";
 
 export async function useAddNews(init = {}) {
-    const result = ref(undefined)
+    const resultNews = ref(null)
     try {
         const formData = new FormData()
         formData.append('title', init.title.value)
@@ -21,12 +21,6 @@ export async function useAddNews(init = {}) {
 
         }
 
-        // for (let i = 0; i < init.files.value.length; i++) {
-        //     let file = init.files.value[i];
-        //     formData.append('files', file);
-        //
-        // }
-
         const res = await axios.post(`${import.meta.env.VITE_APP_API_URL}/news`,
             formData,
             {
@@ -35,11 +29,10 @@ export async function useAddNews(init = {}) {
                 }
             }
         )
-
-        result.value = res.data
+        resultNews.value = res.data
     }
     catch (e) {
         alert('Ошибка')
     }
-    return {result}
+    return {resultNews}
 }

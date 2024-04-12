@@ -47,7 +47,7 @@ export default {
 <style lang="scss" scoped>
 @import "../variables";
 .navbar{
-  position: relative;
+  position: fixed;
   height: 100vh;
   width: 100px;
   background-color: $c_blue;

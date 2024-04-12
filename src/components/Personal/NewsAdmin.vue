@@ -1,9 +1,12 @@
 <template>
   <div class="page">
-      <News />
+    <div>
+      <News/>
+    </div>
+
     <div class="edit__container">
-      <AddNews />
-      <DeleteNews />
+      <AddNews/>
+      <DeleteNews/>
     </div>
 
   </div>
@@ -26,11 +29,13 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../variables";
-.page{
-display: flex;
+
+.page {
+  display: flex;
   flex-direction: column;
 }
-.edit__container{
+
+.edit__container {
   display: flex;
 }
 
