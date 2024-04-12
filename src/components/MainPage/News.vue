@@ -150,6 +150,7 @@ export default {
 
 .swiper-button-prev,
 .swiper-button-next {
+  position: absolute;
   background-color: #fff;
   width: 50px;
   height: 50px;
