@@ -15,7 +15,7 @@
     }"
           class="mySwiper"
       >
-        <swiper-slide v-for="item in news">
+        <swiper-slide v-for="item in news.reverse()" :key="item.id">
           <div class="__slide">
             <img :src="imgUrl(item.newsImgs[0].path)" class="slide__img"/>
             <h3 class="slide__title">
