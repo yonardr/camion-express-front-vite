@@ -30,7 +30,7 @@ export default {
     const file = ref(null)
     async function submit(){
       const res = await useAddDirections({id: selected.value, file: file.value})
-      console.log(res)
+      if(res.status === 201) alert("Направление добавлено")
     }
     return {points_a, selected, submit, file}
   }

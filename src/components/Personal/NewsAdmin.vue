@@ -1,10 +1,7 @@
 <template>
-  <div class="page">
-    <div>
-      <News/>
-    </div>
-
+  <div>
     <div class="edit__container">
+      <News/>
       <AddNews/>
       <DeleteNews/>
     </div>
@@ -30,13 +27,11 @@ export default {
 <style lang="scss" scoped>
 @import "../../variables";
 
-.page {
-  display: flex;
-  flex-direction: column;
-}
-
 .edit__container {
+  position: relative;
+  top: 25px;
   display: flex;
+  flex-wrap: wrap;
 }
 
 </style>

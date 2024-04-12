@@ -52,6 +52,7 @@ export default {
   width: 100px;
   background-color: $c_blue;
   transition: 1s;
+  z-index: 99999;
   &.extension{
     width: 250px;
     transition: 1s;

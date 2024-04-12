@@ -19,10 +19,9 @@ export default {
 
 <style lang="scss" scoped>
 .page{
-  display: flex;
   background-color: #f1f4f6;
 }
 .content{
-  margin-left: 50px;
+  margin-left: 150px;
 }
 </style>

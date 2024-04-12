@@ -7,6 +7,6 @@ export async function useCalcGetDirection(init = {}) {
         return res.data
     }
     catch (e){
-        alert(`На №${init.id} направлении возникла ошибка`)
+        console.log(`На №${init.id} направлении возникла ошибка`)
     }
 }

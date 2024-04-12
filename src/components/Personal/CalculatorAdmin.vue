@@ -1,5 +1,6 @@
 <template>
   <div>
+  <div class="page">
     <div class="card">
     <AddPointA />
     </div>
@@ -11,7 +12,7 @@
     <div class="card">
       <AddDirection />
     </div>
-
+<div>
     <CalcDirection />
 
 
@@ -44,6 +45,8 @@
 
 
     </table>
+</div>
+  </div>
   </div>
 </template>
 
@@ -78,9 +81,15 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../variables';
+.page{
+
+  display: flex;
+  flex-wrap: wrap
+}
 .card{
-  padding: 24px;
-  margin-bottom: 20px;
+  width: 700px;
+  padding: 25px;
+  margin: 25px;
   @include card(white);
 }
 .table{
