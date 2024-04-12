@@ -33,6 +33,7 @@
     </div>
     <CalcTotalPrice />
   </div>
+    <Footer />
   </div>
 
 </template>
@@ -47,11 +48,12 @@ import {useLoadingDataCalc} from "../components/Calc/useLoadingDataCalc.js";
 import {useStore} from "vuex";
 import Navbar from "../components/MainPage/Navbar.vue";
 import CalcTotalPrice from "../components/Calc/CalcTotalPrice.vue";
+import Footer from "../components/MainPage/Footer.vue";
 
 
 const minValue = value => Number(value) >= 0
 export default {
-  components: {CalcTotalPrice, CalcParam, CalcOnMain, CalcDirection, MyButton, MyCombobox, Navbar},
+  components: {Footer, CalcTotalPrice, CalcParam, CalcOnMain, CalcDirection, MyButton, MyCombobox, Navbar},
   setup() {
     const store = useStore()
     const {cargo, direction_info, cargo_current} = useLoadingDataCalc()
