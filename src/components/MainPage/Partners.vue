@@ -81,6 +81,7 @@ export default {
   .first__group,
   .second__group
   {
+    margin-top: 50px;
     grid-template-columns: repeat(3, calc(1000/3)-0.1px);
     img{
       width: 50%;
