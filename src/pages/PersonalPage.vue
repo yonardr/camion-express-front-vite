@@ -4,7 +4,12 @@
        @mouseleave="show = false"
        :class="extension">
     <div class="group">
-      <router-link to="/" style="color : white">Главная</router-link>
+      <router-link to="/">
+        <img src="../assets/personal/menu_icons/mini-logo.svg">
+        <Transition>
+          <img v-if="show" class="logo-text" src="../assets/personal/menu_icons/text-logo.svg" style="position: absolute;width: 110px">
+        </Transition>
+      </router-link>
       <router-link :to="{name: 'calcEdit'}" class="field">
         <img src="../assets/personal/menu_icons/calculator.svg">
         <Transition>
@@ -85,6 +90,7 @@ export default {
     color: #fff
   }
 }
+
 .v-enter-active,
 .v-leave-active {
   transition: opacity 0.3s ease;
