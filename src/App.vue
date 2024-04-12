@@ -48,6 +48,7 @@ h2{
 @media (max-width: 1024px) {
   body{
     -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
   }
 }
 </style>
