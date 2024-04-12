@@ -45,4 +45,9 @@ h2{
   border-radius: 25px;
   border: 3px solid $c_orange;
 }
+@media (max-width: 1024px) {
+  body{
+    -webkit-text-size-adjust: 100%;
+  }
+}
 </style>
