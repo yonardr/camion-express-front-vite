@@ -30,6 +30,7 @@ h2{
 @font-face {
   font-family: Montserrat;
   src: url('./assets/fonts/Montserrat-VariableFont_wght.ttf');
+  src: local(montserrat), url('./assets/fonts/Montserrat-VariableFont_wght.ttf');
 }
 
 *::-webkit-scrollbar {
