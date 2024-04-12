@@ -45,7 +45,7 @@ export default {
 h1{
   z-index: 2;
   color: $c_blue;
-  font-size: 60px;
+  font-size: 58px;
   font-weight: 800;
   width: 600px;
 }
