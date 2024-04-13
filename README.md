@@ -23,6 +23,11 @@ http://94.198.217.94/
 При создании новости к ней можно прикрепить не ограниченное количество картинок, контактов, адресов и документов
 ![image](https://github.com/yonardr/camion-express-front-vite/assets/78346001/5549ca1c-d100-4478-86cc-1241adcccef4)
 
+## Панель администратора.
+Присутствуют разделы для документов, калькулятора и новостей. Интерфейс реактивный. Реализован Sidebar/
+![image](https://github.com/yonardr/camion-express-front-vite/assets/78346001/8bce4cca-e28e-44c9-9659-56c282cf07cf)
+![image](https://github.com/yonardr/camion-express-front-vite/assets/78346001/a1eb4471-7f1c-47ea-9206-bd7990a8ea2f)
+
 ## Раздел с преимуществами
 При наведении курсора карточка переворачивается и выводит дополнительную информацию
 ![image](https://github.com/yonardr/camion-express-front-vite/assets/78346001/f34c254f-3056-40ee-802e-dce7aa57e2c0)
@@ -41,10 +46,7 @@ http://94.198.217.94/
 ## Авторизация
 ![image](https://github.com/yonardr/camion-express-front-vite/assets/78346001/a440d566-8a72-4e95-9bf2-9fd9b8b260a2)
 
-## Панель администратора.
-Присутствуют разделы для документов, калькулятора и новостей. Интерфейс реактивный. Реализован Sidebar/
-![image](https://github.com/yonardr/camion-express-front-vite/assets/78346001/8bce4cca-e28e-44c9-9659-56c282cf07cf)
-![image](https://github.com/yonardr/camion-express-front-vite/assets/78346001/a1eb4471-7f1c-47ea-9206-bd7990a8ea2f)
+
 
 
 
