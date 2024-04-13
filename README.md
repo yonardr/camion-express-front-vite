@@ -12,6 +12,7 @@ http://94.198.217.94/
 ![image](https://github.com/yonardr/camion-express-front-vite/assets/78346001/9f6b8667-d876-4544-acb5-ca2dfb98e674)
 
 ## Калькулятор на главной странице
+Интерфейс реактивный и с анимацией пересчета суммы
 ![image](https://github.com/yonardr/camion-express-front-vite/assets/78346001/379678ea-ab53-4c02-a672-e21a2d167dd7)
 
 ## Калькулятор
@@ -34,8 +35,16 @@ http://94.198.217.94/
 ![image](https://github.com/yonardr/camion-express-front-vite/assets/78346001/2e094121-3644-4cf2-9abf-226106ba0a4b)
 ![image](https://github.com/yonardr/camion-express-front-vite/assets/78346001/c56f38b0-0038-476d-9967-71eb892eef67)
 
+## Сайт полностью адаптирован
+![image](https://github.com/yonardr/camion-express-front-vite/assets/78346001/67f96fd0-5634-4d9c-aa04-1b3a48241e7d)
 
+## Авторизация
+![image](https://github.com/yonardr/camion-express-front-vite/assets/78346001/a440d566-8a72-4e95-9bf2-9fd9b8b260a2)
 
+## Панель администратора.
+Присутствуют разделы для документов, калькулятора и новостей. Интерфейс реактивный. Реализован Sidebar/
+![image](https://github.com/yonardr/camion-express-front-vite/assets/78346001/8bce4cca-e28e-44c9-9659-56c282cf07cf)
+![image](https://github.com/yonardr/camion-express-front-vite/assets/78346001/a1eb4471-7f1c-47ea-9206-bd7990a8ea2f)
 
 
 
