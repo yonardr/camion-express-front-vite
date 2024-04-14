@@ -15,10 +15,9 @@
       </div>
       <div class="input__fields">
         <div class="count_bord" v-show="packing.pallet_board || packing.pallet">
-          <my-button color="blue" @click="form.count_packing.value++">+</my-button>
+          <my-button color="blue" :disabled='form.count_packing.value<=0' @click="form.count_packing.value--">-</my-button>
           <input class="select" v-model="form.count_packing.value"/>
-          <my-button color="blue" :disabled='form.count_packing.value<=0' @click="form.count_packing.value--">-
-          </my-button>
+          <my-button color="blue" @click="form.count_packing.value++">+</my-button>
         </div>
         <div>
           <input type="checkbox" id="stretch_film" v-model="packing.stretch_film" class="stretch_film"/>
@@ -108,7 +107,7 @@
   </div>
   <div class="more_detailed">
     <router-link :to="{name:'calc', hash: '#calc'}" style="text-decoration: none; display: flex">
-      <my-button color="blue">Рассчитать подробнее</my-button>
+      <my-button color="orange">Рассчитать подробнее</my-button>
     </router-link>
   </div>
   </div>
