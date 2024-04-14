@@ -47,6 +47,10 @@ export default {
   font-size: 18px;
   padding: 5px;
   margin: 15px 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none !important;
   option{
     font-size: 18px;
   }

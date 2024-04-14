@@ -49,6 +49,12 @@ export default {
   height: 53px;
   font-size: 16px !important;
   font-weight: 700 !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none !important;
+  background-color: #fff;
+  color: #000;
 }
 
 .card__container {
