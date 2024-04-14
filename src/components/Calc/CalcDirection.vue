@@ -6,9 +6,7 @@
         <div class="input__title">
           Откуда
         </div>
-        <select class="select" @change="onChangePoint_A($event)" style="-webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none !important;">
+        <select class="select" @change="onChangePoint_A($event)">
           <option class="option" v-for="item in points_a" :value=item.id :key="item.id">
             {{ item.name }}
           </option>
@@ -20,9 +18,7 @@
           Куда
         </div>
 
-        <select class="select" @change="onChangePoint_B($event)" style="-webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none !important;">
+        <select class="select" @change="onChangePoint_B($event)">
           <option class="option" v-for="item in directions" :key="item.id" :value="item.id_direction" :selected="item.name === cargo[cargo_current-1].point_b">
             {{ item.name }}
           </option>
@@ -66,12 +62,9 @@ export default {
   font-size: 28px;
   font-weight: bold;
 }
-select{
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none !important;
-  -ms-appearance: none;
-}
+
+
+
 
 select::-ms-expand {
   display: none;
@@ -88,6 +81,8 @@ select::-ms-expand {
   -moz-appearance: none;
   -ms-appearance: none;
   appearance: none !important;
+  background-color: #fff;
+  color: #000;
 }
 
 .input__fields{

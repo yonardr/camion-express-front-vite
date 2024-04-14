@@ -224,6 +224,12 @@ h6 {
   border: 2px solid $c_gray;
   font-size: 18px;
   padding: 10px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none !important;
+  background-color: #fff;
+  color: #000;
 }
 
 .input__fields {
