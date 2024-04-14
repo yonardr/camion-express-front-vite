@@ -94,6 +94,7 @@ export default {
 
     async function submit() {
       const {resultNews} = await useAddNews(form)
+      alert('Новость добавлена')
       if(resultNews.value.id){
         const {resultDocs} = useAddDocNews({files: form.files, id: resultNews.value.id})
         if(resultDocs) alert('Новость добавлена с документами')
