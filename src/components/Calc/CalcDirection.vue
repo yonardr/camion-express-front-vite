@@ -34,7 +34,7 @@
 import {useLoadingDataCalc} from "./useLoadingDataCalc.js";
 import {useInputsCalc} from "./useInputsCalc.js";
 import MyButton from "../UI/MyButton.vue";
-import {reactive, ref, watch} from "vue";
+import {computed, reactive, ref, watch} from "vue";
 import {useStore} from "vuex";
 
 export default {
@@ -63,6 +63,14 @@ export default {
   font-size: 28px;
   font-weight: bold;
 }
+select{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+}
+select::-ms-expand {
+  display: none;
+}
 .select{
   margin-bottom: 5px;
   width: 400px;
@@ -71,7 +79,12 @@ export default {
   border: 1px solid $c_gray;
   font-size: 18px;
   padding: 10px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none !important;
 }
+
 .input__fields{
   display: flex;
   justify-content: space-between;
