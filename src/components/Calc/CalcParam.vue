@@ -85,9 +85,9 @@
             <div class="input__title">Одинаковые места</div>
             <div>
               <div class="count_bord">
-                <my-button color="blue" @click="form.same_places++" style="padding: 18px">+</my-button>
-                <input class="mini__input" v-model="form.same_places"/>
                 <my-button color="blue" :disabled='form.same_places<=0' @click="form.same_places--" style="padding: 18px">-</my-button>
+                <input class="mini__input" v-model="form.same_places"/>
+                <my-button color="blue" @click="form.same_places++" style="padding: 18px">+</my-button>
               </div>
             </div>
           </div>
@@ -177,9 +177,9 @@
     <div class="input__fields border-none" v-show="packing.pallet_board">
       <div class="input__fields">
         <div class="count_bord">
-          <my-button color="blue" @click="form.count_packing.value++">+</my-button>
-          <input class="mini__input" v-model="form.count_packing.value"/>
           <my-button color="blue" :disabled='form.count_packing.value<=0' @click="form.count_packing.value--">-</my-button>
+          <input class="mini__input" v-model="form.count_packing.value"/>
+          <my-button color="blue" @click="form.count_packing.value++">+</my-button>
         </div>
       </div>
     </div>
@@ -196,9 +196,9 @@
     <div class="input__fields border-none" v-show="packing.pallet">
       <div class="input__fields">
         <div class="count_bord">
-          <my-button color="blue" @click="form.count_packing.value++">+</my-button>
-          <input class="mini__input" v-model="form.count_packing.value"/>
           <my-button color="blue" :disabled='form.count_packing.value<=0' @click="form.count_packing.value--">-</my-button>
+          <input class="mini__input" v-model="form.count_packing.value"/>
+          <my-button color="blue" @click="form.count_packing.value++">+</my-button>
         </div>
       </div>
     </div>
