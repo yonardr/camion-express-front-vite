@@ -42,7 +42,7 @@
     </div>
 
     <div class="news__attr" style="margin-bottom: 100px">
-      <h6 v-if="data?.newsDocs?.length > 1">Документы</h6>
+      <h6 v-if="data?.newsDocs?.length >= 1">Документы</h6>
       <div class="news__item" v-for="item in data.newsDocs">
         <a :href="f(item.path)" target="_blank" style="text-decoration: none">{{ item.name }}</a>
       </div>
@@ -140,5 +140,7 @@ pre{
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 }
-
+.news__item{
+  margin: 5px 0;
+}
 </style>
