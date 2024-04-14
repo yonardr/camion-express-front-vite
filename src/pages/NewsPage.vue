@@ -41,8 +41,8 @@
       </div>
     </div>
 
-    <div class="news__attr">
-      <h6>Документы</h6>
+    <div class="news__attr" style="margin-bottom: 100px">
+      <h6 v-if="data?.newsDocs?.length > 1">Документы</h6>
       <div class="news__item" v-for="item in data.newsDocs">
         <a :href="f(item.path)" target="_blank" style="text-decoration: none">{{ item.name }}</a>
       </div>
