@@ -6,8 +6,10 @@
         <div class="input__title">
           Откуда
         </div>
-        <select class="select" @change="onChangePoint_A($event)">
-          <option v-for="item in points_a" :value=item.id :key="item.id">
+        <select class="select" @change="onChangePoint_A($event)" style="-webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none !important;">
+          <option class="option" v-for="item in points_a" :value=item.id :key="item.id">
             {{ item.name }}
           </option>
         </select>
@@ -18,8 +20,10 @@
           Куда
         </div>
 
-        <select class="select" @change="onChangePoint_B($event)" >
-          <option v-for="item in directions" :key="item.id" :value="item.id_direction" :selected="item.name === cargo[cargo_current-1].point_b">
+        <select class="select" @change="onChangePoint_B($event)" style="-webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none !important;">
+          <option class="option" v-for="item in directions" :key="item.id" :value="item.id_direction" :selected="item.name === cargo[cargo_current-1].point_b">
             {{ item.name }}
           </option>
         </select>
@@ -56,8 +60,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../variables';
-.container{
-}
+
 .title{
   margin: 10px 0;
   font-size: 28px;
@@ -66,8 +69,10 @@ export default {
 select{
   -webkit-appearance: none;
   -moz-appearance: none;
+  appearance: none !important;
   -ms-appearance: none;
 }
+
 select::-ms-expand {
   display: none;
 }
