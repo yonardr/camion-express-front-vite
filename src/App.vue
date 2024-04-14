@@ -27,11 +27,11 @@ h2{
   text-align: center;
 }
 
-@font-face {
-  font-family: Montserrat;
-  src: url('./assets/fonts/Montserrat-VariableFont_wght.ttf');
-  src: local(montserrat), url('./assets/fonts/Montserrat-VariableFont_wght.ttf');
-}
+//@font-face {
+//  font-family: Montserrat;
+//  src: url('./assets/fonts/Montserrat-VariableFont_wght.ttf');
+//  src: local(montserrat), url('./assets/fonts/Montserrat-VariableFont_wght.ttf');
+//}
 
 *::-webkit-scrollbar {
   width: 5px; /* Ширина всего элемента навигации */
@@ -46,10 +46,10 @@ h2{
   border-radius: 25px;
   border: 3px solid $c_orange;
 }
-@media (max-width: 1024px) {
-  body{
-    -webkit-text-size-adjust: 100%;
-    -webkit-font-smoothing: antialiased;
-  }
-}
+//@media (max-width: 1024px) {
+//  body{
+//    -webkit-text-size-adjust: 100%;
+//    -webkit-font-smoothing: antialiased;
+//  }
+//}
 </style>
