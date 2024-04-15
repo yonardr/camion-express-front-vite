@@ -28,13 +28,17 @@
             Расчет стоимости
           </div>
           <div class="field">
+            <div>Стоимость упаковки</div>
+            <div>{{item.packimg_price}} ₽</div>
+          </div>
+          <div class="field">
             <div>Количество одинаковых мест</div>
             <div>{{item.same_places}} шт</div>
           </div>
-            <div class="field">
-              <div>Стоимость упаковки</div>
-              <div>{{item.packimg_price}} ₽</div>
-            </div>
+          <div class="field">
+            <div>Стоимость страховки</div>
+            <div>{{item.insurance}} ₽</div>
+          </div>
           <div class="field">
             <div>Итоговая стоимость места</div>
             <div>{{item.price + item.packimg_price}} ₽</div>
@@ -77,6 +81,7 @@ export default {
           item.places.map((el)=>{
             sum.value += el.price
             sum.value += el.packimg_price
+            sum.value += el.insurance
           })
         }
       })
