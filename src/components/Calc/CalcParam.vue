@@ -49,28 +49,27 @@
           <div class="input">
             <div class="input__title">Длина</div>
             <div class="input__unit">
-              <input class="mini__input" v-model="form.volume.length"/>
+              <input class="mini__input" v-model="form.volume.length" type="number" min="0" />
             </div>
           </div>
           <div class="input">
             <div class="input__title">Ширина</div>
             <div class="input__unit">
-              <input class="mini__input" v-model="form.volume.width"/>
+              <input class="mini__input" v-model="form.volume.width" type="number" min="0" />
             </div>
           </div>
           <div class="input">
             <div class="input__title">Высота</div>
             <div class="input__unit">
-              <input class="mini__input" v-model="form.volume.height"/>
+              <input class="mini__input" v-model="form.volume.height" type="number" min="0" />
             </div>
           </div>
           <div class="input">
             <div class="input__title">Объем</div>
             <div class="input__unit m3">
-              <input class="mini__input" v-model="form.volume.value" readonly/>
+              <input class="mini__input" v-model="form.volume.value" readonly />
             </div>
           </div>
-
         </div>
 
 
@@ -78,7 +77,7 @@
           <div class="input">
             <div class="input__title">Вес</div>
             <div class="input__unit kg">
-              <input class="mini__input" v-model="form.weight.value"/>
+              <input class="mini__input" v-model="form.weight.value" type="number" min="0"/>
             </div>
           </div>
           <div class="input">
@@ -86,13 +85,20 @@
             <div>
               <div class="count_bord">
                 <my-button color="blue" :disabled='form.same_places<=0' @click="form.same_places--" style="padding: 18px">-</my-button>
-                <input class="mini__input" v-model="form.same_places"/>
+                <input class="mini__input" v-model="form.same_places" type="number"/>
                 <my-button color="blue" @click="form.same_places++" style="padding: 18px">+</my-button>
               </div>
             </div>
           </div>
         </div>
 
+      </div>
+      <div style="display: flex;">
+      <small v-if="form.volume.length > 13.5" style="color:#ff7b47; ">Максимально допустимая длина груза 13.5 м (негабаритный груз)</small>
+      <small v-if="form.volume.width > 2.45" style="color:#ff7b47; ">Максимально допустимая ширина груза 2.45 м (негабаритный груз)</small>
+      <small v-if="form.volume.height > 2.7" style="color:#ff7b47; ">Максимально допустимая высота груза 2.7 м (негабаритный груз)</small>
+      <small v-if="form.volume.value > 89.3" style="color:#ff7b47; ">Максимально допустимый объем груза 89.3 м3 (негабаритный груз)</small>
+      <small v-if="form.weight.value > 20000" style="color:#ff7b47; ">Максимально допустимый вес груза 20 тонн (негабаритный груз)</small>
       </div>
     </div>
 
@@ -103,19 +109,19 @@
         <div class="input">
           <div class="input__title">Объем</div>
           <div class="input__unit m3">
-            <input class="mini__input total_weight" v-model="form.volume.value"/>
+            <input class="mini__input total_weight" v-model="form.volume.value" type="number"/>
           </div>
         </div>
         <div class="input">
           <div class="input__title">Вес</div>
           <div class="input__unit kg">
-            <input class="mini__input total_weight" v-model="form.weight.value"/>
+            <input class="mini__input total_weight" v-model="form.weight.value" type="number"/>
           </div>
         </div>
         <div class="input">
           <div class="input__title">Макс. вес</div>
           <div class="input__unit kg">
-            <input class="mini__input total_weight"/>
+            <input class="mini__input total_weight" v-model="form.weight.value" type="number"/>
           </div>
         </div>
 
@@ -126,23 +132,29 @@
         <div class="input">
           <div class="input__title">Макс. длина</div>
           <div class="input__unit">
-            <input class="mini__input total_weight"/>
+            <input class="mini__input total_weight" v-model="form.volume.length" type="number"/>
           </div>
         </div>
         <div class="input">
           <div class="input__title">Макс. ширина</div>
           <div class="input__unit">
-            <input class="mini__input total_weight"/>
+            <input class="mini__input total_weight" v-model="form.volume.width" type="number"/>
           </div>
         </div>
         <div class="input">
           <div class="input__title">Макс. высота</div>
           <div class="input__unit">
-            <input class="mini__input total_weight"/>
+            <input class="mini__input total_weight" v-model="form.volume.height" type="number"/>
           </div>
         </div>
       </div>
-
+      <div style="display: flex;">
+        <small v-if="form.volume.length > 13.5" style="color:#ff7b47; ">Максимально допустимая длина груза 13.5 м (негабаритный груз)</small>
+        <small v-if="form.volume.width > 2.45" style="color:#ff7b47; ">Максимально допустимая ширина груза 2.45 м (негабаритный груз)</small>
+        <small v-if="form.volume.height > 2.7" style="color:#ff7b47; ">Максимально допустимая высота груза 2.7 м (негабаритный груз)</small>
+        <small v-if="form.volume.value > 90" style="color:#ff7b47; ">Максимально допустимый объем груза 89.3 м3 (негабаритный груз)</small>
+        <small v-if="form.weight.value > 5000" style="color:#ff7b47; ">Максимально допустимый вес груза 20 тонн (негабаритный груз)</small>
+      </div>
     </div>
     <div class="input__fields border-none">
       <div class="input__fields">
@@ -155,7 +167,7 @@
         <div class="input">
           <div class="input__title">Оценочная стоимость груза</div>
           <div class="input__unit rub">
-            <input class="mini__input long" v-model="form.estimated_price_cargo"/>
+            <input class="mini__input long" v-model="form.estimated_price_cargo" type="number"/>
           </div>
 
         </div>
@@ -219,7 +231,7 @@ export default {
   setup() {
     const store = useStore()
     const {direction_info, packing, cargo_current, cargo} = useLoadingDataCalc()
-    const {changePacking} = useInputsCalc()
+    const {changePacking, inputParse} = useInputsCalc()
 
     const form = reactive({
       volume: {
@@ -341,6 +353,7 @@ export default {
       if(!paramType.value) form.volume.value = form.volume.height * form.volume.width * form.volume.length
     })
 
+
     watch(direction_info, ()=> {
       cargo.value.map((item) =>{
         if(item.id === cargo_current.value){
@@ -383,7 +396,7 @@ export default {
 
 
     function updateData(id = 0) {
-      placeArray.value.map((item, index) => {
+      placeArray.value.map(async (item, index) => {
         if (item.id === placeId.value) {
           const current_place = placeArray.value[index]
           current_place.volume.length = form.volume.length
@@ -396,12 +409,14 @@ export default {
           current_place.estimated_price_cargo = form.estimated_price_cargo
           current_place.count_packing = form.count_packing.value
           if(form.same_places > 0){
-            current_place.price = useCalc(direction_info, form) * (form.same_places + 1)
+            current_place.price = await useCalc(direction_info, form) * (form.same_places + 1)
             current_place.packimg_price = useCalcPacking(packing, form) * (form.same_places + 1)
+            current_place.insurance = insurance(form.estimated_price_cargo)
           }
           else{
-            current_place.price = useCalc(direction_info, form)
+            current_place.price = await useCalc(direction_info, form)
             current_place.packimg_price = useCalcPacking(packing, form)
+            current_place.insurance = insurance(form.estimated_price_cargo)
           }
 
         }
@@ -412,6 +427,11 @@ export default {
       }
     }
 
+    function insurance(num){
+      if(num === 0) return 60;
+      else if ((0.1 * (1/100)* num) <= 60) return 60
+      else return 0.1 * (1/100) * num
+    }
 
 
     return {
@@ -425,7 +445,8 @@ export default {
       changeCargo: changePlace,
       paramType,
       form,
-      packing
+      packing,
+      inputParse
     }
   }
 }
@@ -598,6 +619,10 @@ input{
   font-size: 16px;
   font-family: Montserrat,serif;
   font-weight: 500;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }
 @media (max-width: 1050px) {
   .input__fields{
