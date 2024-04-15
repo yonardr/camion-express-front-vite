@@ -153,15 +153,15 @@ export default {
     const price_packing = useNumbersAnimation(packing_price)
     const price_total = useNumbersAnimation(price_sum)
 
-    watch(form, () => {
-      total_price.value = useCalc(direction_info, form)
+    watch(form, async() => {
+      total_price.value = await useCalc(direction_info, form)
       packing_price.value = useCalcPacking(packing, form)
       price_sum.value = total_price.value + packing_price.value
     })
 
 
-    watch(direction_info, () => {
-      total_price.value = useCalc(direction_info, form)
+    watch(direction_info, async() => {
+      total_price.value = await useCalc(direction_info, form)
       price_sum.value = total_price.value + packing_price.value
     })
 
