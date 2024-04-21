@@ -56,7 +56,8 @@
             <div class="input__title">
               Вес
             </div>
-            <div><input v-model="form.weight.value" class="select" type="number" @input="inputParse($event, 'weight')">
+            <div class="input__unit">
+              <input v-model="form.weight.value" class="select" type="number" max="5000">
             </div>
             <div><input type="range" v-model="form.weight.value" max="5000" class="input__range"
                         :style="inputProgress('weight')"
@@ -68,7 +69,8 @@
             <div class="input__title">
               Объем
             </div>
-            <div><input v-model="form.volume.value" class="select" type="number" @input="inputParse($event, 'volume')">
+            <div class="input__unit m3">
+              <input v-model="form.volume.value" class="select" type="number" max="30">
             </div>
             <div><input type="range" v-model="form.volume.value" max="30" class="input__range" step="0.1"
                         :style="inputProgress('volume')"
@@ -94,7 +96,7 @@
       </div>
       <div>
         <h6>
-          Стоимость упаковки
+          Итоговая стоимость
         </h6>
         <h3>{{ price_total }} ₽</h3>
         <h6>
@@ -114,7 +116,7 @@
 </template>
 
 <script>
-import {ref, watch} from "vue";
+import {reactive, ref, watch} from "vue";
 import MyButton from "../UI/MyButton.vue";
 import {useSubmit} from "../hooks/MainPage/useSubmit.js";
 import {useLoadingDataCalc} from "./useLoadingDataCalc.js";
@@ -143,6 +145,7 @@ export default {
         value: 0
       }
     })
+
 
     const {onChangePoint_A, onChangePoint_B, changePacking, inputProgress, inputParse} = useInputsCalc(form)
 
@@ -414,6 +417,23 @@ margin-left: 85px;
     .select {
       width: 100px;
     }
+  }
+}
+.input__unit {
+  display: inline-block;
+  position: relative;
+
+  &::before {
+    content: "кг";
+    display: block;
+    position: absolute;
+    right: 8px;
+    top: 18px;
+    font-size: 18px;
+    color: #86868b;
+  }
+  &.m3::before {
+    content: "м³";
   }
 }
 </style>
