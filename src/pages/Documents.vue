@@ -8,14 +8,17 @@
       </div>
     </div>
 
+<Footer style="margin-top: 15%"/>
   </div>
 </template>
 
 <script>
 import Navbar from "../components/MainPage/Navbar.vue";
 import ViewDocs from "../components/Docs/ViewDocs.vue";
+import Footer from "../components/MainPage/Footer.vue";
 export default {
 components:{
+  Footer,
   Navbar,ViewDocs
 }
 }
