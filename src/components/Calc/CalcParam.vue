@@ -350,7 +350,7 @@ export default {
     })
 
     watch(form.volume, () => {
-      if(!paramType.value) form.volume.value = form.volume.height * form.volume.width * form.volume.length
+      if(!paramType.value) form.volume.value = Number((form.volume.height * form.volume.width * form.volume.length).toFixed(3))
     })
 
 
@@ -430,7 +430,7 @@ export default {
     function insurance(num){
       if(num === 0) return 60;
       else if ((0.1 * (1/100)* num) <= 60) return 60
-      else return 0.1 * (1/100) * num
+      else return Number((0.1 * (1/100) * num).toFixed())
     }
 
 

@@ -18,5 +18,7 @@ export async function useCalc(direction, form){
 
     result = Math.max(total_price_weight, total_price_volume, direction.value.min_price)
 
+    result = Number(result.toFixed(1))
+
     return result
 }

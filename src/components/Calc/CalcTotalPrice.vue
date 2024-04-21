@@ -79,7 +79,7 @@ export default {
       cargo.value.map((item)=>{
         if(item.direction_id){
           item.places.map((el)=>{
-            sum.value += el.price
+            sum.value += Number(el.price.toFixed(1))
             sum.value += el.packimg_price
             sum.value += el.insurance
           })
