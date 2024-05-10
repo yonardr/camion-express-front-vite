@@ -56,17 +56,17 @@ export const calculatorModule = {
                 direction_id: state.direction_info.id,
                 places: [{
                     id: (new Date()).getTime(), idArray: 1, active: true, volume: {
-                        length: 0,
-                        width: 0,
-                        height: 0,
-                        value: 0
+                        length: '',
+                        width: '',
+                        height: '',
+                        value: ''
                     },
                     weight: {
-                        value: 0
+                        value: ''
                     },
                     same_places: 0,
                     cargo_type: '',
-                    estimated_price_cargo: 0,
+                    estimated_price_cargo: '',
                     count_packing: 0,
                 }]
             })

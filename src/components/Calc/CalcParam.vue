@@ -17,11 +17,6 @@
       >Общий вес и объем
       </my-button>
     </div>
-<!--    {{cargo}}-->
-<!--    //////-->
-<!--    {{cargo_current}}-->
-
-
     <div v-if="!paramType">
       <div class="input__fields">
         <div class="input__fields place__group">
@@ -49,25 +44,25 @@
           <div class="input">
             <div class="input__title">Длина</div>
             <div class="input__unit">
-              <input class="mini__input" v-model="form.volume.length" type="number" min="0" />
+              <input class="mini__input" v-model="form.volume.length" type="number" min="0" placeholder="0"/>
             </div>
           </div>
           <div class="input">
             <div class="input__title">Ширина</div>
             <div class="input__unit">
-              <input class="mini__input" v-model="form.volume.width" type="number" min="0" />
+              <input class="mini__input" v-model="form.volume.width" type="number" min="0" placeholder="0"/>
             </div>
           </div>
           <div class="input">
             <div class="input__title">Высота</div>
             <div class="input__unit">
-              <input class="mini__input" v-model="form.volume.height" type="number" min="0" />
+              <input class="mini__input" v-model="form.volume.height" type="number" min="0" placeholder="0"/>
             </div>
           </div>
           <div class="input">
             <div class="input__title">Объем</div>
             <div class="input__unit m3">
-              <input class="mini__input" v-model="form.volume.value" readonly />
+              <input class="mini__input" v-model="form.volume.value" readonly placeholder="0"/>
             </div>
           </div>
         </div>
@@ -77,7 +72,7 @@
           <div class="input">
             <div class="input__title">Вес</div>
             <div class="input__unit kg">
-              <input class="mini__input" v-model="form.weight.value" type="number" min="0"/>
+              <input class="mini__input" v-model="form.weight.value" type="number" min="0" placeholder="0"/>
             </div>
           </div>
           <div class="input">
@@ -85,7 +80,7 @@
             <div>
               <div class="count_bord">
                 <my-button color="blue" :disabled='form.same_places<=0' @click="form.same_places--" style="padding: 18px">-</my-button>
-                <input class="mini__input" v-model="form.same_places" type="number"/>
+                <input class="mini__input" v-model="form.same_places" type="number" />
                 <my-button color="blue" @click="form.same_places++" style="padding: 18px">+</my-button>
               </div>
             </div>
@@ -109,19 +104,19 @@
         <div class="input">
           <div class="input__title">Объем</div>
           <div class="input__unit m3">
-            <input class="mini__input total_weight" v-model="form.volume.value" type="number"/>
+            <input class="mini__input total_weight" v-model="form.volume.value" type="number" placeholder="0"/>
           </div>
         </div>
         <div class="input">
           <div class="input__title">Вес</div>
           <div class="input__unit kg">
-            <input class="mini__input total_weight" v-model="form.weight.value" type="number"/>
+            <input class="mini__input total_weight" v-model="form.weight.value" type="number" placeholder="0"/>
           </div>
         </div>
         <div class="input">
           <div class="input__title">Макс. вес</div>
           <div class="input__unit kg">
-            <input class="mini__input total_weight" v-model="form.weight.value" type="number"/>
+            <input class="mini__input total_weight" v-model="form.weight.value" type="number" placeholder="0"/>
           </div>
         </div>
 
@@ -132,19 +127,19 @@
         <div class="input">
           <div class="input__title">Макс. длина</div>
           <div class="input__unit">
-            <input class="mini__input total_weight" v-model="form.volume.length" type="number"/>
+            <input class="mini__input total_weight" v-model="form.volume.length" type="number" placeholder="0"/>
           </div>
         </div>
         <div class="input">
           <div class="input__title">Макс. ширина</div>
           <div class="input__unit">
-            <input class="mini__input total_weight" v-model="form.volume.width" type="number"/>
+            <input class="mini__input total_weight" v-model="form.volume.width" type="number" placeholder="0"/>
           </div>
         </div>
         <div class="input">
           <div class="input__title">Макс. высота</div>
           <div class="input__unit">
-            <input class="mini__input total_weight" v-model="form.volume.height" type="number"/>
+            <input class="mini__input total_weight" v-model="form.volume.height" type="number" placeholder="0"/>
           </div>
         </div>
       </div>
@@ -153,7 +148,7 @@
         <small v-if="form.volume.width > 2.45" style="color:#ff7b47; ">Максимально допустимая ширина груза 2.45 м (негабаритный груз)</small>
         <small v-if="form.volume.height > 2.7" style="color:#ff7b47; ">Максимально допустимая высота груза 2.7 м (негабаритный груз)</small>
         <small v-if="form.volume.value > 90" style="color:#ff7b47; ">Максимально допустимый объем груза 89.3 м3 (негабаритный груз)</small>
-        <small v-if="form.weight.value > 5000" style="color:#ff7b47; ">Максимально допустимый вес груза 20 тонн (негабаритный груз)</small>
+        <small v-if="form.weight.value > 20000" style="color:#ff7b47; ">Максимально допустимый вес груза 20 тонн (негабаритный груз)</small>
       </div>
     </div>
     <div class="input__fields border-none">
@@ -167,7 +162,7 @@
         <div class="input">
           <div class="input__title">Оценочная стоимость груза</div>
           <div class="input__unit rub">
-            <input class="mini__input long" v-model="form.estimated_price_cargo" type="number"/>
+            <input class="mini__input long" v-model="form.estimated_price_cargo" type="number" placeholder="0"/>
           </div>
 
         </div>
@@ -235,17 +230,17 @@ export default {
 
     const form = reactive({
       volume: {
-        length: 0,
-        width: 0,
-        height: 0,
-        value: 0
+        length: '',
+        width: '',
+        height: '',
+        value: ''
       },
       weight: {
-        value: 0
+        value: ''
       },
       same_places: 0,
       cargo_type: '',
-      estimated_price_cargo: 0,
+      estimated_price_cargo: '',
       count_packing: {
         value: 0
       },
@@ -260,14 +255,14 @@ export default {
       id: (new Date()).getTime(),
       idArray: 1,
       volume: {
-        length: 0,
-        width: 0,
-        height: 0,
-        value: 0
+        length: '',
+        width: '',
+        height: '',
+        value: ''
       },
       active: true,
       weight: {
-        value: 0
+        value: ''
       },
     }])
     const placeId = ref(placeArray.value[0].id)
@@ -284,17 +279,17 @@ export default {
         id: id,
         idArray: placeArray.value[placeArray.value.length-1].idArray + 1,
         volume: {
-          length: 0,
-          width: 0,
-          height: 0,
-          value: 0
+          length: '',
+          width: '',
+          height: '',
+          value: ''
         },
         weight: {
-          value: 0
+          value: ''
         },
         same_places: 0,
         cargo_type: '',
-        estimated_price_cargo: 0,
+        estimated_price_cargo: '',
         count_packing: 0,
       })
       updateData()
@@ -307,7 +302,6 @@ export default {
         placeArray.value = placeArray.value.filter((elem) => elem.id !== item.id)
         changePlace(placeArray.value[0].id)
         updateData()
-
       }
     }
 
@@ -347,6 +341,13 @@ export default {
 
     watch(paramType, ()=>{
       if(!paramType.value) form.volume.value = form.volume.height * form.volume.width * form.volume.length
+      else {
+        if(placeArray.value.length - 1 > 0){
+          const lastSave = placeArray.value[placeArray.value.length - 1]
+          changePlace(lastSave.id)
+          placeArray.value = placeArray.value.filter((el) => el.id === lastSave.id)
+        }
+      }
     })
 
     watch(form.volume, () => {
