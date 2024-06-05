@@ -39,7 +39,7 @@
           <div class="default" :style="noview" >Выберите файл</div>
         </div>
 
-        <router-link to="https://camionexpress.ru/" class="sub">Скачать файл</router-link>
+        <a href="../../assets/applicationSubmit/Заявка%20на%20перевозку%20груза.docx" class="sub">Скачать файл</a>
       </div>
 
       <my-button :color="'orange'" class="btn" type="submit" @click="submit" :disabled="!form.valid">Отправить</my-button>
