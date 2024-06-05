@@ -39,7 +39,7 @@
           <div class="default" :style="noview" >Выберите файл</div>
         </div>
 
-        <a href="../../assets/applicationSubmit/Заявка%20на%20перевозку%20груза.docx" class="sub">Скачать файл</a>
+        <a :href="f(`Заявка%20на%20перевозку%20груза.docx`)" target="_blank" class="sub">Скачать файл</a>
       </div>
 
       <my-button :color="'orange'" class="btn" type="submit" @click="submit" :disabled="!form.valid">Отправить</my-button>
@@ -96,10 +96,13 @@ export default {
       }
       else alert('Ошибка')
     }
+    function f(path){
+      return `${import.meta.env.VITE_APP_API_URL}/documents/${path}`
+    }
 
     const {view, noview, green} = useAnimationSubmit(changeInput)
 
-    return {form, submit, onChange, view, noview, green, dialogVisible}
+    return {form, submit, onChange, view, noview, green, dialogVisible, f}
   },
 
 }
@@ -159,6 +162,9 @@ h2{
 }
 .input{
   margin: 5px 0;
+}
+input[type='text'] {
+  font-size: 16px;
 }
 .invalid{
   border-color: $c_orange;
