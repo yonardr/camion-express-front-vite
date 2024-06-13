@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="max-height: 600px">
     <h3>Добавление документа</h3>
 
     <my-input
