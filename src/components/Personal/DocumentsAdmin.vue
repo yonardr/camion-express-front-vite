@@ -6,7 +6,7 @@
         <ViewDocs :deleteField="true"></ViewDocs>
       </div>
 
-      <div class="card">
+      <div class="card" style="max-height: 500px">
         <AddDoc/>
       </div>
 
