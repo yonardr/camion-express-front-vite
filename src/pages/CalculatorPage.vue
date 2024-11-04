@@ -30,6 +30,9 @@
       <div class="card">
         <CalcParam/>
       </div>
+      <div>
+        <CalcApplicationAddress />
+      </div>
     </div>
     <CalcTotalPrice />
   </div>
@@ -49,11 +52,14 @@ import {useStore} from "vuex";
 import Navbar from "../components/MainPage/Navbar.vue";
 import CalcTotalPrice from "../components/Calc/CalcTotalPrice.vue";
 import Footer from "../components/MainPage/Footer.vue";
+import CalcApplicationAddress from "../components/Calc/CalcApplicationAddress.vue";
 
 
 const minValue = value => Number(value) >= 0
 export default {
-  components: {Footer, CalcTotalPrice, CalcParam, CalcOnMain, CalcDirection, MyButton, MyCombobox, Navbar},
+  components: {
+    CalcApplicationAddress,
+    Footer, CalcTotalPrice, CalcParam, CalcOnMain, CalcDirection, MyButton, MyCombobox, Navbar},
   setup() {
     const store = useStore()
     const {cargo, direction_info, cargo_current} = useLoadingDataCalc()
