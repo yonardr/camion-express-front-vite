@@ -155,7 +155,7 @@
       <div class="input__fields">
         <div class="input">
           <div class="input__title">Характер груза</div>
-          <input class="mini__input long" v-model="form.cargo_type" placeholder="Мебель, шины, мед. оборудование"/>
+          <input required class="mini__input long" v-model="form.cargo_type" placeholder="Мебель, шины, мед. оборудование"/>
         </div>
       </div>
       <div class="input__fields">

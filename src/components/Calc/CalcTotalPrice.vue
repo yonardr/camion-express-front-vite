@@ -1,6 +1,12 @@
 <template>
   <div class="prices">
-<!--    <img src="./../../assets/calc/check.png" class="invoice__img" />-->
+    <div class="container__btn">
+      <my-button :color="'blue'" @click="downloadDocument({cargo: cargo[0]})"><svg class="printer__img" viewBox="0 0 64 64" >
+<path d="M60,16h-8V4c0-2.211-1.789-4-4-4H16c-2.211,0-4,1.789-4,4v12H4c-2.211,0-4,1.789-4,4v32c0,2.211,1.789,4,4,4
+	h8v4c0,2.211,1.789,4,4,4h32c2.211,0,4-1.789,4-4v-4h8c2.211,0,4-1.789,4-4V20C64,17.789,62.211,16,60,16z M20,8h24v8H20V8z M44,56
+	H20V40h24V56z"/>
+</svg>  Распечатать</my-button>
+    </div>
     <div class="prices__content">
       <div v-for="elem in cargo">
         <div class="direction">
@@ -64,11 +70,12 @@
 
 <script>
 import {useLoadingDataCalc} from "./useLoadingDataCalc.js";
-import {onMounted, ref, watch} from "vue";
-import {useCalc} from "./useCalc.js";
-import {useStore} from "vuex";
+import {downloadDocument} from "./useGetCalcApplication.js";
+import {ref, watch} from "vue";
+import MyButton from "../UI/MyButton.vue";
 
 export default {
+  components: {MyButton},
   setup(){
     const {cargo} = useLoadingDataCalc()
 
@@ -87,10 +94,7 @@ export default {
       })
     })
 
-
-
-
-    return {cargo, sum}
+    return {cargo, sum, downloadDocument}
   }
 }
 </script>
@@ -139,6 +143,24 @@ export default {
   padding: 20px;
   display: flex;
   justify-content: space-between;
+}
+.container__btn{
+  display: flex;
+  justify-content: center;
+  &:hover{
+    .printer__img{
+      fill: $c_blue;
+      transition: .6s;
+    }
+  }
+  button{
+    width: 100%;
+  }
+  .printer__img{
+    fill: #fff;
+    width: 20px;
+    margin-right: 15px;
+  }
 }
 @media (max-width: 1460px){
   .prices{
