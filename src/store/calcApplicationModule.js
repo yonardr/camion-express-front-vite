@@ -51,7 +51,7 @@ export const calcApplicationModule = {
         async submitMail(state, data){
             try{
                 const response = await axios.post(
-                    'http://localhost:3000/emailer/calc/send',
+                    `${import.meta.env.VITE_APP_API_URL}/emailer/calc/send`,
                     {
                         cargo: data.cargo,
                         sender: data.sender,
