@@ -4,7 +4,7 @@ export async function downloadDocument(data) {
     try {
         // Отправляем запрос на сервер с указанием типа ответа как 'blob' для получения бинарных данных
         const response = await axios.post(
-            'http://localhost:3000/emailer/calc',
+            `${import.meta.env.VITE_APP_API_URL}/emailer/calc`,
             {
                 cargo: data.cargo,
                 sender: data.sender,

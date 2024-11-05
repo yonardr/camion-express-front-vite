@@ -63,7 +63,7 @@
             </div>
           </div>
         </div>
-        <div class="card" :style="{background: `url(${vector1}) center no-repeat` , backgroundSize: '90% 90%'}">
+        <div class="card" >
           <h3 class="title" style="color: #ff7b47">
             Отправитель
           </h3>
@@ -113,7 +113,7 @@
             </label>
           </section>
         </div>
-        <div class="card" :style="{background: `url(${vector2}) center no-repeat` , backgroundSize: '90% 90%'}">
+        <div class="card" >
           <h3 class="title" style="color: #ff7b47">
             Получатель
           </h3>
@@ -166,7 +166,7 @@
         </div>
 
 
-        <div class="card" id="pay" :style="{background: `url(${vector3}) center no-repeat` , backgroundSize: '70% 70%'}">
+        <div class="card" id="pay" >
           <h3 class="title">
             Платеж
           </h3>
