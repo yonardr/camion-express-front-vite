@@ -351,7 +351,7 @@ export default {
     })
 
     watch(form.volume, () => {
-      form.volume.value = Number((form.volume.height * form.volume.width * form.volume.length).toFixed(3))
+      if(!paramType.value) form.volume.value = Number((form.volume.height * form.volume.width * form.volume.length).toFixed(3))
     })
 
 
