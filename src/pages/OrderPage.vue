@@ -450,6 +450,9 @@ label {
 #pay{
   width: 60%;
 }
+.text{
+  margin-left: 15px;
+}
 @media (max-width: 1460px) {
   .__container {
     flex-wrap: wrap;
@@ -495,9 +498,6 @@ label {
   }
   #pay{
     width: 100%;
-  }
-  .text{
-    margin-left: 15px;
   }
 }
 </style>

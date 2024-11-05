@@ -16,7 +16,7 @@
             placeholder="Адрес забора груза"
         ></my-input>
       </label>
-      <label >Дата сдачи груза <span>*</span>
+      <label >Дата забора груза <span>*</span>
         <input
 
             v-model="formSender.pick_up_date"
