@@ -10,6 +10,7 @@ import NewsAdmin from "../components/Personal/NewsAdmin.vue";
 import CalculatorPage from "../pages/CalculatorPage.vue";
 import CalculatorAdmin from "../components/Personal/CalculatorAdmin.vue";
 import OrderPage from "../pages/OrderPage.vue";
+import IframePage from "../pages/IframePage.vue";
 
 
 const routes = [
@@ -41,6 +42,11 @@ const routes = [
         name: 'order' ,
         path: '/order',
         component: OrderPage
+    },
+    {
+        name: 'iframe' ,
+        path: '/iframe',
+        component: IframePage
     },
     {
         name: 'personal',
