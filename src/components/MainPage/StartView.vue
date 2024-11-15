@@ -14,7 +14,7 @@
       </aos-vue>
       <aos-vue animation="fade-right" :duration="1800" placement="top-bottom">
       <div class="btns">
-        <my-button :color="'orange'" @click="$router.push('/#zayavka')">Оставить заявку</my-button>
+        <router-link :to="{name: 'calc', hash: '#calc'}" class="btn__orange">Оставить заявку</router-link>
         <my-button :color="'blue'" @click="$router.push('/#map')">Отследить транспорт</my-button>
       </div>
       </aos-vue>
@@ -62,6 +62,11 @@ h1{
 
 .btns{
   margin-top: 20px;
+  .btn__orange{
+    text-decoration: none;
+    @include btn__universal($c_orange);
+    display: inline-flex;
+  }
 }
 
 img{

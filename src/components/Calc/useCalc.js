@@ -14,7 +14,7 @@ export async function useCalc(direction, form){
     const sortVolume = direction.value.volumes.sort(compareNumeric)
     let volumeRatio = sortVolume.find(item=> item.value >= form.volume.value)
     if(!volumeRatio) volumeRatio = sortVolume[sortVolume.length-1]
-    const total_price_volume = volumeRatio?.price * form.volume.value
+    const total_price_volume = volumeRatio?.price * (form.volume.value * 1.2)
 
     result = Math.max(total_price_weight, total_price_volume, direction.value.min_price)
 

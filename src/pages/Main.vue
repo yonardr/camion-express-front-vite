@@ -9,7 +9,7 @@
 
     <Advantages class="__container margin"/>
 
-    <SubmitApplication class="__container margin"/>
+<!--    <SubmitApplication class="__container margin"/>-->
 
     <Partners class="margin"/>
 

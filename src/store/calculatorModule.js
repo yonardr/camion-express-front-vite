@@ -8,6 +8,7 @@ export const calculatorModule = {
         point_a: [],
         directions: [],
         direction_info: {},
+        places: [],
         packaging: {
             pallet_board: false,
             pallet: false,
@@ -64,6 +65,7 @@ export const calculatorModule = {
                     weight: {
                         value: ''
                     },
+                    oversize_cargo: false,
                     same_places: 0,
                     cargo_type: '',
                     estimated_price_cargo: '',

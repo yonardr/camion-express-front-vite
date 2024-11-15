@@ -88,12 +88,19 @@
         </div>
 
       </div>
-      <div style="display: flex;">
-      <small v-if="form.volume.length > 13.5" style="color:#ff7b47; ">Максимально допустимая длина груза 13.5 м (негабаритный груз)</small>
-      <small v-if="form.volume.width > 2.45" style="color:#ff7b47; ">Максимально допустимая ширина груза 2.45 м (негабаритный груз)</small>
-      <small v-if="form.volume.height > 2.7" style="color:#ff7b47; ">Максимально допустимая высота груза 2.7 м (негабаритный груз)</small>
-      <small v-if="form.volume.value > 89.3" style="color:#ff7b47; ">Максимально допустимый объем груза 89.3 м3 (негабаритный груз)</small>
-      <small v-if="form.weight.value > 20000" style="color:#ff7b47; ">Максимально допустимый вес груза 20 тонн (негабаритный груз)</small>
+      <div style="display: flex; color:#ff7b47;">
+      <small v-if="form.volume.length > 13.5">* Максимально допустимая длина груза 13.5 м (негабаритный груз)</small>
+      <small v-if="form.volume.width > 2.45">* Максимально допустимая ширина груза 2.45 м (негабаритный груз)</small>
+      <small v-if="form.volume.height > 2.7">* Максимально допустимая высота груза 2.7 м (негабаритный груз)</small>
+      <small v-if="form.volume.value > 89.3">* Максимально допустимый объем груза 89.3 м3 (негабаритный груз)</small>
+      <small v-if="form.weight.value > 20000">* Максимально допустимый вес груза 20 тонн (негабаритный груз)</small>
+      </div>
+      <div style="display: flex;color:#ff7b47;">
+        <small v-if="form.volume.length > 13.5" >* Груз негабаритный, цена рассчитана ориентировочно (для выполнения такого заказа свяжитесь со специалистом) <br> <a style="color:#252B42; " href="tel:+78552470590">+7 (855) 247-05-90</a></small>
+        <small v-if="form.volume.width > 2.45" >* Груз негабаритный, цена рассчитана ориентировочно (для выполнения такого заказа свяжитесь со специалистом) <br> <a style="color:#252B42; " href="tel:+78552470590">+7 (855) 247-05-90</a></small>
+        <small v-if="form.volume.height > 2.7" >* Груз негабаритный, цена рассчитана ориентировочно (для выполнения такого заказа свяжитесь со специалистом) <br> <a style="color:#252B42; " href="tel:+78552470590">+7 (855) 247-05-90</a></small>
+        <small v-if="form.volume.value > 89.3" >* Груз негабаритный, цена рассчитана ориентировочно (для выполнения такого заказа свяжитесь со специалистом) <br> <a style="color:#252B42; " href="tel:+78552470590">+7 (855) 247-05-90</a></small>
+        <small v-if="form.weight.value > 20000" >* Груз негабаритный, цена рассчитана ориентировочно (для выполнения такого заказа свяжитесь со специалистом) <br> <a style="color:#252B42; " href="tel:+78552470590">+7 (855) 247-05-90</a></small>
       </div>
     </div>
 
@@ -143,12 +150,12 @@
           </div>
         </div>
       </div>
-      <div style="display: flex;">
-        <small v-if="form.volume.length > 13.5" style="color:#ff7b47; ">Максимально допустимая длина груза 13.5 м (негабаритный груз)</small>
-        <small v-if="form.volume.width > 2.45" style="color:#ff7b47; ">Максимально допустимая ширина груза 2.45 м (негабаритный груз)</small>
-        <small v-if="form.volume.height > 2.7" style="color:#ff7b47; ">Максимально допустимая высота груза 2.7 м (негабаритный груз)</small>
-        <small v-if="form.volume.value > 90" style="color:#ff7b47; ">Максимально допустимый объем груза 89.3 м3 (негабаритный груз)</small>
-        <small v-if="form.weight.value > 20000" style="color:#ff7b47; ">Максимально допустимый вес груза 20 тонн (негабаритный груз)</small>
+      <div style="display: flex;color:#ff7b47;">
+        <small v-if="form.volume.length > 13.5" >* Максимально допустимая длина груза 13.5 м (негабаритный груз)</small>
+        <small v-if="form.volume.width > 2.45" >* Максимально допустимая ширина груза 2.45 м (негабаритный груз)</small>
+        <small v-if="form.volume.height > 2.7" >* Максимально допустимая высота груза 2.7 м (негабаритный груз)</small>
+        <small v-if="form.volume.value > 90" >* Максимально допустимый объем груза 89.3 м3 (негабаритный груз)</small>
+        <small v-if="form.weight.value > 20000" >* Максимально допустимый вес груза 20 тонн (негабаритный груз)</small>
       </div>
     </div>
     <div class="input__fields border-none">
@@ -287,6 +294,7 @@ export default {
         weight: {
           value: ''
         },
+        oversize_cargo: false,
         same_places: 0,
         cargo_type: '',
         estimated_price_cargo: '',
@@ -371,6 +379,12 @@ export default {
       placeArray.value.map((item, index) => {
         if (item.id === placeId.value) {
           const current_place = placeArray.value[index]
+          if(placeArray.value[index].weight.value > 20000) placeArray.value[index].oversize_cargo = true
+          else if(placeArray.value[index].volume.value > 90) placeArray.value[index].oversize_cargo = true
+          else if(placeArray.value[index].volume.width > 2.45) placeArray.value[index].oversize_cargo = true
+          else if(placeArray.value[index].volume.length > 13.5) placeArray.value[index].oversize_cargo = true
+          else if(placeArray.value[index].volume.height > 2.7) placeArray.value[index].oversize_cargo = false
+          else placeArray.value[index].oversize_cargo = false
           current_place.packimg_price = useCalcPacking(packing, form)
           current_place.packing = {...packing.value}
         }
@@ -409,6 +423,14 @@ export default {
           current_place.cargo_type = form.cargo_type
           current_place.estimated_price_cargo = form.estimated_price_cargo
           current_place.count_packing = form.count_packing.value
+
+          if(placeArray.value[index].weight.value > 20000) placeArray.value[index].oversize_cargo = true
+          else if(placeArray.value[index].volume.value > 90) placeArray.value[index].oversize_cargo = true
+          else if(placeArray.value[index].volume.width > 2.45) placeArray.value[index].oversize_cargo = true
+          else if(placeArray.value[index].volume.length > 13.5) placeArray.value[index].oversize_cargo = true
+          else if(placeArray.value[index].volume.height > 2.7) placeArray.value[index].oversize_cargo = false
+          else placeArray.value[index].oversize_cargo = false
+
           if(form.same_places > 0){
             current_place.price = await useCalc(direction_info, form) * (form.same_places + 1)
             current_place.packimg_price = useCalcPacking(packing, form) * (form.same_places + 1)

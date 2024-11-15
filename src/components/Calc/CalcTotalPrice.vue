@@ -59,10 +59,16 @@
       </div>
 
       <div class="total_price">
-        <div>Общая стоимость</div>
-        {{sum}} ₽
+
+        <div v-if="!oversize_cargo">Общая стоимость</div>
+        <div v-if="oversize_cargo">Ориентировочная стоимость</div><div class="check__sum">{{sum}} ₽</div>
       </div>
     </div>
+    <div class="total_price" style="display: block" v-if="oversize_cargo">
+      <div><span style="color: #ff7b47">*</span> Груз негабаритный, для точного расчета стоимости свяжитесь со специалистом </div>
+      <a href="tel:+78552470590" style="color: #252B42">+7 (855) 247-05-90</a>
+    </div>
+
 
 
   </div>
@@ -79,6 +85,8 @@ export default {
   setup(){
     const {cargo} = useLoadingDataCalc()
 
+    const oversize_cargo = ref(false)
+
     const sum = ref(0)
 
     watch(cargo.value, ()=>{
@@ -86,15 +94,16 @@ export default {
       cargo.value.map((item)=>{
         if(item.direction_id){
           item.places.map((el)=>{
-            sum.value += Number(el.price.toFixed(1))
+            sum.value += Number(el.price)//sum.value += Number(el.price.toFixed(1))
             sum.value += el.packimg_price
             sum.value += el.insurance
+            oversize_cargo.value = el.oversize_cargo
           })
         }
       })
     })
 
-    return {cargo, sum, downloadDocument}
+    return {cargo, sum, downloadDocument, oversize_cargo}
   }
 }
 </script>
@@ -161,6 +170,11 @@ export default {
     width: 20px;
     margin-right: 15px;
   }
+}
+.check__sum{
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
 }
 @media (max-width: 1460px){
   .prices{
