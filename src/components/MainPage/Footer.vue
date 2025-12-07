@@ -1,36 +1,36 @@
 <template>
-  <div class="wrapper">
+  <footer class="wrapper">
   <div class="footer">
-    <div class="footer__content __container">
+    <nav class="footer__content __container" aria-label="Документы">
       <router-link to="" class="link">Правила перевозки груза</router-link>
       <router-link to="" class="link">Документы компании</router-link>
       <router-link to="" class="link">Документы для перевозки</router-link>
-    </div>
+    </nav>
     <div class="line __container"></div>
-    <div class="footer__content __container" style="margin-top: 25px">
-      <router-link to="" class="link">
-        <img src="../../assets/footer/01.svg">
+    <address class="footer__content __container" style="margin-top: 25px">
+      <a href="tel:+78552475120" class="link">
+        <img src="../../assets/footer/01.svg" alt="Телефон" width="25" height="25">
         8 (855)-247-51-20
-      </router-link>
-      <router-link to="" class="link">
-        <img src="../../assets/footer/02.svg">
+      </a>
+      <span class="link">
+        <img src="../../assets/footer/02.svg" alt="Адрес" width="25" height="25">
         г.Набережные Челны, ул.Мензелинский тракт, д.30A
-      </router-link>
-      <router-link to="" class="link">
-        <img src="../../assets/footer/03.svg">
+      </span>
+      <a href="mailto:astron71@gmail.com" class="link">
+        <img src="../../assets/footer/03.svg" alt="Email" width="25" height="25">
         astron71@gmail.com
-      </router-link>
-    </div>
+      </a>
+    </address>
   </div>
   <div class="footer__bottom __container">
     <p>© Транспортная компания Камион Экспресс, 2022 | Политика конфиденциальности</p>
-    <div class="social">
-      <img src="../../assets/footer/phone.png"/>
-      <img src="../../assets/footer/mail.png"/>
-      <img src="../../assets/footer/telegram.png"/>
+    <div class="social" role="navigation" aria-label="Социальные сети">
+      <a href="tel:+78552475120" aria-label="Позвонить"><img src="../../assets/footer/phone.png" alt="Телефон" width="25" height="25"/></a>
+      <a href="mailto:astron71@gmail.com" aria-label="Написать на email"><img src="../../assets/footer/mail.png" alt="Email" width="25" height="25"/></a>
+      <a href="https://t.me/" aria-label="Telegram" rel="noopener noreferrer" target="_blank"><img src="../../assets/footer/telegram.png" alt="Telegram" width="25" height="25"/></a>
     </div>
   </div>
-  </div>
+  </footer>
 </template>
 
 <script>

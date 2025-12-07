@@ -1,21 +1,38 @@
 <template>
   <div>
     <Navbar/>
-    <StartView id="start"/>
+    <header>
+      <StartView id="start"/>
+    </header>
 
-    <CalcOnMain id="calc" class="__container margin"/>
+    <main>
+      <section id="calc" class="__container margin" aria-label="Калькулятор стоимости">
+        <CalcOnMain />
+      </section>
 
-    <News id="news" class="margin"/>
+      <section id="news" class="margin" aria-label="Новости и спецпредложения">
+        <News />
+      </section>
 
-    <Advantages class="__container margin"/>
+      <section class="__container margin" aria-label="Преимущества компании">
+        <Advantages />
+      </section>
 
-<!--    <SubmitApplication class="__container margin"/>-->
+      <!--    <SubmitApplication class="__container margin"/>-->
 
-    <Partners class="margin"/>
+      <section class="margin" aria-label="Партнёры">
+        <Partners />
+      </section>
 
-    <Contacts id="contacts" class="__container margin"/>
+      <section id="contacts" class="__container margin" aria-label="Контакты">
+        <Contacts />
+      </section>
 
-    <Map id="map"/>
+      <section id="map" aria-label="Карта отслеживания транспорта">
+        <Map />
+      </section>
+    </main>
+
     <Footer/>
   </div>
 </template>

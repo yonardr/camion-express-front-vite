@@ -1,0 +1,16 @@
+# robots.txt for КамионЭкспресс
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://camion-express.ru/sitemap.xml
+
+# Disallow admin pages
+Disallow: /personal/
+Disallow: /auth
+
+# Allow crawling of main pages
+Allow: /
+Allow: /calculator
+Allow: /documents
+Allow: /news/*

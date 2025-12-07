@@ -14,3 +14,8 @@ app
     .use(router)
     .use(store)
     .mount('#app')
+
+// Событие для prerender-spa-plugin
+router.isReady().then(() => {
+    document.dispatchEvent(new Event('render-event'))
+})

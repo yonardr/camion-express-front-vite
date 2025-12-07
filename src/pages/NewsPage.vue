@@ -1,11 +1,11 @@
 <template>
   <Navbar />
-  <div class="news">
-    <div class="news__title">
-      <h2>{{ data.title }}</h2>
-    </div>
+  <article class="news" itemscope itemtype="https://schema.org/NewsArticle">
+    <header class="news__title">
+      <h1 itemprop="headline">{{ data.title }}</h1>
+    </header>
 
-    <div class="news__imgs">
+    <figure class="news__imgs" v-if="data.newsImgs?.length">
       <swiper
           :loop="true"
           :autoplay="{
@@ -14,40 +14,42 @@
     }"
           :modules="modules"
           :centeredSlides="true"
-          class="mySwiper">
-        <swiper-slide v-for="item in data.newsImgs">
-          <img :src="imgUrl(item.path)" />
+          class="mySwiper"
+          role="region"
+          aria-label="Галерея изображений">
+        <swiper-slide v-for="(item, index) in data.newsImgs" :key="item.path">
+          <img :src="imgUrl(item.path)" :alt="`${data.title} - изображение ${index + 1}`" itemprop="image" loading="lazy" />
         </swiper-slide>
       </swiper>
-    </div>
+    </figure>
 
-    <div class="news__attr">
-      <h6>Адреса</h6>
-      <div class="news__item" v-for="item in data.newsAddress">
+    <section class="news__attr" v-if="data.newsAddress?.length">
+      <h2>Адреса</h2>
+      <address class="news__item" v-for="item in data.newsAddress" :key="item.value">
         {{ item.value }}
-      </div>
-    </div>
+      </address>
+    </section>
 
-    <div class="news__attr">
-      <h6>Контакты для связи</h6>
-      <div class="news__item" v-for="item in data.newsContacts">
+    <section class="news__attr" v-if="data.newsContacts?.length">
+      <h2>Контакты для связи</h2>
+      <address class="news__item" v-for="item in data.newsContacts" :key="item.value">
         {{ item.value }}
-      </div>
-    </div>
+      </address>
+    </section>
 
-    <div class="news__attr">
-      <div class="des">
+    <section class="news__attr" v-if="data.description">
+      <div class="des" itemprop="articleBody">
         <pre>{{ data.description }}</pre>
       </div>
-    </div>
+    </section>
 
-    <div class="news__attr" style="margin-bottom: 100px">
-      <h6 v-if="data?.newsDocs?.length >= 1">Документы</h6>
-      <div class="news__item" v-for="item in data.newsDocs">
-        <a :href="f(item.path)" target="_blank" style="text-decoration: none">{{ item.name }}</a>
+    <section class="news__attr" style="margin-bottom: 100px" v-if="data?.newsDocs?.length >= 1">
+      <h2>Документы</h2>
+      <div class="news__item" v-for="item in data.newsDocs" :key="item.path">
+        <a :href="f(item.path)" target="_blank" rel="noopener noreferrer" style="text-decoration: none">{{ item.name }}</a>
       </div>
-    </div>
-  </div>
+    </section>
+  </article>
   <Footer/>
 </template>
 
@@ -58,6 +60,8 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import Footer from "../components/MainPage/Footer.vue";
 import Navbar from "../components/MainPage/Navbar.vue";
 import { Autoplay} from 'swiper/modules';
+import { useSeo } from "../composables/useSeo.js";
+import { watch } from 'vue';
 import 'swiper/css';
 export default {
   components: {
@@ -70,6 +74,22 @@ export default {
     const {data} = useGetById({id: useRoute().params.id})
     const imgUrl = (path) => new URL(`${import.meta.env.VITE_APP_API_URL}${path}`, import.meta.url).href
     const f = (path) => `${import.meta.env.VITE_APP_API_URL}${path}`
+
+    const { updateMeta } = useSeo({
+      title: 'Новости — КамионЭкспресс',
+      description: 'Новости и спецпредложения транспортной компании КамионЭкспресс.',
+      keywords: 'новости грузоперевозки, акции КамионЭкспресс, спецпредложения'
+    })
+
+    watch(data, (newData) => {
+      if (newData && newData.title) {
+        document.title = `${newData.title} — КамионЭкспресс`
+        const descMeta = document.querySelector('meta[name="description"]')
+        if (descMeta && newData.description) {
+          descMeta.setAttribute('content', newData.description.substring(0, 160))
+        }
+      }
+    })
 
     return {data, imgUrl, f,
       modules: [Autoplay]
@@ -97,16 +117,19 @@ export default {
     width: 100%;
   }
 }
-h2{
+h1{
   font-size: 40px;
 }
+h2{
+  font-size: 25px;
+}
 @media (max-width: 768px){
-  h2{
+  h1{
     font-size: 30px;
   }
-}
-h6{
-  font-size: 25px;
+  h2{
+    font-size: 20px;
+  }
 }
 .news__imgs{
   display: flex;

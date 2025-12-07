@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>НОВОСТИ И СПЕЦПРЕДЛОЖЕНИЯ</h2>
-    <div class="news">
+    <div class="news" role="region" aria-label="Слайдер новостей">
       <swiper
           :slidesPerView="count_news"
           :spaceBetween="30"
@@ -16,8 +16,8 @@
           class="mySwiper"
       >
         <swiper-slide v-for="item in news.reverse()" :key="item.id">
-          <div class="__slide">
-            <img :src="imgUrl(item.newsImgs[0].path)" class="slide__img"/>
+          <article class="__slide">
+            <img :src="imgUrl(item.newsImgs[0].path)" class="slide__img" :alt="item.title" loading="lazy"/>
             <h3 class="slide__title">
               {{ item.title }}
             </h3>
@@ -26,14 +26,14 @@
             </div>
 
 
-            <router-link :to="{path: `/news/${item.id}`}" style="text-decoration: none">
+            <router-link :to="{path: `/news/${item.id}`}" style="text-decoration: none" :aria-label="`Читать подробнее: ${item.title}`">
               <my-button :color="'orange'" class="slide__btn">Подробнее</my-button>
             </router-link>
 
-          </div>
+          </article>
         </swiper-slide>
-        <div ref="prev" class="swiper-button-prev"><img src="../../assets/swiper/back.svg"/></div>
-        <div ref="next" class="swiper-button-next"><img src="../../assets/swiper/right.svg"/></div>
+        <button ref="prev" class="swiper-button-prev" aria-label="Предыдущий слайд"><img src="../../assets/swiper/back.svg" alt="" width="24" height="24"/></button>
+        <button ref="next" class="swiper-button-next" aria-label="Следующий слайд"><img src="../../assets/swiper/right.svg" alt="" width="24" height="24"/></button>
       </swiper>
 
     </div>
@@ -156,6 +156,8 @@ export default {
   height: 50px;
   border-radius: 100%;
   box-shadow: 11px 11px 11px 11px rgba(0, 0, 0, 0.07);
+  border: none;
+  cursor: pointer;
 
   img {
     position: absolute;

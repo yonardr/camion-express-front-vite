@@ -6,24 +6,24 @@
       <h1>Транспортно-логистическая компания «КамионЭкспресс»</h1>
     </aos-vue>
       <aos-vue animation="fade-right" :duration="1400" placement="top-bottom">
-      <div class="text">
+      <p class="text">
         Перевозка сборных грузов
         <br>
         (Сибирь, Дальний Восток, Урал, Север, Юг)
-      </div>
+      </p>
       </aos-vue>
       <aos-vue animation="fade-right" :duration="1800" placement="top-bottom">
-      <div class="btns">
+      <nav class="btns" aria-label="Основные действия">
         <router-link :to="{name: 'calc', hash: '#calc'}" class="btn__orange">Оставить заявку</router-link>
         <my-button :color="'blue'" @click="$router.push('/#map')">Отследить транспорт</my-button>
-      </div>
+      </nav>
       </aos-vue>
 
 
     </div>
   </div>
 
-  <img src="../../assets/main.jpg" >
+  <img src="../../assets/main.jpg" alt="Грузоперевозки КамионЭкспресс - доставка грузов по России" loading="eager">
 </div>
 </template>
 

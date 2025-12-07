@@ -117,7 +117,7 @@ export default {
   background: hsl(0,0%, 100%, 0.1);
   backdrop-filter: blur(1rem);
   -webkit-backdrop-filter: blur(10px);
-  paddig: 70px 10px 20px 10px;
+  padding: 70px 10px 20px 10px;
   transition: all 0.3s ease 0s;
   z-index: 15;
 }

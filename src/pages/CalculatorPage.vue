@@ -53,6 +53,7 @@ import Navbar from "../components/MainPage/Navbar.vue";
 import CalcTotalPrice from "../components/Calc/CalcTotalPrice.vue";
 import Footer from "../components/MainPage/Footer.vue";
 import CalcApplicationAddress from "../components/Calc/CalcApplicationAddress.vue";
+import { useSeo } from "../composables/useSeo.js";
 
 
 const minValue = value => Number(value) >= 0
@@ -61,6 +62,13 @@ export default {
     CalcApplicationAddress,
     Footer, CalcTotalPrice, CalcParam, CalcOnMain, CalcDirection, MyButton, MyCombobox, Navbar},
   setup() {
+    useSeo({
+      title: 'Калькулятор стоимости грузоперевозки — КамионЭкспресс',
+      description: 'Рассчитайте стоимость доставки груза онлайн. Быстрый расчёт, точная цена, оформление заявки на грузоперевозку по России.',
+      keywords: 'калькулятор грузоперевозки, расчёт стоимости доставки, цена перевозки груза, КамионЭкспресс',
+      canonical: 'https://camion-express.ru/calculator'
+    })
+
     const store = useStore()
     const {cargo, direction_info, cargo_current} = useLoadingDataCalc()
 
