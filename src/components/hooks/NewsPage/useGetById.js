@@ -3,15 +3,15 @@ import axios from "axios";
 
 export function useGetById(init = {}) {
     const data = ref({})
-    try{
-        const fetch = async() =>{
+    const fetch = async() =>{
+        try{
             const res = await axios.get(`${import.meta.env.VITE_APP_API_URL}/news/${init.id}` )
             data.value = res.data
         }
-        onMounted(fetch)
+        catch (e){
+            console.error('Не удалось загрузить новость:', e)
+        }
     }
-    catch (e){
-        alert('Ошибка')
-    }
+    onMounted(fetch)
     return {data}
 }
