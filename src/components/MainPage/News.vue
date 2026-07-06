@@ -59,7 +59,8 @@ export default {
     // reversed copy — НЕ мутируем реактивный массив в рендере (иначе бесконечная рекурсия и краш вкладки)
     const newsReversed = computed(() => [...news.value].reverse());
 
-    const imgUrl = (path) => new URL(`${import.meta.env.VITE_APP_API_URL}${path}`, import.meta.url).href
+    // картинки отдаёт nginx статикой same-origin (/media/news/...), минуя Node :8443 -> без упора в лимит соединений
+    const imgUrl = (path) => `/media${path}`
 
     const prev = ref(null);
     const next = ref(null);

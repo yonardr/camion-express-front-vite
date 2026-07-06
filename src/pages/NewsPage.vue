@@ -72,7 +72,7 @@ export default {
   },
   setup() {
     const {data} = useGetById({id: useRoute().params.id})
-    const imgUrl = (path) => new URL(`${import.meta.env.VITE_APP_API_URL}${path}`, import.meta.url).href
+    const imgUrl = (path) => `/media${path}`
     const f = (path) => `${import.meta.env.VITE_APP_API_URL}${path}`
 
     const { updateMeta } = useSeo({
