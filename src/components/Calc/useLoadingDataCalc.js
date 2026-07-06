@@ -4,7 +4,7 @@ import {computed, onMounted, ref, watch, watchEffect} from "vue";
 export function useLoadingDataCalc() {
 
     const store = useStore()
-    const points_a = computed(() => store.getters.getPoints_a.sort((a, b) => {
+    const points_a = computed(() => [...store.getters.getPoints_a].sort((a, b) => {
         if (a.name < b.name) {
             return -1;
         }
@@ -13,7 +13,7 @@ export function useLoadingDataCalc() {
         }
         return 0;
     }));
-    const directions = computed(() => store.getters.getDirections.sort((a, b) => {
+    const directions = computed(() => [...store.getters.getDirections].sort((a, b) => {
         if (a.name < b.name) {
             return -1;
         }

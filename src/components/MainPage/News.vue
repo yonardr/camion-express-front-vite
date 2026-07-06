@@ -15,7 +15,7 @@
     }"
           class="mySwiper"
       >
-        <swiper-slide v-for="item in news.reverse()" :key="item.id">
+        <swiper-slide v-for="item in newsReversed" :key="item.id">
           <article class="__slide">
             <img :src="imgUrl(item.newsImgs[0].path)" class="slide__img" :alt="item.title" loading="lazy"/>
             <h3 class="slide__title">
@@ -56,6 +56,8 @@ export default {
     const store = useStore()
     onMounted(() => store.dispatch('fetchNews'))
     const news = computed(() => store.getters.getNews);
+    // reversed copy — НЕ мутируем реактивный массив в рендере (иначе бесконечная рекурсия и краш вкладки)
+    const newsReversed = computed(() => [...news.value].reverse());
 
     const imgUrl = (path) => new URL(`${import.meta.env.VITE_APP_API_URL}${path}`, import.meta.url).href
 
@@ -77,7 +79,7 @@ export default {
     }
 
     return {
-      news, imgUrl, prev, next, count_news,
+      news, newsReversed, imgUrl, prev, next, count_news,
       modules: [Navigation],
     }
   }
