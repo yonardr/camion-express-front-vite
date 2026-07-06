@@ -18,7 +18,7 @@
           role="region"
           aria-label="Галерея изображений">
         <swiper-slide v-for="(item, index) in data.newsImgs" :key="item.path">
-          <img :src="imgUrl(item.path)" :alt="`${data.title} - изображение ${index + 1}`" itemprop="image" loading="lazy" />
+          <img :src="imgUrl(item.path)" :alt="`${data.title} - изображение ${index + 1}`" itemprop="image" />
         </swiper-slide>
       </swiper>
     </figure>
