@@ -5,7 +5,7 @@ export function useSeo(options) {
     title: 'КамионЭкспресс — грузоперевозки по России',
     description: 'КамионЭкспресс — надёжные грузоперевозки по России. Расчёт стоимости онлайн, отслеживание груза в реальном времени.',
     keywords: 'грузоперевозки, транспортная компания, доставка грузов',
-    ogImage: 'https://camion-express.ru/og-image.jpg',
+    ogImage: 'https://camionexpress.ru/og-image.jpg',
     canonical: null
   }
 

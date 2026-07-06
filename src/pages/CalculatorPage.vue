@@ -66,7 +66,7 @@ export default {
       title: 'Калькулятор стоимости грузоперевозки — КамионЭкспресс',
       description: 'Рассчитайте стоимость доставки груза онлайн. Быстрый расчёт, точная цена, оформление заявки на грузоперевозку по России.',
       keywords: 'калькулятор грузоперевозки, расчёт стоимости доставки, цена перевозки груза, КамионЭкспресс',
-      canonical: 'https://camion-express.ru/calculator'
+      canonical: 'https://camionexpress.ru/calculator'
     })
 
     const store = useStore()
