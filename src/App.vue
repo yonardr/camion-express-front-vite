@@ -1,11 +1,16 @@
 <template>
   <div class="app" >
     <router-view></router-view>
+    <ToastHost />
   </div>
 </template>
 
 <script>
+import ToastHost from "./components/UI/ToastHost.vue";
 
+export default {
+  components: { ToastHost }
+}
 </script>
 
 <style lang="scss">

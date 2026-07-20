@@ -1,3 +1,4 @@
+import { showToast } from '../toast.js'
 import axios from "axios";
 export const calcApplicationModule = {
 
@@ -63,10 +64,9 @@ export const calcApplicationModule = {
                         responseType: 'blob' // Указываем тип ответа 'blob' для получения бинарного файла
                     }
                 );
-                if(response.status !== 201) alert("Ошибка, заявка не отправлена!")
-
+                if(response.status !== 201) showToast("Ошибка, заявка не отправлена!", 'error')
             }catch (e) {
-                alert("Ошибка " + e)
+                showToast("Ошибка " + e, 'error')
             }
         }
     }

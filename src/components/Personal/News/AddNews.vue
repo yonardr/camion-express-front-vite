@@ -59,6 +59,7 @@
   </div>
 </template>
 <script>
+import { showToast } from '../../../toast.js'
 import News from "../../MainPage/News.vue";
 import MyInput from "../../UI/MyInput.vue";
 import MyTextarea from "../../UI/MyTextarea.vue";
@@ -94,12 +95,12 @@ export default {
 
     async function submit() {
       const {resultNews} = await useAddNews(form)
-      alert('Новость добавлена')
+      showToast('Новость добавлена', 'success')
       if(resultNews.value.id){
         const {resultDocs} = useAddDocNews({files: form.files, id: resultNews.value.id})
-        if(resultDocs) alert('Новость добавлена с документами')
+        if(resultDocs) showToast('Новость добавлена с документами', 'success')
       }
-      else alert('Новость добавлена')
+      else showToast('Новость добавлена', 'success')
     }
 
     return {form, submit}

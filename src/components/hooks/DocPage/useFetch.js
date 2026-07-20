@@ -1,3 +1,4 @@
+import { showToast } from '../../../toast.js'
 import axios from "axios";
 import {onMounted, ref} from "vue";
 export function useFetchDocs(){
@@ -18,7 +19,7 @@ export function useFetchDocs(){
 
         }
         catch(e){
-            alert('Ошибка')
+            showToast('Ошибка', 'error')
         }
     }
     onMounted(fetching)

@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import { showToast } from '../../toast.js'
 import MyInput from "../UI/MyInput.vue";
 import MyButton from "../UI/MyButton.vue";
 import {useAuth} from "../hooks/Auth/useAuth";
@@ -48,7 +49,7 @@ export default {
       const {jwt} = await useAuth(form)
       console.log(jwt.value)
       if(jwt.value === false){
-        alert('Невенрный логин или пароль')
+        showToast('Невенрный логин или пароль', 'error')
       }
       else{
         localStorage.jwt = jwt.value;

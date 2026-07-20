@@ -1,3 +1,4 @@
+import { showToast } from '../../../toast.js'
 import axios from "axios";
 
 export async function useAddDoc(init ={}){
@@ -19,6 +20,6 @@ export async function useAddDoc(init ={}){
         console.log(res.data)
     }
     catch (e){
-        alert('Ошибка')
+        showToast('Ошибка', 'error')
     }
 }

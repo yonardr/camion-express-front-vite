@@ -1,3 +1,4 @@
+import { showToast } from '../../../../toast.js'
 import axios from "axios";
 
 export async function useDeletePointA(init = {}){
@@ -6,6 +7,6 @@ export async function useDeletePointA(init = {}){
         return res.data
     }
     catch (e){
-        alert('Ошибка при удалении')
+        showToast('Ошибка при удалении', 'error')
     }
 }

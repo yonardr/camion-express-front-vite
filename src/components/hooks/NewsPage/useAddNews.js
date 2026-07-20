@@ -1,3 +1,4 @@
+import { showToast } from '../../../toast.js'
 import axios from "axios";
 import {ref} from "vue";
 
@@ -32,7 +33,7 @@ export async function useAddNews(init = {}) {
         resultNews.value = res.data
     }
     catch (e) {
-        alert('Ошибка')
+        showToast('Ошибка', 'error')
     }
     return {resultNews}
 }

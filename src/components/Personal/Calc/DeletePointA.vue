@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import { showToast } from '../../../toast.js'
 import MyButton from "../../UI/MyButton.vue";
 import {useLoadingDataCalc} from "../../Calc/useLoadingDataCalc.js";
 import {ref} from "vue";
@@ -23,7 +24,7 @@ export default {
     const selected = ref(0)
     async function submit(){
       const res = await useDeletePointA({id: selected.value})
-      if(res > 0) alert("Точка удалена успешно")
+      if(res > 0) showToast("Точка удалена успешно", 'success')
     }
     return {points_a, selected, submit}
   }

@@ -1,3 +1,4 @@
+import { showToast } from '../../../toast.js'
 import {onMounted, ref} from "vue";
 import axios from "axios";
 
@@ -7,7 +8,7 @@ export async function useDelNews(init = {}) {
         const res = await axios.delete(`${import.meta.env.VITE_APP_API_URL}/news/${init.id}`)
         data.value = res.data
     } catch (e) {
-        alert('Ошибка')
+        showToast('Ошибка', 'error')
     }
     return {data}
 }

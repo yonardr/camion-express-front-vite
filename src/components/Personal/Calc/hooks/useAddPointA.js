@@ -1,3 +1,4 @@
+import { showToast } from '../../../../toast.js'
 import axios from "axios";
 
 export async function useAddPointA(init = {}){
@@ -6,6 +7,6 @@ export async function useAddPointA(init = {}){
         return res.status
     }
     catch (e){
-        alert('Ошибка при добавлении отправной точки')
+        showToast('Ошибка при добавлении отправной точки', 'error')
     }
 }

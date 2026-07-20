@@ -1,3 +1,4 @@
+import { showToast } from '../../../toast.js'
 import axios from "axios";
 import {ref} from "vue";
 
@@ -23,7 +24,7 @@ export async function useAddDocNews(init = {}) {
         )
         resultDocs.value = res.data
     } catch (e) {
-        alert('Ошибка')
+        showToast('Ошибка', 'error')
     }
     return {resultDocs}
 }

@@ -1,3 +1,4 @@
+import { showToast } from '../../../toast.js'
 import axios from "axios";
 import {ref} from "vue";
 
@@ -9,7 +10,7 @@ export async function useAddTypeDocs(init = {}) {
         } )
         result.value = res.data
     } catch (e) {
-        alert('Ошибка')
+        showToast('Ошибка', 'error')
     }
     return {result}
 }

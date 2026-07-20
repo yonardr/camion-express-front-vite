@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { showToast } from '../../../toast.js'
 import MyInputFile from "../../UI/MyInputFile.vue";
 import MyInput from "../../UI/MyInput.vue";
 import MyButton from "../../UI/MyButton.vue";
@@ -51,7 +52,7 @@ export default {
         })
       }
       else{
-        alert('Не все поля заполнены')
+        showToast('Не все поля заполнены', 'error')
       }
     }
 

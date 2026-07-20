@@ -1,3 +1,4 @@
+import { showToast } from '../../../toast.js'
 import axios from "axios";
 import {ref} from "vue";
 export async function useDeleteDoc(init = {}){
@@ -7,7 +8,7 @@ export async function useDeleteDoc(init = {}){
             count.value = res.data
         }
         catch(e){
-            alert('Ошибка')
+            showToast('Ошибка', 'error')
         }
 
     return {count}

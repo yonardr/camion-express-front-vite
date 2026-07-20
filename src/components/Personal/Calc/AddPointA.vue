@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import { showToast } from '../../../toast.js'
 import MyInput from "../../UI/MyInput.vue";
 import MyButton from "../../UI/MyButton.vue";
 import {ref} from "vue";
@@ -23,7 +24,7 @@ export default {
     async function submit(){
       const res = await useAddPointA({name: name.value})
       if(res === 201){
-        alert('Добавлено')
+        showToast('Добавлено', 'success')
       }
     }
     return {name, submit}

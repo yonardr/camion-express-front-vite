@@ -56,6 +56,7 @@
 </template>
 
 <script>
+import { showToast } from '../../toast.js'
 import MyButton from "../UI/MyButton.vue";
 import MyInput from "../UI/MyInput.vue";
 import {useFetchSub, useSubmit} from "../hooks/MainPage/useSubmit";
@@ -94,7 +95,7 @@ export default {
       if(201 === await useFetchSub(form, file.value)){
         dialogVisible.value = true
       }
-      else alert('Ошибка')
+      else showToast('Ошибка', 'error')
     }
     function f(path){
       return `${import.meta.env.VITE_APP_API_URL}/documents/${path}`
