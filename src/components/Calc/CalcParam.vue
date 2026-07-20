@@ -382,7 +382,7 @@ export default {
       cargo.value.map((item) =>{
         if(item.id === cargo_current.value){
           item.places.map((elem)=>{
-            elem.price = useCalc(direction_info, elem)
+            elem.price = useCalc(direction_info, elem, packing.value)
           })
         }
       })
@@ -447,12 +447,12 @@ export default {
           else placeArray.value[index].oversize_cargo = false
 
           if(form.same_places > 0){
-            current_place.price = await useCalc(direction_info, form) * (form.same_places + 1)
+            current_place.price = await useCalc(direction_info, form, packing.value) * (form.same_places + 1)
             current_place.packimg_price = useCalcPacking(packing, form) * (form.same_places + 1)
             current_place.insurance = insurance(form.estimated_price_cargo)
           }
           else{
-            current_place.price = await useCalc(direction_info, form)
+            current_place.price = await useCalc(direction_info, form, packing.value)
             current_place.packimg_price = useCalcPacking(packing, form)
             current_place.insurance = insurance(form.estimated_price_cargo)
           }
