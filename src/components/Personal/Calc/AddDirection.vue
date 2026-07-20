@@ -11,7 +11,16 @@
 
     <my-input-file v-model="file"/>
 
-    <my-button :color="'blue'" class="btn" @click="submit">Добавить</my-button>
+    <label class="replace-row">
+      <input type="checkbox" v-model="replace"/>
+      Заменить все направления базы (снести старые и залить заново)
+    </label>
+
+    <my-button :color="'blue'" class="btn" @click="submit">
+      {{ replace ? 'Заменить' : 'Добавить' }}
+    </my-button>
+
+    <p v-if="message" class="msg">{{ message }}</p>
   </div>
 </template>
 
@@ -28,11 +37,22 @@ export default {
     const {points_a} = useLoadingDataCalc()
     const selected = ref(0)
     const file = ref(null)
+    const replace = ref(false)
+    const message = ref('')
     async function submit(){
-      const res = await useAddDirections({id: selected.value, file: file.value})
-      if(res.status === 201) alert("Направление добавлено")
+      message.value = ''
+      if(!selected.value){ message.value = 'Выберите отправную точку'; return }
+      if(!file.value){ message.value = 'Выберите файл'; return }
+      const res = await useAddDirections({id: selected.value, file: file.value, replace: replace.value})
+      if(res.ok){
+        const d = res.data || {}
+        message.value = `Готово: залито ${d.added ?? '?'} направлений` +
+          (d.skipped && d.skipped.length ? `, пропущено ${d.skipped.length} (${d.skipped.join(', ')})` : '')
+      } else {
+        message.value = `Ошибка: ${res.error}`
+      }
     }
-    return {points_a, selected, submit, file}
+    return {points_a, selected, submit, file, replace, message}
   }
 }
 </script>
@@ -54,5 +74,19 @@ export default {
   appearance: none !important;
   background-color: #fff;
   color: #000;
+}
+.replace-row{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+  max-width: 400px;
+  font-size: 15px;
+  cursor: pointer;
+}
+.msg{
+  margin-top: 10px;
+  max-width: 400px;
+  font-size: 15px;
 }
 </style>
