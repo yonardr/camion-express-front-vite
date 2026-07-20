@@ -58,7 +58,9 @@ export const calcApplicationModule = {
                         sender: data.sender,
                         recipient: data.recipient,
                         payment_for_transportation: data.payment_for_transportation,
-                        price: data.price
+                        price: data.price,
+                        region_expediting: data.region_expediting,
+                        expediting_price: data.expediting_price
                     },
                     {
                         responseType: 'blob' // Указываем тип ответа 'blob' для получения бинарного файла

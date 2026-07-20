@@ -185,7 +185,7 @@
           </section>
         </div>
         <div class="container__btn">
-          <my-button :color="'blue'" class="btn" @click.prevent="downloadDocument({cargo: cargo[0], sender: sender, recipient: recipient, payment_for_transportation: pay_trans, price: sum})"><svg class="printer__img" viewBox="0 0 64 64" >
+          <my-button :color="'blue'" class="btn" @click.prevent="downloadDocument({cargo: cargo[0], sender: sender, recipient: recipient, payment_for_transportation: pay_trans, price: sum, region_expediting: region_expediting, expediting_price: expediting_price})"><svg class="printer__img" viewBox="0 0 64 64" >
             <path d="M60,16h-8V4c0-2.211-1.789-4-4-4H16c-2.211,0-4,1.789-4,4v12H4c-2.211,0-4,1.789-4,4v32c0,2.211,1.789,4,4,4
 	h8v4c0,2.211,1.789,4,4,4h32c2.211,0,4-1.789,4-4v-4h8c2.211,0,4-1.789,4-4V20C64,17.789,62.211,16,60,16z M20,8h24v8H20V8z M44,56
 	H20V40h24V56z"/>
@@ -233,6 +233,7 @@ import vector2 from '../assets/calc/Intersect_1.svg'
 import vector3 from '../assets/calc/Intersect_2.svg'
 import {downloadDocument} from "../components/Calc/useGetCalcApplication.js";
 import MyDialog from "../components/UI/MyDialog.vue";
+import {calcRegionExpediting} from "../regionsExpediting.js";
 
 export default {
   components: {
@@ -277,6 +278,7 @@ export default {
       store.commit('updatePay_trans', pay_trans)
     })
     const sum = ref(0)
+    let expW = 0, expV = 0
 
       cargo.value.map((item)=>{
         if(item.direction_id){
@@ -284,12 +286,19 @@ export default {
             sum.value += Number(el.price.toFixed(1))
             sum.value += el.packimg_price
             sum.value += el.insurance
+            expW += Number(el.weight?.value) || 0
+            expV += Number(el.volume?.value) || 0
           })
         }
       })
 
+    // Экспедирование до точки (доставка до города назначения)
+    const region_expediting = store.getters.getRegionExpediting || ''
+    const expediting_price = region_expediting ? calcRegionExpediting(region_expediting, expW, expV) : 0
+    sum.value += expediting_price
+
     async function submit(){
-      await store.dispatch('submitMail', {cargo: cargo.value[0], sender: sender.value, recipient: recipient.value, payment_for_transportation: pay_trans.value, price: sum.value})
+      await store.dispatch('submitMail', {cargo: cargo.value[0], sender: sender.value, recipient: recipient.value, payment_for_transportation: pay_trans.value, price: sum.value, region_expediting, expediting_price})
       dialogVisible.value = true
     }
 
@@ -306,6 +315,8 @@ export default {
       submit,
       downloadDocument,
       sum,
+      region_expediting,
+      expediting_price,
       dialogVisible
     }
   }
