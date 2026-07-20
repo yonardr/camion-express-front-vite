@@ -400,12 +400,11 @@ export default {
           else if(placeArray.value[index].volume.length > 13.5) placeArray.value[index].oversize_cargo = true
           else if(placeArray.value[index].volume.height > 2.7) placeArray.value[index].oversize_cargo = false
           else placeArray.value[index].oversize_cargo = false
-          current_place.packimg_price = useCalcPacking(packing, form)
           current_place.packing = {...packing.value}
         }
       })
-      store.commit('UpdateCargoById', {current_cargo: cargo_current.value, places: placeArray.value})
-
+      // пересчитываем и фрахт (тара обрешётки влияет на вес/объём), и цену упаковки
+      updateData()
     })
     watch(cargo_current, (value, oldValue) => {
       if(cargo_current.value !== oldValue){
