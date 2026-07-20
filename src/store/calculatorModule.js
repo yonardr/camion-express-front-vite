@@ -15,6 +15,7 @@ export const calculatorModule = {
             wooden: false,
             stretch_film: false
         },
+        region_expediting: '',
     },
     actions: {
         async fetchPoints_a(ctx) {
@@ -98,8 +99,14 @@ export const calculatorModule = {
         ChangeCargoId(state, id) {
             state.current_cargo = id
         },
+        setRegionExpediting(state, city) {
+            state.region_expediting = city
+        },
     },
     getters: {
+        getRegionExpediting(state) {
+            return state.region_expediting
+        },
         getCurrentCargo(state) {
             return state.current_cargo
         },

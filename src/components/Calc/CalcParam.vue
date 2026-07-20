@@ -216,6 +216,17 @@
         </div>
       </div>
     </div>
+
+    <div class="title">Экспедирование до точки</div>
+    <div class="input__fields border-none">
+      <div class="input">
+        <div class="input__title">Доставка до города назначения (необязательно)</div>
+        <select class="select-region" v-model="regionExp" @change="onRegion">
+          <option value="">Нет / самовывоз со склада</option>
+          <option v-for="city in regionCities" :value="city" :key="city">{{ city }}</option>
+        </select>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -227,11 +238,15 @@ import {useStore} from "vuex";
 import {useInputsCalc} from "./useInputsCalc.js";
 import {useCalc} from "./useCalc.js";
 import {useCalcPacking} from "./useCalcPacking.js";
+import {REGION_CITIES} from "../../regionsExpediting.js";
 
 export default {
   components: {MyButton},
   setup() {
     const store = useStore()
+    const regionCities = REGION_CITIES
+    const regionExp = ref(store.getters.getRegionExpediting || '')
+    const onRegion = () => store.commit('setRegionExpediting', regionExp.value)
     const {direction_info, packing, cargo_current, cargo} = useLoadingDataCalc()
     const {changePacking, inputParse} = useInputsCalc()
 
@@ -469,7 +484,10 @@ export default {
       paramType,
       form,
       packing,
-      inputParse
+      inputParse,
+      regionCities,
+      regionExp,
+      onRegion
     }
   }
 }
@@ -646,6 +664,19 @@ input{
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
+}
+.select-region {
+  margin-top: 8px;
+  min-width: 340px;
+  max-width: 100%;
+  height: 48px;
+  border-radius: 16px;
+  border: 1px solid $c_blue;
+  font-size: 16px;
+  padding: 10px;
+  background-color: #fff;
+  color: $c_blue;
+  font-family: Montserrat, serif;
 }
 @media (max-width: 1050px) {
   .input__fields{

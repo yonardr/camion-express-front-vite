@@ -58,10 +58,15 @@
 
       </div>
 
+      <div class="field" v-if="region" style="margin: 10px 20px;">
+        <div>Экспедирование до точки<br><small style="color:#737373">{{region}}</small></div>
+        <div>{{expediting}} ₽</div>
+      </div>
+
       <div class="total_price">
 
         <div v-if="!oversize_cargo">Общая стоимость</div>
-        <div v-if="oversize_cargo">Ориентировочная стоимость</div><div class="check__sum">{{sum}} ₽</div>
+        <div v-if="oversize_cargo">Ориентировочная стоимость</div><div class="check__sum">{{total}} ₽</div>
       </div>
     </div>
     <div class="total_price" style="display: block" v-if="oversize_cargo">
@@ -77,13 +82,16 @@
 <script>
 import {useLoadingDataCalc} from "./useLoadingDataCalc.js";
 import {downloadDocument} from "./useGetCalcApplication.js";
-import {ref, watch} from "vue";
+import {computed, ref, watch} from "vue";
+import {useStore} from "vuex";
+import {calcRegionExpediting} from "../../regionsExpediting.js";
 import MyButton from "../UI/MyButton.vue";
 
 export default {
   components: {MyButton},
   setup(){
     const {cargo} = useLoadingDataCalc()
+    const store = useStore()
 
     const oversize_cargo = ref(false)
 
@@ -103,7 +111,22 @@ export default {
       })
     })
 
-    return {cargo, sum, downloadDocument, oversize_cargo}
+    // Экспедирование до точки (доставка до города назначения) — доп к межгороду
+    const region = computed(() => store.getters.getRegionExpediting)
+    const expediting = computed(() => {
+      if (!region.value) return 0
+      let w = 0, v = 0
+      cargo.value.forEach((item) => {
+        if (item.direction_id) item.places.forEach((el) => {
+          w += Number(el.weight?.value) || 0
+          v += Number(el.volume?.value) || 0
+        })
+      })
+      return calcRegionExpediting(region.value, w, v)
+    })
+    const total = computed(() => Number(sum.value) + Number(expediting.value))
+
+    return {cargo, sum, region, expediting, total, downloadDocument, oversize_cargo}
   }
 }
 </script>
