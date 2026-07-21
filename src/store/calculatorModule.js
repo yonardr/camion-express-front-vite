@@ -21,10 +21,16 @@ export const calculatorModule = {
         async fetchPoints_a(ctx) {
             const res = await axios.get(`${import.meta.env.VITE_APP_API_URL}/calculator/points_a`)
             ctx.commit('updatePoint_a', res.data)
+            // авто-выбор первой базы (по алфавиту, как в дропдауне) и её направлений — один раз централизованно
+            const firstBase = [...res.data].sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0)[0]
+            if (firstBase) await ctx.dispatch('fetchDirections', {id: firstBase.id})
         },
         async fetchDirections(ctx, inputData) {
             const res = await axios.get(`${import.meta.env.VITE_APP_API_URL}/calculator/id/${inputData.id}`)
             ctx.commit('updateDirections', res.data)
+            // авто-выбор первого направления новой базы (по алфавиту)
+            const firstDir = [...res.data].sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0)[0]
+            if (firstDir) await ctx.dispatch('fetchDirectionById', {id_direction: firstDir.id_direction})
         },
         async fetchDirectionById(ctx, inputData) {
             const res = await axios.get(`${import.meta.env.VITE_APP_API_URL}/calculator/direction/id/${inputData.id_direction}`)
