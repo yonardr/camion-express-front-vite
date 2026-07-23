@@ -3,6 +3,17 @@
   <div class="container">
     <div class="interaction">
       <div class="input__fields btns">
+        <my-button color="blue" class="btn left" :class="{active: mode==='ltl'}"
+                   @click="changeMode('ltl')">Сборный
+        </my-button>
+        <my-button color="blue" class="btn between" :class="{active: mode==='partial'}"
+                   @click="changeMode('partial')">Полфуры
+        </my-button>
+        <my-button color="blue" class="btn right" :class="{active: mode==='ftl'}"
+                   @click="changeMode('ftl')">Фура
+        </my-button>
+      </div>
+      <div class="input__fields btns" v-if="mode==='ltl'">
         <my-button color="blue" class="btn left" :class="{active: packing.pallet_board}"
                    @click="changePacking('pallet_board')">Паллетный борт
         </my-button>
@@ -13,7 +24,7 @@
                    @click="changePacking('wooden')">Деревянная упаковка
         </my-button>
       </div>
-      <div class="input__fields">
+      <div class="input__fields" v-if="mode==='ltl'">
         <div class="count_bord" v-show="packing.pallet_board || packing.pallet">
           <my-button color="blue" :disabled='form.count_packing.value<=0' @click="form.count_packing.value--">-</my-button>
           <input class="select" v-model="form.count_packing.value"/>
@@ -51,7 +62,7 @@
           </div>
         </div>
 
-        <div class="input__fields">
+        <div class="input__fields" v-if="mode==='ltl'">
           <div class="input">
             <div class="input__title">
               Вес
@@ -86,19 +97,23 @@
     <div class="total__price">
       <div>
         <h6>
-          Стоимость грузоперевозки
+          {{ mode==='ftl' ? 'Стоимость (фура)' : mode==='partial' ? 'Стоимость (полфуры)' : 'Стоимость грузоперевозки' }}
         </h6>
-        <h3>{{ price_direction }} ₽</h3>
-        <h6>
-          Стоимость упаковки
-        </h6>
-        <h3>{{ price_packing }} ₽</h3>
+        <h3 v-if="ftl_unavailable">по запросу</h3>
+        <h3 v-else>{{ price_direction }} ₽</h3>
+        <template v-if="mode==='ltl'">
+          <h6>
+            Стоимость упаковки
+          </h6>
+          <h3>{{ price_packing }} ₽</h3>
+        </template>
       </div>
       <div>
         <h6>
           Итоговая стоимость
         </h6>
-        <h3>{{ price_total }} ₽</h3>
+        <h3 v-if="ftl_unavailable">по запросу</h3>
+        <h3 v-else>{{ price_total }} ₽</h3>
         <h6>
           Сроки доставки
         </h6>
@@ -156,23 +171,30 @@ export default {
     const price_packing = useNumbersAnimation(packing_price)
     const price_total = useNumbersAnimation(price_sum)
 
-    watch(form, async() => {
-      total_price.value = await useCalc(direction_info, form, packing.value)
-      packing_price.value = useCalcPacking(packing, form)
+    const mode = ref('ltl')          // 'ltl' | 'partial' | 'ftl'
+    const ftl_unavailable = ref(false)
+
+    async function recalc() {
+      const p = await useCalc(direction_info, form, packing.value, mode.value)
+      if (p === null || p === undefined) {
+        ftl_unavailable.value = true
+        total_price.value = 0
+      } else {
+        ftl_unavailable.value = false
+        total_price.value = p
+      }
+      packing_price.value = (mode.value === 'ltl') ? useCalcPacking(packing, form) : 0
       price_sum.value = total_price.value + packing_price.value
-    })
+    }
 
+    function changeMode(m) {
+      mode.value = m
+      recalc()
+    }
 
-    watch(direction_info, async() => {
-      total_price.value = await useCalc(direction_info, form, packing.value)
-      price_sum.value = total_price.value + packing_price.value
-    })
-
-
-    watch(packing.value, () => {
-      packing_price.value = useCalcPacking(packing, form)
-      price_sum.value = total_price.value + packing_price.value
-    })
+    watch(form, recalc)
+    watch(direction_info, recalc)
+    watch(packing.value, recalc)
 
 
     return {
@@ -189,7 +211,10 @@ export default {
       changePacking,
       total_price,
       inputParse,
-      price_direction
+      price_direction,
+      mode,
+      changeMode,
+      ftl_unavailable
     }
   }
 }

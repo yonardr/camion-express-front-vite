@@ -1,7 +1,17 @@
 import {taraForVolume} from "../../packagingTara.js";
 
-export async function useCalc(direction, form, packing){
+export async function useCalc(direction, form, packing, mode = 'ltl'){
     let result;
+
+    // FTL-режимы: фиксированная цена за машину по плечу (не ₽/кг сборного).
+    // null => по плечу FTL не задан (показываем "по запросу").
+    if (mode === 'ftl' || mode === 'partial') {
+        const price = mode === 'ftl'
+            ? direction.value?.ftl_price
+            : direction.value?.partial_ftl_price
+        return (price === null || price === undefined) ? null : Number(price)
+    }
+
     function compareNumeric(a, b) {
         if (a.value > b.value) return 1;
         if (a.value === b.value) return 0;
